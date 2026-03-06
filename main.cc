@@ -2,8 +2,6 @@
 #include "game.hh"
 #include "window.hh"
 
-
-
 using namespace std;
 
 const int WIDTH = 480, HEIGHT = 320;

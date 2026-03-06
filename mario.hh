@@ -58,5 +58,5 @@ class Mario {
  private:
     static const std::vector<std::vector<int>> mario_sprite_normal_;
 };
-// a
+
 #endif
