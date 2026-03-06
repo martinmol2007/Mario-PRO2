@@ -2,6 +2,8 @@
 #include "game.hh"
 #include "window.hh"
 
+// Este es el main, aqui empieza todo
+
 using namespace std;
 
 const int WIDTH = 480, HEIGHT = 320;
