@@ -46,6 +46,7 @@ void paint_square(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mi
  * @param window Ventana
  * @param r Tipo Rectangulo
  * @param color Color
+ * @param mida Mida del Rectangle
  */
 void paint_rect(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida);
 
