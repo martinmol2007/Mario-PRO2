@@ -61,6 +61,13 @@ void Game::paint(pro2::Window& window) {
 
     pro2::Rect r = window.camera_rect();
     
+    pro2::Rect rect;
+    rect.left = 50;
+    rect.right = 100;
+    rect.top = 50;
+    rect.bottom = 0;
+    
+    paint_rect(window, rect, pro2::yellow, 50);
     paint_square(window, r, pro2::black, 4);
 
 }

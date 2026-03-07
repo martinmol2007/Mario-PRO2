@@ -39,6 +39,16 @@ void paint_vline(pro2::Window& window, int x, int yini, int yfin, pro2::Color co
 */
 void paint_square(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida);
 
+
+/**
+ * @brief 
+ * 
+ * @param window Ventana
+ * @param r Tipo Rectangulo
+ * @param color Color
+ */
+void paint_rect(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida);
+
 /**
  * @brief Dibuixa una imatge/textura a la finestra a partir d'una posició
  *
