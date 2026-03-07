@@ -65,7 +65,7 @@ void Game::paint(pro2::Window& window) {
     rect.top = punt.y;
 
     // Parpadea cada x FPS
-    if (window.frame_count() % 48 < 10) {
+    if (window.frame_count() % 48 == 0) {
         paint_rect(window, rect, pro2::yellow, 20);
     }
 
