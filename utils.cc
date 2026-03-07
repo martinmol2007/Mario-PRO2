@@ -23,7 +23,8 @@ void paint_vline(pro2::Window& window, int x, int yini, int yfin, Color color) {
 
 void paint_rect(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida) {
     for (int i = 0; i < mida; i++) {
-        paint_hline(window, r.left, r.right, r.top+i, color);
+        paint_hline(window, r.left, r.left+50, r.top-i, color);
+        paint_hline(window, r.left-50, r.left, r.top-i, color);
     }
 }
 
