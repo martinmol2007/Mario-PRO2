@@ -29,6 +29,14 @@ void paint_hline(pro2::Window& window, int xini, int xfin, int y, pro2::Color co
  */
 void paint_vline(pro2::Window& window, int x, int yini, int yfin, pro2::Color color = pro2::white);
 
+/** 
+* @brief  Dibuixa el marc del color indicat
+* 
+* @param window Finestra
+* @param r Rectangle (coordenades)
+* @param color Color
+* @param mida Mida
+*/
 void paint_square(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida);
 
 /**
@@ -39,12 +47,8 @@ void paint_square(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mi
  * @param sprite Matriu de colors que representa la imatge (_sprite_).
  * @param mirror Si cal pintar girar la textura horitzontalment
  */
-void paint_sprite(pro2::Window&                        window,
-                  pro2::Pt                             orig,
-                  const std::vector<std::vector<int>>& sprite,
-                  bool                                 mirror);
+void paint_sprite(pro2::Window& window, pro2::Pt orig, const std::vector<std::vector<int>>& sprite, bool mirror);
                 
-
 }  // namespace pro2
 
 #endif
