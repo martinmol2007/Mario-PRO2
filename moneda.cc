@@ -19,26 +19,31 @@ const int y = pro2::yellow;
 const int h = pro2::black;
 const int g = 0xaaaaaa;
 const int w = 0x8d573c;
+const int v = pro2::green;
+
+const int a = 0x0a6fb6;     // azul oscuro
+const int c = 0x6ec6e8;     // azul claro
+const int d = 0xbfefff;     // brillo
+
 
 /**
- * @brief Estilo pixel art de la moneda de Mario Bros
- * 
+ * @brief Esmeralda estilo pixel art
  */
 const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
+    {_, _, _, _, _, h, h, _, _, _, _, _},
+    {_, _, _, _, h, c, c, h, _, _, _, _},
+    {_, _, _, h, c, d, d, c, h, _, _, _},
+    {_, _, h, c, c, c, c, c, c, h, _, _},
+    {_, h, c, c, b, c, c, b, c, c, h, _},
+    {_, h, c, b, b, b, b, b, b, c, h, _},
+    {_, h, b, b, b, c, c, b, b, b, h, _},
+    {_, h, b, b, c, c, c, c, b, b, h, _},
+    {_, _, h, c, b, b, b, b, c, h, _, _},
+    {_, _, _, h, c, b, b, c, h, _, _, _},
+    {_, _, _, _, h, b, b, h, _, _, _, _},
+    {_, _, _, _, _, h, h, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
-    {_, _, _, h, h, h, h, h, h, _, _, _},
-    {_, _, h, h, s, s, s, h, s, h, _, _},
-    {_, h, s, h, h, s, s, s, h, s, h, _},
-    {_, h, h, s, s, s, s, h, h, h, h, _},
-    {_, h, h, s, s, s, s, s, s, s, h, _},
-    {_, h, h, h, h, r, h, h, h, h, h, _},
-    {_, h, r, r, h, h, r, b, h, r, h, _},
-    {_, h, r, r, b, b, b, b, h, r, h, _},
-    {_, h, h, b, y, b, b, y, b, r, h, _},
-    {_, h, h, b, b, b, b, b, b, g, h, _},
-    {_, _, h, b, b, b, b, b, b, h, _, _},
-    {_, _, _, h, h, h, h, h, h, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
 };
@@ -52,7 +57,7 @@ const vector<vector<int>> Moneda::sprite_moneda = {
 void Moneda::paint(pro2::Window& window) const {
     if (encima_) return;
 
-    const Pt punto = {posicion().x - 6, posicion().y - 15 };
+    const Pt punto = {pos_.x - 6, pos_.y - 15 - 1};
     paint_sprite(window, punto, sprite_moneda, false);
 
 }
