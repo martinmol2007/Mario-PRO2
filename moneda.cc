@@ -1,7 +1,7 @@
 #include "moneda.hh"
 #include "window.hh"
 #include "mario.hh"
-
+#include "utils.hh"
 
 #include <iostream>
 #include <vector>
@@ -41,6 +41,19 @@ const vector<vector<int>> Moneda::sprite_moneda = {
 };
 
 void Moneda::paint(Window& window) const {
-    const Pt punto = posicion();
-    
+    if (encima_) return;
+
+    const Pt punto = {posicion().x - 6, posicion().y - 15 };
+    paint_sprite(window, punto, sprite_moneda, false);
+
+}
+
+Moneda::Moneda(Pt pos) : pos_(pos) {}
+
+bool Moneda::esta_encima() const {
+    return encima_;
+}
+
+void Moneda::encima() {
+    encima_ = true;
 }

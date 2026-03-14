@@ -22,7 +22,7 @@ class Moneda {
 
     public:
 
-    Moneda(Pt posicion) : pos_(posicion) {}
+    Moneda(Pt posicion);
 
     void paint(Window& window) const;
 
