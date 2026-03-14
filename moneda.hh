@@ -22,20 +22,17 @@ class Moneda {
 
     public:
 
-    Moneda(Pt posicion);
+    Moneda(Pt pos);
 
-    void paint(Window& window) const;
+    void paint(pro2::Window & window) const;
 
+    bool esta_encima () const;
+    
+    void encima ();
+    
     Pt posicion () const {
         return pos_;
     }
-
-    bool esta_encima () const;
-
-    void encima ();
-
-
-
 };
 
 

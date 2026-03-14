@@ -20,7 +20,10 @@ const int h = pro2::black;
 const int g = 0xaaaaaa;
 const int w = 0x8d573c;
 
-
+/**
+ * @brief Estilo pixel art de la moneda de Mario Bros
+ * 
+ */
 const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
@@ -40,7 +43,13 @@ const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
 };
 
-void Moneda::paint(Window& window) const {
+
+/**
+ * @brief Pinta la moneda
+ * 
+ * @param window Ventana en la que pintar
+ */
+void Moneda::paint(pro2::Window& window) const {
     if (encima_) return;
 
     const Pt punto = {posicion().x - 6, posicion().y - 15 };
@@ -48,12 +57,28 @@ void Moneda::paint(Window& window) const {
 
 }
 
-Moneda::Moneda(Pt pos) : pos_(pos) {}
+/**
+ * @brief Construct a new Moneda:: Moneda object
+ * 
+ * @param pos Pos en la que se construye
+ */
+Moneda::Moneda(Pt pos) {
+    pos_ = pos;
+}
 
+
+/**
+ * @brief Mira si esta esta encima de la moneda para cogerla
+ * 
+ */
 bool Moneda::esta_encima() const {
     return encima_;
 }
 
+/**
+ * @brief Si pasa por encima (de la moneda), lo pone a true
+ * 
+ */
 void Moneda::encima() {
     encima_ = true;
 }

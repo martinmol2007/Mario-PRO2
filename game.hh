@@ -8,10 +8,12 @@
 #include "platform.hh"
 #include "window.hh"
 #include "utils.hh"
+#include "moneda.hh"
 
 class Game {
     Mario mario_, mario2_;
     std::vector<Platform> platforms_;
+    std::vector<Moneda> moneda_;
 
     bool finished_;
     bool paused_;

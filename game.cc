@@ -15,6 +15,9 @@ Game::Game(int width, int height)
     for (int i = 1; i < 20; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
+    for (int i = 0; i < 20; i++) {
+        moneda_.push_back(Moneda({50 + i*10, 50}));
+    }
 }
 
 void Game::process_keys(pro2::Window& window) {
