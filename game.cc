@@ -3,8 +3,7 @@
 using namespace pro2;
 
 Game::Game(int width, int height) : 
-    mario_({width / 2, 150}, Keys::Space, Keys::Right, Keys::Left), 
-    mario2_({(width / 2) - 30, 150}, 'W', 'D', 'A'),
+    mario_({width / 2, 150}, Keys::Space, Keys::Right, Keys::Left, 0), 
     platforms_ {
         Platform(100, 300, 200, 211),
         Platform(0, 200, 250, 261),
@@ -38,7 +37,7 @@ void Game::process_keys(pro2::Window& window) {
 
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
-    mario2_.update(window, platforms_);
+    
 }
 
 void Game::update_camera(pro2::Window& window) {
@@ -71,7 +70,7 @@ void Game::paint(pro2::Window& window) {
     }
 
     mario_.paint(window);
-    mario2_.paint(window);
+    
   
     /*
     Pt punt = window.camera_center();

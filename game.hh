@@ -11,7 +11,7 @@
 #include "moneda.hh"
 
 class Game {
-    Mario mario_, mario2_;
+    Mario mario_;
     std::vector<Platform> platforms_;
     std::vector<Moneda> moneda_;
 

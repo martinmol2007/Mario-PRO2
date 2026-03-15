@@ -11,14 +11,11 @@ using namespace std;
 using namespace pro2;
 
 class Moneda {
-
     private:
 
     Pt pos_;
     int contador_;
     bool encima_ = false;
-
-    static const vector<vector<int>> sprite_moneda;
 
     public:
 
@@ -33,6 +30,12 @@ class Moneda {
     Pt posicion () const {
         return pos_;
     }
+
+    void update ();
+    
+    private:
+
+    static const vector<vector<int>> sprite_moneda;
 };
 
 

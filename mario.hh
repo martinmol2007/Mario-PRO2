@@ -17,7 +17,6 @@ class Mario {
 
     int jump_key, right_key, left_key;
 
-
     bool grounded_ = false;
 	bool looking_left_ = false;
 
@@ -26,7 +25,7 @@ class Mario {
     int contador_;
 	
  public:
-    Mario(pro2::Pt pos, int j, int r, int l) : pos_(pos), last_pos_(pos), jump_key(j), right_key(r), left_key(l) {}
+    Mario(pro2::Pt pos, int j, int r, int l, int contador) : pos_(pos), last_pos_(pos), jump_key(j), right_key(r), left_key(l), contador_(contador) {}
 
     void paint(pro2::Window& window) const;
 
@@ -55,11 +54,16 @@ class Mario {
 
     void jump();
 
+    void update(pro2::Window& window, const std::vector<Platform>& platforms);
+
+    // Apartado Objeto Monead
     void sumar_moneda() {
         contador_ += 1;
     }
 
-    void update(pro2::Window& window, const std::vector<Platform>& platforms);
+    int contador () const {
+        return contador_;
+    }
 
  private:
     static const std::vector<std::vector<int>> mario_sprite_normal_;
