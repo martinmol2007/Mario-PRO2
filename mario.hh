@@ -22,6 +22,8 @@ class Mario {
 	bool looking_left_ = false;
 
 	void apply_physics_();
+
+    int contador_;
 	
  public:
     Mario(pro2::Pt pos, int j, int r, int l) : pos_(pos), last_pos_(pos), jump_key(j), right_key(r), left_key(l) {}
@@ -52,6 +54,10 @@ class Mario {
     }
 
     void jump();
+
+    void sumar_moneda() {
+        contador_ += 1;
+    }
 
     void update(pro2::Window& window, const std::vector<Platform>& platforms);
 
