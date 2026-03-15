@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 
 using namespace std;
@@ -55,11 +56,11 @@ const vector<vector<int>> Moneda::sprite_moneda = {
  * @param window Ventana en la que pintar
  */
 void Moneda::paint(pro2::Window& window) const {
-    if (encima_) return;
-
-    const Pt punto = {pos_.x - 6, pos_.y - 15 - 1};
-    paint_sprite(window, punto, sprite_moneda, false);
-
+    if (not encima_) {
+        const Pt punto = {pos_.x - 6, pos_.y - 15 - 1};
+        paint_sprite(window, punto, sprite_moneda, false);
+    }
+    return;
 }
 
 /**
@@ -88,10 +89,10 @@ void Moneda::encima() {
     encima_ = true;
 }
 
-void Moneda::update(Mario& mario, Moneda& moneda) {
-    pro2::Pt punto = moneda.pos_;
-    if (punto.x == mario.pos().x && punto.y == mario.pos().y) { // Faltaria poner que la coja cuando este cerca
-        moneda.encima_ = true;
+void Moneda::update(Mario& mario) {
+    pro2::Pt punto = posicion();
+    if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5) && not esta_encima()) { // Faltaria poner que la coja cuando este cerca
+        encima();
         mario.sumar_moneda();
     }
 }

@@ -37,7 +37,9 @@ void Game::process_keys(pro2::Window& window) {
 
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
-    
+    for (int i = 0; i < moneda_.size(); i++) {
+        moneda_[i].update(mario_);
+    }
 }
 
 void Game::update_camera(pro2::Window& window) {
@@ -56,6 +58,7 @@ void Game::update(pro2::Window& window) {
         update_objects(window);
         update_camera(window);
     }
+    // cout << mario_.contador() << endl;
 }
 
 void Game::paint(pro2::Window& window) {
@@ -71,6 +74,8 @@ void Game::paint(pro2::Window& window) {
 
     mario_.paint(window);
     
+    pro2::Rect r = window.camera_rect();
+    paint_square(window, r, pro2::black, 4);
   
     /*
     Pt punt = window.camera_center();
@@ -84,7 +89,5 @@ void Game::paint(pro2::Window& window) {
     }
     */
 
-    pro2::Rect r = window.camera_rect();
-    paint_square(window, r, pro2::black, 4);
 
 }

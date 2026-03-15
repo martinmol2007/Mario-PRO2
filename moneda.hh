@@ -30,7 +30,7 @@ class Moneda {
         return pos_;
     }
 
-    void update (Mario& mario, Moneda& moneda);
+    void update (Mario& mario);
     
     private:
 
