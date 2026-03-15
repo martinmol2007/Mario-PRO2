@@ -3,7 +3,7 @@
 using namespace pro2;
 
 Game::Game(int width, int height) : 
-    mario_({width / 2, 150}, Keys::Space, Keys::Right, Keys::Left, 0), 
+    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0), // Controles Mas Comodos
     platforms_ {
         Platform(100, 300, 200, 211),
         Platform(0, 200, 250, 261),

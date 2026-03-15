@@ -87,3 +87,11 @@ bool Moneda::esta_encima() const {
 void Moneda::encima() {
     encima_ = true;
 }
+
+void Moneda::update(Mario& mario, Moneda& moneda) {
+    pro2::Pt punto = moneda.pos_;
+    if (punto.x == mario.pos().x && punto.y == mario.pos().y) { // Faltaria poner que la coja cuando este cerca
+        moneda.encima_ = true;
+        mario.sumar_moneda();
+    }
+}

@@ -14,7 +14,6 @@ class Moneda {
     private:
 
     Pt pos_;
-    int contador_;
     bool encima_ = false;
 
     public:
@@ -31,7 +30,7 @@ class Moneda {
         return pos_;
     }
 
-    void update ();
+    void update (Mario& mario, Moneda& moneda);
     
     private:
 
