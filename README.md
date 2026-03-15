@@ -8,7 +8,7 @@
 
 Comandos:
 ```
-> make (Compila el juego)
-> make clean (Borra archivos en codigo maquina)
-> make tgz (Comprime el juego para extortar)
+make (Compila el juego)
+make clean (Borra archivos en codigo maquina)
+make tgz (Comprime el juego para extortar)
 ```
