@@ -58,7 +58,7 @@ void Game::update(pro2::Window& window) {
         update_objects(window);
         update_camera(window);
     }
-    // cout << mario_.contador() << endl;
+    cout << mario_.contador() << endl;
 }
 
 void Game::paint(pro2::Window& window) {

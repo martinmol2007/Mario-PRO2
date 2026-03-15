@@ -32,6 +32,7 @@ const int d = 0xbfefff;     // brillo
  */
 const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
+    {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, h, h, _, _, _, _, _},
     {_, _, _, _, h, c, c, h, _, _, _, _},
     {_, _, _, h, c, d, d, c, h, _, _, _},
@@ -44,7 +45,6 @@ const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, h, c, b, b, c, h, _, _, _},
     {_, _, _, _, h, b, b, h, _, _, _, _},
     {_, _, _, _, _, h, h, _, _, _, _, _},
-    {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
 };
@@ -71,7 +71,6 @@ void Moneda::paint(pro2::Window& window) const {
 Moneda::Moneda(Pt pos) {
     pos_ = pos;
 }
-
 
 /**
  * @brief Mira si esta esta encima de la moneda para cogerla
