@@ -1,28 +1,36 @@
-# MARIO PRO2 2026 MARTIN MOLINA
+# 🍄 Mario PRO2 2026 — Martin Molina
 
-### ESTE ES EL JUEGO DE MARIO DE PRO2 DE LA FIB (EN CONSTRUCCION)
+> 🚧 Proyecto en construcción
 
-## TO DO LIST:
-- Ordenar codigo y pulirlo con comentarios
+---
 
-# INFO JUEGO:
+## 📌 Descripción
 
-Comandos Juego:
-```
-space (Saltar)
-A (Izquerda)
-D (Derecha)
-```
-Objetos Juego:
-```
-Diamantes (Como las monedas)
-```
+Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 
-Comandos Terminal:
-```
-make (Compila el juego)
-make clean (Borra archivos en codigo maquina)
-make tgz (Comprime el juego para extortar)
-make push (Sube a GitHub los cambios hechos)
-make pull (Hace pull)
-```
+---
+
+## 🎮 Controles del juego
+
+| Acción    | Tecla |
+|----------|------|
+| Saltar   | `SPACE` |
+| Izquierda| `A` |
+| Derecha  | `D` |
+
+---
+
+## 💎 Objetos del juego
+
+- **Diamantes** → Como las monedas (se pueden recojer y suman puntos (en un futuro))
+
+---
+
+## ⚙️ Comandos de terminal
+
+```bash
+make        # Compila el juego
+make clean  # Borra archivos compilados
+make tgz    # Comprime el proyecto
+make push   # Sube cambios a GitHub
+make pull   # Actualiza el repositorio
