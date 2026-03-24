@@ -31,7 +31,15 @@ class Mario {
 
 	
  public:
-    Mario(pro2::Pt pos, int j, int r, int l, int contador, bool en_animacion, int frames) : pos_(pos), last_pos_(pos), jump_key(j), right_key(r), left_key(l), contador_(contador), en_animacion_(en_animacion), frames_animacion_(frames) {}
+    Mario(pro2::Pt pos, int j, int r, int l, int contador, int frames) : 
+        pos_(pos), 
+        last_pos_(pos), 
+        jump_key(j), 
+        right_key(r), 
+        left_key(l), 
+        contador_(contador),  
+        frames_animacion_(frames) 
+    {}
 
     void paint(pro2::Window& window, const std::vector<std::vector<int>>& sprite) const;
 
@@ -62,7 +70,7 @@ class Mario {
 
     void update(pro2::Window& window, const std::vector<Platform>& platforms);
 
-    // Apartado Objeto Monead
+    // Apartado Objeto Moneda
     void sumar_moneda() {
         contador_ += 1;
     }
@@ -71,32 +79,25 @@ class Mario {
         return contador_;
     }
 
-    // Animacion
+    // Animacion Poner
     void poner_animacion () {
-        en_animacion_ = not en_animacion_;
+        frames_animacion_ = 60;
+        return;
+    }
+
+    void actualizar_animacion () {
+        if (frames_animacion_ > 0) {
+            frames_animacion_--;
+        }
         return;
     }
 
     bool en_animacion () const {
-        return en_animacion_;
-    }
-
-    int frames_animacion () const {
-        return frames_animacion_;
-    }
-
-    void set_frames_animacion () {
-        frames_animacion_ = 1250;
-        return; 
-    }
-
-    void restar_frames_animacion () {
-        if (frames_animacion_ >= 0) frames_animacion_--;
-        return;
+        return (frames_animacion_ > 0 ? true : false);
     }
 
     // Consigue el sprite dependiendo de si esta en animacion o no
-    std::vector<std::vector<int>> get_sprite () {
+    const std::vector<std::vector<int>> get_sprite () const {
         if (frames_animacion_ > 0) {
             return mario_sprite_moneda_;
         } else {
@@ -104,16 +105,11 @@ class Mario {
         }
     }
 
-    // Pone el sprite dependiendo de si esta o no (otra funcion)
-    void set_sprite () {
-        sprite = get_sprite();
-        return;
-    }
-
  private:
+
     static const std::vector<std::vector<int>> mario_sprite_normal_;
-    
     static const std::vector<std::vector<int>> mario_sprite_moneda_;
+
 };
 
 #endif

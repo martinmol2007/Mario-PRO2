@@ -3,7 +3,7 @@
 using namespace pro2;
 
 Game::Game(int width, int height) : 
-    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0, false, 0), // Controles Mas Comodos
+    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0, 0), // Controles Mas Comodos
     platforms_ {
         Platform(100, 300, 200, 211),
         Platform(0, 200, 250, 261),
@@ -37,20 +37,9 @@ void Game::process_keys(pro2::Window& window) {
 
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
+    
     for (int i = 0; i < moneda_.size(); i++) {
         moneda_[i].update(mario_);
-        if(mario_.en_animacion()) {
-            mario_.poner_animacion();
-            mario_.set_frames_animacion();
-            mario_.set_sprite();
-        } 
-        else if (not mario_.en_animacion() && mario_.frames_animacion() == 0) {
-            mario_.set_sprite();
-        }
-        else if (not mario_.en_animacion() && mario_.frames_animacion() > 0) {
-            mario_.restar_frames_animacion();
-        }
-        
     }
 }
 
@@ -88,18 +77,4 @@ void Game::paint(pro2::Window& window) {
     
     pro2::Rect r = window.camera_rect();
     paint_square(window, r, pro2::black, 4);
-  
-    /*
-    Pt punt = window.camera_center();
-    pro2::Rect rect;
-    rect.left = punt.x;
-    rect.top = punt.y;
-
-    // Parpadea cada x FPS
-    if (window.frame_count() % 48 == 0) {
-        paint_rect(window, rect, pro2::yellow, 20);
-    }
-    */
-
-
 }
