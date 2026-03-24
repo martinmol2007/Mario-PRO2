@@ -43,4 +43,9 @@ save:
 	@clear
 	@echo "Todo subido a GitHub!"
 
-.PHONY: clean tgz save
+pull:
+	@git pull
+	@clear
+	@echo Pull hecho!
+
+.PHONY: clean tgz save pull
