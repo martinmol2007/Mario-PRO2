@@ -37,9 +37,10 @@ clean:
 	rm -f mario_pro_2 $(OBJS) mario-pro-2-*.tgz
 
 save:
-	git add .
-	git commit -m "Cambios"
-	git push
-	echo Todo subido
+	@git add .
+	@git commit -m "Cambios"
+	@git push
+	@clear
+	@echo Todo subido
 
 .PHONY: clean tgz save
