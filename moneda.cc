@@ -93,6 +93,8 @@ void Moneda::update(Mario& mario) {
     if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5) && not esta_encima()) { 
         encima();
         mario.sumar_moneda();
+
+        // Activa la animacin si esta encima
         mario.poner_animacion();
     }
 }

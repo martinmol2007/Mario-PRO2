@@ -11,13 +11,11 @@ using namespace std;
 using namespace pro2;
 
 class Moneda {
-    private:
-
+private:
     Pt pos_;
     bool encima_ = false;
 
-    public:
-
+public:
     Moneda(Pt pos);
 
     void paint(pro2::Window & window) const;
@@ -32,8 +30,7 @@ class Moneda {
 
     void update (Mario& mario);
     
-    private:
-
+private:
     static const vector<vector<int>> sprite_moneda;
 };
 

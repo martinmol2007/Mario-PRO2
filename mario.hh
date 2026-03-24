@@ -70,21 +70,36 @@ class Mario {
 
     void update(pro2::Window& window, const std::vector<Platform>& platforms);
 
-    // Apartado Objeto Moneda
+    /**
+     * @brief Suma 1 al contador de monedas
+     * 
+     */
     void sumar_moneda() {
         contador_ += 1;
     }
 
+    /**
+     * @brief Devuelve el contador de monedas
+     * 
+     * @return Contador de monedas de mario
+     */
     int contador () const {
         return contador_;
     }
 
-    // Animacion Poner
+    /**
+     * @brief Pone la animacion
+     * 
+     */
     void poner_animacion () {
         frames_animacion_ = 60;
         return;
     }
 
+    /**
+     * @brief Actualiza la animacion
+     * 
+     */
     void actualizar_animacion () {
         if (frames_animacion_ > 0) {
             frames_animacion_--;
@@ -92,11 +107,21 @@ class Mario {
         return;
     }
 
+    /**
+     * @brief Devuevle si esta en animacion o no
+     * 
+     * @return Devuelve true si esta en animacion
+     * @return Devuelve false si no esta en animacion
+     */
     bool en_animacion () const {
         return (frames_animacion_ > 0 ? true : false);
     }
 
-    // Consigue el sprite dependiendo de si esta en animacion o no
+    /**
+     * @brief Get the sprite object
+     * 
+     * @return Consigue el sprite dependiendo de si esta en animacion
+     */
     const std::vector<std::vector<int>> get_sprite () const {
         if (frames_animacion_ > 0) {
             return mario_sprite_moneda_;
@@ -106,10 +131,8 @@ class Mario {
     }
 
  private:
-
     static const std::vector<std::vector<int>> mario_sprite_normal_;
     static const std::vector<std::vector<int>> mario_sprite_moneda_;
-
 };
 
 #endif
