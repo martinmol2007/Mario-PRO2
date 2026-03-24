@@ -12,6 +12,10 @@ const int h = pro2::black;
 const int g = 0xaaaaaa;
 const int w = 0x8d573c;
 
+const int a = 0x0a6fb6;     // azul oscuro
+const int c = 0x6ec6e8;     // azul claro
+const int d = 0xbfefff;     // brillo
+
 // clang-format off
 const vector<vector<int>> Mario::mario_sprite_normal_ = {
     {_, _, _, r, r, r, r, r, _, _, _, _},
@@ -32,11 +36,32 @@ const vector<vector<int>> Mario::mario_sprite_normal_ = {
     {w, w, w, w, _, _, _, _, w, w, w, w},
     // Posicion aqui ¡
 };
+
+const vector<vector<int>> Mario::mario_sprite_moneda_ = {
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {c, c, c, c, c, c, c, c, c, c, c, c},
+    // Posicion aqui ¡
+};
+
 // clang-format on
 
-void Mario::paint(pro2::Window& window) const {
+void Mario::paint(pro2::Window& window, const std::vector<std::vector<int>>& sprite) const {
     const Pt top_left = {pos_.x - 6, pos_.y - 15};
-    paint_sprite(window, top_left, mario_sprite_normal_, looking_left_);
+    paint_sprite(window, top_left, sprite, looking_left_);
 }
 
 void Mario::apply_physics_() {

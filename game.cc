@@ -39,6 +39,11 @@ void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
     for (int i = 0; i < moneda_.size(); i++) {
         moneda_[i].update(mario_);
+        if(mario_.en_animacion()) {
+            int frames_act = window.frame_count() + 250;
+            mario_.set_frames_animacion(frames_act);
+            
+        }
     }
 }
 

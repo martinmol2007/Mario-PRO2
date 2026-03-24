@@ -90,8 +90,10 @@ void Moneda::encima() {
 
 void Moneda::update(Mario& mario) {
     pro2::Pt punto = posicion();
-    if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5) && not esta_encima()) { // Faltaria poner que la coja cuando este cerca
+    if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5) && not esta_encima()) { 
         encima();
         mario.sumar_moneda();
+        mario.poner_animacion();
+        
     }
 }
