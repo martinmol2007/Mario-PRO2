@@ -5,12 +5,13 @@
 ## TO DO LIST:
 - Ordenar codigo y pulirlo con comentarios
 
+# INFO JUEGO:
+
 Comandos Juego:
 ```
 space (Saltar)
 A (Izquerda)
 D (Derecha)
-
 ```
 Objetos Juego:
 ```
