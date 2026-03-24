@@ -41,6 +41,6 @@ save:
 	@git commit -m "Cambios"
 	@git push
 	@clear
-	@echo Todo subido
+	@echo "Todo subido a GitHub!"
 
 .PHONY: clean tgz save
