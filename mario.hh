@@ -26,7 +26,6 @@ class Mario {
 
     std::vector<std::vector<int>> sprite;
 
-    bool en_animacion_;
     int frames_animacion_;
 
 	
