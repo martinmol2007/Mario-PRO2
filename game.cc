@@ -3,7 +3,7 @@
 using namespace pro2;
 
 Game::Game(int width, int height) : 
-    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0), // Controles Mas Comodos
+    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0, false, 0), // Controles Mas Comodos
     platforms_ {
         Platform(100, 300, 200, 211),
         Platform(0, 200, 250, 261),
@@ -40,9 +40,15 @@ void Game::update_objects(pro2::Window& window) {
     for (int i = 0; i < moneda_.size(); i++) {
         moneda_[i].update(mario_);
         if(mario_.en_animacion()) {
-            int frames_act = window.frame_count() + 250;
-            mario_.set_frames_animacion(frames_act);
-            
+            mario_.poner_animacion();
+            mario_.set_frames_animacion();
+            mario_.set_sprite();
+        } 
+        else if (not mario_.en_animacion() && mario_.frames_animacion() == 0) {
+            mario_.set_sprite();
+        }
+        else if (not mario_.en_animacion() && mario_.frames_animacion() > 0) {
+            mario_.restar_frames_animacion();
         }
     }
 }
@@ -63,7 +69,7 @@ void Game::update(pro2::Window& window) {
         update_objects(window);
         update_camera(window);
     }
-    cout << mario_.contador() << endl;
+    // cout << mario_.contador() << endl;
 }
 
 void Game::paint(pro2::Window& window) {
@@ -77,7 +83,7 @@ void Game::paint(pro2::Window& window) {
         m.paint(window);
     }
 
-    mario_.paint(window);
+    mario_.paint(window, mario_.get_sprite());
     
     pro2::Rect r = window.camera_rect();
     paint_square(window, r, pro2::black, 4);

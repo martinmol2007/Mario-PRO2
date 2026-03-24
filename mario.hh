@@ -24,14 +24,14 @@ class Mario {
 
     int contador_;
 
-    vector<vector<int>> sprite;
+    std::vector<std::vector<int>> sprite;
 
     bool en_animacion_;
     int frames_animacion_;
 
 	
  public:
-    Mario(pro2::Pt pos, int j, int r, int l, int contador) : pos_(pos), last_pos_(pos), jump_key(j), right_key(r), left_key(l), contador_(contador) {}
+    Mario(pro2::Pt pos, int j, int r, int l, int contador, bool en_animacion, int frames) : pos_(pos), last_pos_(pos), jump_key(j), right_key(r), left_key(l), contador_(contador), en_animacion_(en_animacion), frames_animacion_(frames) {}
 
     void paint(pro2::Window& window, const std::vector<std::vector<int>>& sprite) const;
 
@@ -73,7 +73,7 @@ class Mario {
 
     // Animacion
     void poner_animacion () {
-        en_animacion_ = true;
+        en_animacion_ = not en_animacion_;
         return;
     }
 
@@ -85,14 +85,19 @@ class Mario {
         return frames_animacion_;
     }
 
-    void set_frames_animacion (int x) {
-        frames_animacion_ = x;
+    void set_frames_animacion () {
+        frames_animacion_ = 1000;
         return; 
     }
 
+    void restar_frames_animacion () {
+        if (frames_animacion_ >= 0) frames_animacion_--;
+        return;
+    }
+
     // Consigue el sprite dependiendo de si esta en animacion o no
-    vector<vector<int>> get_sprite () {
-        if (en_animacion()) {
+    std::vector<std::vector<int>> get_sprite () {
+        if (frames_animacion_ > 0) {
             return mario_sprite_moneda_;
         } else {
             return mario_sprite_normal_;

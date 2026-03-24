@@ -94,6 +94,5 @@ void Moneda::update(Mario& mario) {
         encima();
         mario.sumar_moneda();
         mario.poner_animacion();
-        
     }
 }
