@@ -122,4 +122,5 @@ void Mario::update(pro2::Window& window, const vector<Platform>& platforms) {
             set_y(platform.top());
         }
     }
+
 }

@@ -39,7 +39,6 @@ void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
     for (int i = 0; i < moneda_.size(); i++) {
         moneda_[i].update(mario_);
-
         if(mario_.en_animacion()) {
             mario_.poner_animacion();
             mario_.set_frames_animacion();
@@ -51,6 +50,7 @@ void Game::update_objects(pro2::Window& window) {
         else if (not mario_.en_animacion() && mario_.frames_animacion() > 0) {
             mario_.restar_frames_animacion();
         }
+        
     }
 }
 
