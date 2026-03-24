@@ -86,7 +86,7 @@ class Mario {
     }
 
     void set_frames_animacion () {
-        frames_animacion_ = 1000;
+        frames_animacion_ = 1250;
         return; 
     }
 

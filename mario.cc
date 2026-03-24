@@ -38,22 +38,22 @@ const vector<vector<int>> Mario::mario_sprite_normal_ = {
 };
 
 const vector<vector<int>> Mario::mario_sprite_moneda_ = {
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
-    {c, c, c, c, c, c, c, c, c, c, c, c},
+    {_, _, _, a, a, a, a, a, _, _, _, _},
+    {_, _, a, a, a, a, a, a, a, a, a, _},
+    {_, _, h, h, h, s, s, h, s, _, _, _},
+    {_, h, s, h, s, s, s, h, s, s, s, _},
+    {_, h, s, h, h, s, s, s, h, s, s, s},
+    {_, h, h, s, s, s, s, h, h, h, h, _},
+    {_, _, _, s, s, s, s, s, s, s, _, _},
+    {_, _, a, a, d, a, a, a, _, _, _, _},
+    {_, a, a, a, d, a, a, d, a, a, a, _},
+    {a, a, a, a, d, d, d, d, a, a, a, a},
+    {g, g, a, d, y, d, d, y, d, a, g, g},
+    {g, g, g, d, d, d, d, d, d, g, g, g},
+    {g, g, d, d, d, d, d, d, d, d, g, g},
+    {_, _, d, d, d, _, _, d, d, d, _, _},
+    {_, w, w, w, _, _, _, _, w, w, w, _},
+    {w, w, w, w, _, _, _, _, w, w, w, w},
     // Posicion aqui ¡
 };
 
