@@ -8,12 +8,14 @@
 #include "platform.hh"
 #include "window.hh"
 
+using namespace pro2;
+
 class Mario {
  private:
-    pro2::Pt pos_, last_pos_;
-    pro2::Pt speed_ = {0, 0};
-    pro2::Pt accel_ = {0, 0};
-    int      accel_time_ = 0;
+    Pt pos_, last_pos_;
+    Pt speed_ = {0, 0};
+    Pt accel_ = {0, 0};
+    int accel_time_ = 0;
 
     int jump_key, right_key, left_key;
 
@@ -22,12 +24,13 @@ class Mario {
 
 	void apply_physics_();
 
+    // Contador de Monedas
     int contador_;
 
-    std::vector<std::vector<int>> sprite;
-
+    // Frames de la animacion
     int frames_animacion_;
 
+    std::vector<std::vector<int>> sprite;
 	
  public:
     Mario(pro2::Pt pos, int j, int r, int l, int contador, int frames) : 
@@ -130,6 +133,7 @@ class Mario {
     }
 
  private:
+ 
     static const std::vector<std::vector<int>> mario_sprite_normal_;
     static const std::vector<std::vector<int>> mario_sprite_moneda_;
 };

@@ -75,6 +75,7 @@ void Game::paint(pro2::Window& window) {
 
     mario_.paint(window, mario_.get_sprite());
     
-    pro2::Rect r = window.camera_rect();
-    paint_square(window, r, pro2::black, 4);
+    Rect r = window.camera_rect();
+    paint_square(window, r, black, 4);
+    // Poner un sol
 }

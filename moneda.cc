@@ -28,7 +28,7 @@ const int d = 0xbfefff;     // brillo
 
 
 /**
- * @brief Esmeralda estilo pixel art
+ * @brief Moneda estilo pixel art
  */
 const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
