@@ -1,18 +1,23 @@
-# 🍄 Mario PRO2 2026 — Martin Molina
+# Mario PRO2 2026 — Martin Molina
 
-> 🚧 Proyecto en construcción
+>[!IMPORTANT]
+>
+>Sin Acabar!
 
 ---
 
-## 📌 Descripción
+## Info
 
 Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
+
+![Imagen](./assets/Estrella.png)
 
 ---
 
 ## To Do:
 
 - Pulir el codigo y comentarlo
+- Añadir Nubes y decorar el paisaje
 
 ## 🎮 Controles del juego
 
@@ -21,16 +26,17 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 | Saltar   | `SPACE` |
 | Izquierda| `A` |
 | Derecha  | `D` |
+| Pausar   | `P` |
 
 ---
 
-## 💎 Objetos del juego
+## Objetos del juego
 
 - **Diamantes** → Como las monedas (se pueden recojer y suman puntos (en un futuro))
 
 ---
 
-## ⚙️ Comandos de terminal
+## Comandos de terminal
 
 ```bash
 make        # Compila el juego
