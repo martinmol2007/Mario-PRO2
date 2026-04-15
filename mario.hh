@@ -24,8 +24,6 @@ class Mario {
 
 	void apply_physics_();
 
-    // Contador de Monedas
-    int contador_;
 
     // Frames de la animacion
     int frames_animacion_;
@@ -38,8 +36,7 @@ class Mario {
         last_pos_(pos), 
         jump_key(j), 
         right_key(r), 
-        left_key(l), 
-        contador_(contador),  
+        left_key(l),   
         frames_animacion_(frames) 
     {}
 
@@ -71,23 +68,6 @@ class Mario {
     void jump();
 
     void update(pro2::Window& window, const std::vector<Platform>& platforms);
-
-    /**
-     * @brief Suma 1 al contador de monedas
-     * 
-     */
-    void sumar_moneda() {
-        contador_ += 1;
-    }
-
-    /**
-     * @brief Devuelve el contador de monedas
-     * 
-     * @return Contador de monedas de mario
-     */
-    int contador () const {
-        return contador_;
-    }
 
     /**
      * @brief Pone la animacion

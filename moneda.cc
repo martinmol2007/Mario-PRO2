@@ -78,7 +78,7 @@ bool Moneda::chocan(Mario& mario) const {
 
 int direccio = 1;
 void Moneda::update() {
-    xoffset_+= direccio;;
+    xoffset_ += direccio;;
     if (xoffset_ > 45) {
         direccio = -1;
     }

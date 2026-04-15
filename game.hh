@@ -13,8 +13,11 @@
 
 class Game {
     Mario mario_;
+
     std::vector<Platform> platforms_;
     std::vector<Moneda> monedas_;
+
+    int contador_monedas_;
 
     bool finished_;
     bool paused_;

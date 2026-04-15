@@ -22,7 +22,8 @@ Game::Game(int width, int height) :
     for (int i = 0; i < 20; i++) {
         monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
-
+    // Las monedas las lleva el Juego
+    contador_monedas_ = 0;
 }
 
 void Game::process_keys(pro2::Window& window) {
@@ -48,7 +49,7 @@ void Game::update_objects(pro2::Window& window) {
     while (it != monedas_.end()) {
         // Lo borras, se avanza solo el iterador
         if (it->chocan(mario_)) {
-            mario_.sumar_moneda();
+            contador_monedas_ += 1;
             mario_.poner_animacion();
             it = monedas_.erase(it);
         }
@@ -79,7 +80,7 @@ void Game::update(pro2::Window& window) {
         update_objects(window);
         update_camera(window);
     }
-    // cout << mario_.contador() << endl;
+    // cout << contador_monedas_ << endl;
 }
 
 
