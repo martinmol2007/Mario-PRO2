@@ -44,3 +44,4 @@ make clean  # Borra archivos compilados
 make tgz    # Comprime el proyecto
 make push   # Sube cambios a GitHub
 make pull   # Actualiza el repositorio
+make save   # Gurda todo lo hecho en GitHub
