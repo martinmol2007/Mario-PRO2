@@ -9,6 +9,7 @@
 #include "window.hh"
 #include "utils.hh"
 #include "moneda.hh"
+#include "nube.hh"
 
 class Game {
     Mario mario_;

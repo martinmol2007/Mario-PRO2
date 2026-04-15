@@ -56,10 +56,9 @@ const vector<vector<int>> Moneda::sprite_moneda = {
  * @param window Ventana en la que pintar
  */
 void Moneda::paint(pro2::Window& window) const {
-    if (not encima_) {
-        const Pt punto = {pos_.x - 6, pos_.y - 15 - 1};
-        paint_sprite(window, punto, sprite_moneda, false);
-    }
+    const Pt punto = {pos_.x - 6, pos_.y - 15 - 1};
+    paint_sprite(window, punto, sprite_moneda, false);
+    
     return;
 }
 
@@ -72,25 +71,10 @@ Moneda::Moneda(Pt pos) {
     pos_ = pos;
 }
 
-/**
- * @brief Mira si esta esta encima de la moneda para cogerla
- * 
- */
-bool Moneda::esta_encima() const {
-    return encima_;
-}
-
-/**
- * @brief Si pasa por encima (de la moneda), lo pone a true
- * 
- */
-void Moneda::encima() {
-    encima_ = true;
-}
 
 bool Moneda::chocan(Mario& mario) const {
     Pt punto = posicion();
-    if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5) && not esta_encima()) { 
+    if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5)) { 
         return true;
     }
     return false;

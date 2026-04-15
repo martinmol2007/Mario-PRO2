@@ -22,6 +22,7 @@ Game::Game(int width, int height) :
     for (int i = 0; i < 20; i++) {
         moneda_.push_back(Moneda({530 + 200*i, 150}));
     }
+
 }
 
 void Game::process_keys(pro2::Window& window) {
@@ -37,18 +38,25 @@ void Game::process_keys(pro2::Window& window) {
 
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
-    
-    for (int i = 0; i < moneda_.size(); i++) {
-        // TODO: Si el mario i al moneda intersecten, esborro la moneda del vector
-        vector<Moneda>::const_iterator it = &moneda_[i];
-        
-        if (moneda_[i].chocan(mario_)) {
+
+    auto it = moneda_.begin();
+
+    while (it != moneda_.end()) {
+        // Lo borras, se avanza solo el iterador
+        if (it->chocan(mario_)) {
             mario_.sumar_moneda();
             mario_.poner_animacion();
-            moneda_.erase(it);
+            it = moneda_.erase(it);
+        }
+        // No borras
+        else {
+            it++;
         }
     }
+
+    cout << moneda_.size() << endl;
 }
+
 
 void Game::update_camera(pro2::Window& window) {
     const Pt pos = mario_.pos();
@@ -69,8 +77,16 @@ void Game::update(pro2::Window& window) {
     // cout << mario_.contador() << endl;
 }
 
+
 void Game::paint(pro2::Window& window) {
     window.clear(sky_blue);
+
+    // Pinta las nubes
+    for (int i = 0; i < 100; i += 2) {
+        paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
+        paint_sprite(window, { 50*i + 45, 50 }, sprite_nube, false);
+        paint_sprite(window, { 50*i + 48, 47 }, sprite_nube, false);
+    }
 
     for (const Platform& p : platforms_) {
         p.paint(window);
@@ -86,8 +102,4 @@ void Game::paint(pro2::Window& window) {
     // Pintar el marco negro
     Rect r = window.camera_rect();
     paint_square(window, r, black, 4);
-
-    // Poner un sol
-    // paint_sprite(window);
-
 }
