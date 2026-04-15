@@ -55,7 +55,6 @@ void Game::update_objects(pro2::Window& window) {
         // No borras
         else {
             it++;
-            
         }
     }
 

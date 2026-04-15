@@ -23,7 +23,6 @@ public:
 
     void update();
 
-
     bool chocan (Mario& mario) const;
     
 private:
