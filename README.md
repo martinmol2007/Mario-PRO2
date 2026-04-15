@@ -19,7 +19,7 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 - Pulir el codigo y comentarlo
 - Añadir el contador de monedas a la clase game, ya que es la que lleva todas las monedas
 
-## 🎮 Controles del juego
+## Controles del juego
 
 | Acción    | Tecla |
 |----------|------|
