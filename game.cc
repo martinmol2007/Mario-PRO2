@@ -9,7 +9,7 @@ Game::Game(int width, int height) :
         Platform(0, 200, 250, 261),
         Platform(250, 400, 150, 161),
     },
-    moneda_ {
+    monedas_ {
         Moneda ({325, 150}), // Moneda de la derecha del todo
         Moneda ({200, 200}),
         Moneda ({100, 250}),
@@ -20,7 +20,7 @@ Game::Game(int width, int height) :
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
     for (int i = 0; i < 20; i++) {
-        moneda_.push_back(Moneda({530 + 200*i, 150}));
+        monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
 
 }
@@ -39,22 +39,28 @@ void Game::process_keys(pro2::Window& window) {
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
 
-    auto it = moneda_.begin();
+    for (auto& m : monedas_) {
+        m.update();
+    }
 
-    while (it != moneda_.end()) {
+    auto it = monedas_.begin();
+
+    while (it != monedas_.end()) {
         // Lo borras, se avanza solo el iterador
         if (it->chocan(mario_)) {
             mario_.sumar_moneda();
             mario_.poner_animacion();
-            it = moneda_.erase(it);
+            it = monedas_.erase(it);
         }
         // No borras
         else {
             it++;
+            
         }
     }
 
-    cout << moneda_.size() << endl;
+    // Sacar el tamaño del vector de monedas
+    // cout << moneda_.size() << endl;
 }
 
 
@@ -93,7 +99,7 @@ void Game::paint(pro2::Window& window) {
     }
 
     // Imprime las monedas
-    for (const Moneda& m : moneda_) {
+    for (const Moneda& m : monedas_) {
         m.paint(window);
     }
 

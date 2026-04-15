@@ -13,16 +13,16 @@ using namespace pro2;
 class Moneda {
 private:
     Pt pos_;
-    bool encima_ = false;
+    int xoffset_;
+    bool encima_;
 
 public:
     Moneda(Pt pos);
 
     void paint(pro2::Window & window) const;
-    
-    Pt posicion () const {
-        return pos_;
-    }
+
+    void update();
+
 
     bool chocan (Mario& mario) const;
     
