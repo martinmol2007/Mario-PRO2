@@ -10,6 +10,13 @@
 using namespace std;
 using namespace pro2;
 
+// Variables globales para los sprites
+
+const int width = 6;
+const int height = 15;
+
+// Paleta de Colores para moneda
+
 const int _ = -1;
 const int r = pro2::red;
 const int s = 0xecc49b;
@@ -19,12 +26,12 @@ const int h = pro2::black;
 const int g = 0xaaaaaa;
 const int w = 0x8d573c;
 const int v = pro2::green;
-
 const int a = 0x0a6fb6;  // azul oscuro
 const int c = 0x6ec6e8;  // azul claro
 const int d = 0xbfefff;  // brillo
 
 // clang-format off
+
 /**
  * @brief Moneda estilo pixel art
  */
@@ -46,29 +53,16 @@ const vector<vector<int>> Moneda::sprite_moneda = {
     {_, _, _, _, _, _, _, _, _, _, _, _}, 
     {_, _, _, _, _, _, _, _, _, _, _, _},
 };
+
 // clang-format on
 
-/**
- * @brief Pinta la moneda
- *
- * @param window Ventana en la que pintar
- */
-void Moneda::paint(pro2::Window& window) const {
-    Pt p = { pos_.x + xoffset_, pos_.y };
-    const Pt punto = {p.x - 6, p.y - 15 - 1};
-    paint_sprite(window, punto, sprite_moneda, false);
-}
 
-/**
- * @brief Construct a new Moneda:: Moneda object
- *
- * @param pos Pos en la que se construye
- */
 Moneda::Moneda(Pt pos) {
     pos_ = pos;
     xoffset_ = 0;
     encima_ = false;
 }
+
 
 bool Moneda::chocan(Mario& mario) const {
     Pt p = { pos_.x + xoffset_, pos_.y };
@@ -76,13 +70,28 @@ bool Moneda::chocan(Mario& mario) const {
 }
 
 
-int direccio = 1;
+// Indica la direccion en que se mueve la moneda
+// Esto hace que la moneda se mueva de izquerda a derecha en una zona de (-45, 45) pixeles
+int direccion = 1;
+
 void Moneda::update() {
-    xoffset_ += direccio;;
+    xoffset_ += direccion;;
     if (xoffset_ > 45) {
-        direccio = -1;
+        direccion = -1;
     }
     else if (xoffset_ < -45) {
-        direccio = 1;
+        direccion = 1;
     }
+}
+
+
+/**
+ * @brief Pinta la moneda (xoffset)
+ *
+ * @param window Ventana en la que pintar
+ */
+void Moneda::paint(pro2::Window& window) const {
+    Pt p = { pos_.x + xoffset_, pos_.y };
+    const Pt punto = {p.x - width, p.y - height};
+    paint_sprite(window, punto, sprite_moneda, false);
 }

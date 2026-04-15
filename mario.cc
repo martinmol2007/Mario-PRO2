@@ -3,6 +3,9 @@
 using namespace std;
 using namespace pro2;
 
+
+// Paleta de colores Mario
+
 const int _ = -1;
 const int r = pro2::red;
 const int s = 0xecc49b;
@@ -11,7 +14,6 @@ const int y = pro2::yellow;
 const int h = pro2::black;
 const int g = 0xaaaaaa;
 const int w = 0x8d573c;
-
 const int a = 0x0a6fb6;     // azul oscuro
 const int c = 0x6ec6e8;     // azul claro
 const int d = 0xbfefff;     // brillo

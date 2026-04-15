@@ -15,6 +15,7 @@ class Mario {
     Pt pos_, last_pos_;
     Pt speed_ = {0, 0};
     Pt accel_ = {0, 0};
+    
     int accel_time_ = 0;
 
     int jump_key, right_key, left_key;
@@ -23,7 +24,6 @@ class Mario {
 	bool looking_left_ = false;
 
 	void apply_physics_();
-
 
     // Frames de la animacion
     int frames_animacion_;

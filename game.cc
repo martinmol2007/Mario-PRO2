@@ -40,10 +40,12 @@ void Game::process_keys(pro2::Window& window) {
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
 
+    // Provoca que se muevan las monedas
     for (auto& m : monedas_) {
         m.update();
     }
 
+    // Comprobar si las monedas chocan con Mario (se las recoge)
     auto it = monedas_.begin();
 
     while (it != monedas_.end()) {
@@ -59,7 +61,7 @@ void Game::update_objects(pro2::Window& window) {
         }
     }
 
-    // Sacar el tamaño del vector de monedas
+    // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
     // cout << moneda_.size() << endl;
 }
 
