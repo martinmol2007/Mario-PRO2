@@ -1,15 +1,14 @@
 #ifndef GAME_HH
 #define GAME_HH
 
-// LO HACE TODO
-
-#include <vector>
 #include "mario.hh"
+#include "moneda.hh"
 #include "platform.hh"
 #include "window.hh"
 #include "utils.hh"
-#include "moneda.hh"
 #include "nube.hh"
+
+#include <vector>
 
 class Game {
     Mario mario_;

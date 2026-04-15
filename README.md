@@ -16,8 +16,7 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 
 ## To Do:
 
-- Pulir el codigo y comentarlo
-- Añadir el contador de monedas a la clase game, ya que es la que lleva todas las monedas
+- 
 
 ## Controles del juego
 
@@ -43,5 +42,5 @@ make        # Compila el juego
 make clean  # Borra archivos compilados
 make tgz    # Comprime el proyecto
 make push   # Sube cambios a GitHub
-make pull   # Actualiza el repositorio
 make save   # Gurda todo lo hecho en GitHub
+make pull   # Actualiza el repositorio

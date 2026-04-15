@@ -62,7 +62,7 @@ void Game::update_objects(pro2::Window& window) {
     }
 
     // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
-    // cout << moneda_.size() << endl;
+    // cout << monedas_.size() << endl;
 }
 
 

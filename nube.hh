@@ -1,7 +1,12 @@
+#ifndef NUBE_HH
+#define NUBE_HH
+
 #include <vector>
 #include "window.hh"
 
 using namespace std;
+
+// Paleta de Colores para la Nube
 
 const int _ = -1;
 const int r = pro2::red;
@@ -35,3 +40,5 @@ const vector<vector<int>> sprite_nube = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
 };
+
+#endif 

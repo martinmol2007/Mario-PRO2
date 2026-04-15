@@ -34,7 +34,7 @@ tgz: clean
 	tar -czf $(TAR_FILE) Makefile *.cc *.hh fenster.h .vscode .clang-format
 
 clean:
-	rm -f $(OBJS) mario-pro-2-*.tgz
+	rm -f $(OBJS) mario-pro-2-*.tgz nube.o
 
 save:
 	@git add .

@@ -1,5 +1,4 @@
 #include "moneda.hh"
-#include "mario.hh"
 #include "utils.hh"
 #include "window.hh"
 
