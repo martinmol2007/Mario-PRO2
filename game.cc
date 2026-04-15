@@ -39,7 +39,14 @@ void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
     
     for (int i = 0; i < moneda_.size(); i++) {
-        moneda_[i].update(mario_);
+        // TODO: Si el mario i al moneda intersecten, esborro la moneda del vector
+        vector<Moneda>::const_iterator it = &moneda_[i];
+        
+        if (moneda_[i].chocan(mario_)) {
+            mario_.sumar_moneda();
+            mario_.poner_animacion();
+            moneda_.erase(it);
+        }
     }
 }
 
@@ -69,13 +76,18 @@ void Game::paint(pro2::Window& window) {
         p.paint(window);
     }
 
+    // Imprime las monedas
     for (const Moneda& m : moneda_) {
         m.paint(window);
     }
 
     mario_.paint(window, mario_.get_sprite());
     
+    // Pintar el marco negro
     Rect r = window.camera_rect();
     paint_square(window, r, black, 4);
+
     // Poner un sol
+    // paint_sprite(window);
+
 }

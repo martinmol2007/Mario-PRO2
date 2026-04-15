@@ -88,13 +88,10 @@ void Moneda::encima() {
     encima_ = true;
 }
 
-void Moneda::update(Mario& mario) {
-    pro2::Pt punto = posicion();
+bool Moneda::chocan(Mario& mario) const {
+    Pt punto = posicion();
     if ((abs(punto.x - mario.pos().x) <= 5) && (abs(punto.y - mario.pos().y) <= 5) && not esta_encima()) { 
-        encima();
-        mario.sumar_moneda();
-
-        // Activa la animacin si esta encima
-        mario.poner_animacion();
+        return true;
     }
+    return false;
 }

@@ -28,7 +28,7 @@ public:
         return pos_;
     }
 
-    void update (Mario& mario);
+    bool chocan (Mario& mario) const;
     
 private:
     static const vector<vector<int>> sprite_moneda;
