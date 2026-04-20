@@ -74,7 +74,7 @@ class Mario {
      * 
      */
     void poner_animacion () {
-        frames_animacion_ = 60;
+        frames_animacion_ += 60;
         return;
     }
 
