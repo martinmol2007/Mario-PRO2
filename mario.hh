@@ -26,7 +26,7 @@ class Mario {
 	void apply_physics_();
 
     // Frames de la animacion
-    int frames_animacion_;
+    int frames_animacion_ = 0;
 
     std::vector<std::vector<int>> sprite;
 	
