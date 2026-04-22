@@ -24,12 +24,6 @@ private:
      */
     int xoffset_;
 
-    /**
-     * @brief Booleano que indica si esta encima
-     * 
-     */
-    bool encima_;
-
 public:
     /**
      * @brief Construye un objeto Moneda con pos

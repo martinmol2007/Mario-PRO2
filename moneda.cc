@@ -59,7 +59,6 @@ const vector<vector<int>> Moneda::sprite_moneda = {
 Moneda::Moneda(Pt pos) {
     pos_ = pos;
     xoffset_ = 0;
-    encima_ = false;
 }
 
 
