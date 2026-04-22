@@ -93,3 +93,15 @@ void Moneda::paint(pro2::Window& window) const {
     const Pt punto = {p.x - width, p.y - height};
     paint_sprite(window, punto, sprite_moneda, false);
 }
+
+
+pro2::Rect Moneda::get_rect () const {
+    pro2::Rect r;
+    
+    r.left = pos_.x - width/2;
+    r.right = pos_.x + width/2;
+    r.bottom = pos_.y;
+    r.top = pos_.y - height; 
+
+    return r;
+}

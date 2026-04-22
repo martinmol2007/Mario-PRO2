@@ -3,6 +3,9 @@
 using namespace std;
 using namespace pro2;
 
+// Tamaño de los sprites
+const int width = 12;
+const int height = 16;
 
 // Paleta de colores Mario
 
@@ -93,6 +96,17 @@ void Mario::jump() {
         grounded_ = false;
         accel_time_ = 2;
     }
+}
+
+pro2::Rect Mario::get_rect () const {
+    pro2::Rect r;
+    
+    r.left = pos_.x - width/2;
+    r.right = pos_.x + width/2;
+    r.bottom = pos_.y;
+    r.top = pos_.y - height; 
+
+    return r;
 }
 
 void Mario::update(pro2::Window& window, const vector<Platform>& platforms) {

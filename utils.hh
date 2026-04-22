@@ -60,6 +60,8 @@ void paint_rect(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida
  */
 void paint_sprite(pro2::Window& window, pro2::Pt orig, const std::vector<std::vector<int>>& sprite, bool mirror);
                 
+bool is_collision (const pro2::Rect& a, const pro2::Rect& b);
+
 }  // namespace pro2
 
 #endif

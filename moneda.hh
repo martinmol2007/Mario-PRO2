@@ -53,6 +53,8 @@ public:
      * @return false Si Mario no ha codigo la moneda
      */
     bool chocan (Mario& mario) const;
+
+    pro2::Rect get_rect () const;
     
 private:
     /**

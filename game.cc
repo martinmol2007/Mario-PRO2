@@ -18,8 +18,6 @@ Game::Game(int width, int height) :
     assert(width > 0 && height > 0, "L'amplada i l'alcada del joc han de ser positives.");
     for (int i = 1; i < 20; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
-    }
-    for (int i = 0; i < 20; i++) {
         monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
     // Las monedas las lleva el Juego
@@ -38,31 +36,49 @@ void Game::process_keys(pro2::Window& window) {
 }
 
 void Game::update_objects(pro2::Window& window) {
-    mario_.update(window, platforms_);
+    if (not paused_) {
+        mario_.update(window, platforms_);
+        
+        // Provoca que se muevan las monedas y acurliza las cosas
+        auto it = monedas_.begin();
+        for (Moneda& m : monedas_) {
+            // Mueve cada moneda (animacion)
+            m.update();
 
-    // Provoca que se muevan las monedas
-    for (auto& m : monedas_) {
-        m.update();
-    }
+            // Hitbox de Mario
+            pro2::Rect r = mario_.get_rect();
+            // Hitbox de Moneda
+            pro2::Rect c = m.get_rect();
 
-    // Comprobar si las monedas chocan con Mario (se las recoge)
-    auto it = monedas_.begin();
-
-    while (it != monedas_.end()) {
-        // Lo borras, se avanza solo el iterador
-        if (it->chocan(mario_)) {
-            contador_monedas_ += 1;
-            mario_.poner_animacion();
-            it = monedas_.erase(it);
+            // Mira si chocan
+            if (is_collision(r, c)) {
+                contador_monedas_++;
+                mario_.poner_animacion();
+                it = monedas_.erase(it);
+            } else {
+                it++;
+            }
         }
-        // No borras
-        else {
-            it++;
+        /*
+        // Comprobar si las monedas chocan con Mario (se las recoge)
+        auto it = monedas_.begin();
+    
+        while (it != monedas_.end()) {
+            // Lo borras, se avanza solo el iterador
+            if (it->chocan(mario_)) {
+                contador_monedas_ += 1;
+                mario_.poner_animacion();
+                it = monedas_.erase(it);
+            }
+            // No borras
+            else {
+                it++;
+            }
         }
+        // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
+        // cout << monedas_.size() << endl;
+        */
     }
-
-    // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
-    // cout << monedas_.size() << endl;
 }
 
 
@@ -87,6 +103,7 @@ void Game::update(pro2::Window& window) {
 
 
 void Game::paint(pro2::Window& window) {
+    // Pinta el cielo color azul
     window.clear(sky_blue);
 
     // Pinta las nubes
@@ -96,15 +113,17 @@ void Game::paint(pro2::Window& window) {
         paint_sprite(window, { 50*i + 48, 47 }, sprite_nube, false);
     }
 
+    // Pinta las plataformas
     for (const Platform& p : platforms_) {
         p.paint(window);
     }
 
-    // Imprime las monedas
+    // Pinta las monedas
     for (const Moneda& m : monedas_) {
         m.paint(window);
     }
 
+    // Pinta el Mario
     mario_.paint(window, mario_.get_sprite());
     
     // Pintar el marco negro

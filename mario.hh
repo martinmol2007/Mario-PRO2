@@ -112,6 +112,8 @@ class Mario {
         }
     }
 
+    pro2::Rect get_rect () const;
+
  private:
  
     static const std::vector<std::vector<int>> mario_sprite_normal_;

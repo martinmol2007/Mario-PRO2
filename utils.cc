@@ -50,5 +50,19 @@ void paint_sprite(pro2::Window& window, pro2::Pt orig, const vector<vector<int>>
     }
 }
 
+// Actua como hitbox para ver si Mario y Moneda colisionan
+// Si el rectangulo B esta sobre el rectangulo A, han chocado
+bool is_collision (const pro2::Rect& a, const pro2::Rect& b) {
+    if (a.top <= b.top && b.top <= a.bottom) {
+        if (a.left <= b.left && b.left <= a.right) return true;
+        if (a.left <= b.right && b.right <= a.right) return true;
+    }
+    else if (a.top <= b.bottom && b.bottom <= a.bottom) {
+        if (a.left <= b.left && b.left <= a.right) return true;
+        if (a.left <= b.right && b.right <= a.right) return true;
+    }
+    return false;
+}
+
 
 }  // namespace pro2
