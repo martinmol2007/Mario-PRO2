@@ -2,7 +2,6 @@
 #define MONEDA__HH
 
 #include "window.hh"
-#include "mario.hh"
 
 #include <iostream>
 #include <vector>
@@ -46,15 +45,32 @@ public:
     void update();
 
     /**
-     * @brief Mira si Mario y la Moneda estan en contacto 
+     * @brief Genera un rectangulo de la Hitbox de la moneda
      * 
-     * @param mario Mario
-     * @return true Si Mario ha cogido la moneda 
-     * @return false Si Mario no ha codigo la moneda
+     * @return Hitbox de la moneda
      */
-    bool chocan (Mario& mario) const;
-
     pro2::Rect get_rect () const;
+
+    /**
+     * @brief Devuelve la posicion x de la moneda
+     * 
+     * @return Posicion x
+     */
+    int get_pos_x() const;
+
+    /**
+     * @brief Devuelve la posicion y de la moneda
+     * 
+     * @return Posicion y
+     */
+    int get_pos_y() const;
+
+    /**
+     * @brief Devuelve la posicion xoffset de la moneda
+     * 
+     * @return Posicion xoffset
+     */
+    int get_xoffset() const;
     
 private:
     /**

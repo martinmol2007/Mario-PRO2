@@ -2,8 +2,12 @@
 #define UTILS_HH
 
 #include <vector>
+
 #include "geometry.hh"
 #include "window.hh"
+
+#include "mario.hh"
+#include "moneda.hh"
 
 namespace pro2 {
 
@@ -59,7 +63,25 @@ void paint_rect(pro2::Window& window, pro2::Rect& r, pro2::Color color, int mida
  * @param mirror Si cal pintar girar la textura horitzontalment
  */
 void paint_sprite(pro2::Window& window, pro2::Pt orig, const std::vector<std::vector<int>>& sprite, bool mirror);
-                
+
+/**
+ * @brief Devuelve si hay colision entre la moneda y el mario
+ * 
+ * @param mario Mario
+ * @param moneda Moneda
+ * @return true Si hay colision
+ * @return false Si no hay colision
+ */
+bool hay_colision (const Mario& mario, const Moneda& moneda);
+
+/**
+ * @brief Mira si hay colision en la hitbox del Mario y la Moneda
+ * 
+ * @param a Hitbox del Mario
+ * @param b Hitbox de la Moneda
+ * @return true Si pasa cerca
+ * @return false Si no pasan cerca
+ */
 bool is_collision (const pro2::Rect& a, const pro2::Rect& b);
 
 }  // namespace pro2

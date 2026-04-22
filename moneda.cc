@@ -62,12 +62,6 @@ Moneda::Moneda(Pt pos) {
 }
 
 
-bool Moneda::chocan(Mario& mario) const {
-    Pt p = { pos_.x + xoffset_, pos_.y };
-    return (abs(p.x - mario.pos().x) <= 5) && (abs(p.y - mario.pos().y) <= 5);
-}
-
-
 // Indica la direccion en que se mueve la moneda
 // Esto hace que la moneda se mueva de izquerda a derecha en una zona de (-45, 45) pixeles
 int direccion = 1;
@@ -104,4 +98,16 @@ pro2::Rect Moneda::get_rect () const {
     r.top = pos_.y - height; 
 
     return r;
+}
+
+int Moneda::get_pos_x() const {
+    return pos_.x;
+}
+
+int Moneda::get_pos_y() const {
+    return pos_.y;
+}
+
+int Moneda::get_xoffset() const {
+    return xoffset_;
 }

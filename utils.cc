@@ -2,6 +2,7 @@
 
 #include "utils.hh"
 #include "assert.hh"
+
 using namespace std;
 
 namespace pro2 {
@@ -50,6 +51,13 @@ void paint_sprite(pro2::Window& window, pro2::Pt orig, const vector<vector<int>>
     }
 }
 
+
+bool hay_colision (const Mario& mario, const Moneda& moneda) {
+    Pt p = { moneda.get_pos_x() + moneda.get_xoffset(), moneda.get_pos_y() };
+    return (abs(p.x - mario.pos().x) <= 5) && (abs(p.y - mario.pos().y) <= 5);
+}
+
+
 // Actua como hitbox para ver si Mario y Moneda colisionan
 // Si el rectangulo B esta sobre el rectangulo A, han chocado
 bool is_collision (const pro2::Rect& a, const pro2::Rect& b) {
@@ -63,6 +71,5 @@ bool is_collision (const pro2::Rect& a, const pro2::Rect& b) {
     }
     return false;
 }
-
 
 }  // namespace pro2

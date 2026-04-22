@@ -18,6 +18,9 @@ Game::Game(int width, int height) :
     assert(width > 0 && height > 0, "L'amplada i l'alcada del joc han de ser positives.");
     for (int i = 1; i < 20; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
+    }
+
+    for (int i = 0; i < 20; i++) {
         monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
     // Las monedas las lleva el Juego
@@ -39,33 +42,18 @@ void Game::update_objects(pro2::Window& window) {
     if (not paused_) {
         mario_.update(window, platforms_);
         
-        // Provoca que se muevan las monedas y acurliza las cosas
-        auto it = monedas_.begin();
+        // Provoca que se muevan las monedas
         for (Moneda& m : monedas_) {
             // Mueve cada moneda (animacion)
             m.update();
-
-            // Hitbox de Mario
-            pro2::Rect r = mario_.get_rect();
-            // Hitbox de Moneda
-            pro2::Rect c = m.get_rect();
-
-            // Mira si chocan
-            if (is_collision(r, c)) {
-                contador_monedas_++;
-                mario_.poner_animacion();
-                it = monedas_.erase(it);
-            } else {
-                it++;
-            }
         }
-        /*
+        
         // Comprobar si las monedas chocan con Mario (se las recoge)
         auto it = monedas_.begin();
     
         while (it != monedas_.end()) {
             // Lo borras, se avanza solo el iterador
-            if (it->chocan(mario_)) {
+            if (hay_colision(mario_, (*it))) {
                 contador_monedas_ += 1;
                 mario_.poner_animacion();
                 it = monedas_.erase(it);
@@ -77,7 +65,6 @@ void Game::update_objects(pro2::Window& window) {
         }
         // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
         // cout << monedas_.size() << endl;
-        */
     }
 }
 
