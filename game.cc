@@ -1,5 +1,6 @@
 #include "game.hh"
 #include "assert.hh"
+
 using namespace pro2;
 
 Game::Game(int width, int height) : 

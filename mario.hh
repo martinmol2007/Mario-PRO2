@@ -112,7 +112,12 @@ class Mario {
         }
     }
 
-    pro2::Rect get_rect () const;
+    /**
+     * @brief Devuelve el Rectangulo de Mario (hitbox)
+     * 
+     * @return Rectangulo de la Hitbox de Mario
+     */
+    pro2::Rect get_rect() const;
 
  private:
  

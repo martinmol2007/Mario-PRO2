@@ -98,7 +98,7 @@ void Mario::jump() {
     }
 }
 
-pro2::Rect Mario::get_rect () const {
+pro2::Rect Mario::get_rect() const {
     pro2::Rect r;
     
     r.left = pos_.x - width/2;

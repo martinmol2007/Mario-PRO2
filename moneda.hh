@@ -49,7 +49,7 @@ public:
      * 
      * @return Hitbox de la moneda
      */
-    pro2::Rect get_rect () const;
+    pro2::Rect get_rect() const;
 
     /**
      * @brief Devuelve la posicion x de la moneda
