@@ -58,6 +58,7 @@ void Game::update_objects(pro2::Window& window) {
                 contador_monedas_ += 1;
                 mario_.poner_animacion();
                 it = monedas_.erase(it);
+                // cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
             }
             // No borras
             else {
