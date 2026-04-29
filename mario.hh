@@ -3,7 +3,6 @@
 
 // INFO DE MARIO
 
-#include <iostream>
 #include <vector>
 #include "platform.hh"
 #include "window.hh"

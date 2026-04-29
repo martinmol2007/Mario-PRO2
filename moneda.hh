@@ -3,9 +3,6 @@
 
 #include "window.hh"
 
-#include <iostream>
-#include <vector>
-
 using namespace std;
 using namespace pro2;
 
