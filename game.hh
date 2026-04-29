@@ -10,12 +10,13 @@
 #include "utils.hh"
 
 #include <vector>
+#include <list>
 
 class Game {
     Mario mario_;
 
     std::vector<Platform> platforms_;
-    std::vector<Moneda> monedas_;
+    std::list<Moneda> monedas_;
 
     int contador_monedas_;
 

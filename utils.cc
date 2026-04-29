@@ -53,8 +53,9 @@ void paint_sprite(pro2::Window& window, pro2::Pt orig, const vector<vector<int>>
 
 
 bool hay_colision (const Mario& mario, const Moneda& moneda) {
-    Pt p = { moneda.get_pos_x() + moneda.get_xoffset(), moneda.get_pos_y() };
-    return (abs(p.x - mario.pos().x) <= 5) && (abs(p.y - mario.pos().y) <= 5);
+    // Pt p = { moneda.get_pos_x() + moneda.get_xoffset(), moneda.get_pos_y() };
+    // return (abs(p.x - mario.pos().x) <= 5) && (abs(p.y - mario.pos().y) <= 5);
+    return is_collision(mario.get_rect(), moneda.get_rect());
 }
 
 

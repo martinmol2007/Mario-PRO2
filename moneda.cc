@@ -92,8 +92,8 @@ void Moneda::paint(pro2::Window& window) const {
 pro2::Rect Moneda::get_rect() const {
     pro2::Rect r;
     
-    r.left = pos_.x - width/2;
-    r.right = pos_.x + width/2;
+    r.left = pos_.x + xoffset_ - width/2;
+    r.right = pos_.x + xoffset_ + width/2;
     r.bottom = pos_.y;
     r.top = pos_.y - height; 
 
