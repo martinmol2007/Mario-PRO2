@@ -25,7 +25,7 @@ OBJS := $(patsubst %.cc,%.o,$(CCFILES))
 TAR_FILE = mario-pro-2-$(USER)-$(shell date +%s).tgz
 
 mario_pro_2: $(OBJS)
-	g++ -g3 -o mario_pro_2 $(OBJS) $(LDFLAGS)
+	g++ -g3 -o mario_pro_2.exe $(OBJS) $(LDFLAGS)
 
 $(OBJS): $(HHFILES)
 window.o: window.cc geometry.hh fenster.h
