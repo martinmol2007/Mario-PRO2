@@ -3,7 +3,6 @@
 #include "window.hh"
 
 #include <cmath>
-#include <vector>
 
 using namespace std;
 using namespace pro2;

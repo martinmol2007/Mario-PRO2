@@ -2,6 +2,7 @@
 #define MONEDA__HH
 
 #include "window.hh"
+#include <vector>
 
 using namespace std;
 using namespace pro2;
