@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <list>
+#include <iostream>
 
 class Game {
     Mario mario_;

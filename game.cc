@@ -73,28 +73,11 @@ void Game::update_objects(pro2::Window& window) {
 
 
 void Game::update_camera(pro2::Window& window) {
-
-    // Movimiento de camara mas fluido
-
     const Pt pos = mario_.pos();
     const Pt cam = window.camera_center();
-
-    const int left = cam.x - window.width() / 4;
-    const int right = cam.x + window.width() / 4;
-    const int top = cam.y - window.height() / 4;
-    const int bottom = cam.y + window.height() / 4;
-
-    int dx = 0, dy = 0;
-    if (pos.x > right) {
-        dx = pos.x - right;
-    } else if (pos.x < left) {
-        dx = pos.x - left;
-    }
-    if (pos.y < top) {
-        dy = pos.y - top;
-    } else if (pos.y > bottom) {
-        dy = pos.y - bottom;
-    }
+    
+    int dx = pos.x - cam.x;
+    int dy = pos.y - cam.y;
 
     window.move_camera({dx, dy});
 }
