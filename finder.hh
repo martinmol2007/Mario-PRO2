@@ -1,3 +1,9 @@
+#ifndef FINDER_HH
+#define FINDER_HH
+
+#include <map>
+#include <set>
+
 template <typename T>
 class Finder {
     // ...
@@ -22,3 +28,14 @@ public:
      */
     std::set<const T *> query(pro2::Rect rect) const;
 };
+
+/*
+NOTAS:
+Casillas que separan la camara
+- Dos maps
+map<obj., pts>
+mpa<pt, objs>
+
+*/
+
+#endif
