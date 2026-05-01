@@ -32,6 +32,8 @@ class Game {
     void update_objects(pro2::Window& window);
     void update_camera(pro2::Window& window);
 
+    void reset();
+
  public:
     Game(int width, int height);
 

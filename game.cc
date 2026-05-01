@@ -1,6 +1,8 @@
 #include "game.hh"
 #include "assert.hh"
 
+const int WIDTH = 480, HEIGHT = 320;
+
 using namespace pro2;
 
 Game::Game(int width, int height) : 
@@ -29,7 +31,7 @@ Game::Game(int width, int height) :
     // Las monedas las lleva el Juego
     contador_monedas_ = 0;
     // Atributos del Mario que los lleva el juego
-    vidas_ = 3;
+    vidas_ = 5;
     muerto_ = false;
 }
 
@@ -42,13 +44,14 @@ void Game::process_keys(pro2::Window& window) {
         paused_ = not paused_;
         return;
     }
-    if(window.was_key_pressed('R')) {
-        muerto_ = false;
+    if(window.was_key_pressed('R') && muerto_) {
+        reset();
+        return;
     }
 }
 
 void Game::update_objects(pro2::Window& window) {
-    if (not paused_) {
+    if (muerto_ or paused_) {
         mario_.update(window, platforms_);
         auto rect_mario = mario_.get_rect();
         
@@ -116,7 +119,7 @@ void Game::update_camera(pro2::Window& window) {
 
 void Game::update(pro2::Window& window) {
     process_keys(window);
-    if(not paused_) {
+    if(not paused_ or not muerto_) {
         update_objects(window);
         update_camera(window);
     }
@@ -124,7 +127,12 @@ void Game::update(pro2::Window& window) {
 
 
 void Game::paint(pro2::Window& window) {
-    // Pinta el cielo color azul
+    // Pinta el cielo color rojo si no esta muerto
+    if (muerto_) {
+        window.clear(red);
+        return;
+    } 
+
     window.clear(sky_blue);
 
     // Pinta las nubes
@@ -155,4 +163,33 @@ void Game::paint(pro2::Window& window) {
     // Pintar el marco negro
     Rect r = window.camera_rect();
     paint_square(window, r, black, 4);
+}
+
+void Game::reset() {
+    mario_ = Mario({WIDTH / 2, 150}, Keys::Space, 'D', 'A', 0, 0);
+
+    platforms_.clear();
+    monedas_.clear();
+    fantasmas_.clear();
+
+    platforms_ = {Platform(100, 300, 200, 211), Platform(0, 200, 250, 261), Platform(250, 400, 150, 161)};
+    monedas_ = {Moneda ({325, 150}), Moneda ({200, 200}), Moneda ({100, 250})};
+
+    for (int i = 1; i < 20; i++) {
+        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
+    }
+
+    for (int i = 0; i < 20; i++) {
+        monedas_.push_back(Moneda({530 + 200*i, 150}));
+    }
+
+    for (int i = 0; i < 20; i++) {
+        fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
+    }
+
+   
+    contador_monedas_ = 0;
+    vidas_ = 5;
+    muerto_ = false;
+    paused_ = false;
 }
