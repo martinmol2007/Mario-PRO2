@@ -46,7 +46,7 @@ void Game::update_objects(pro2::Window& window) {
         // Provoca que se muevan las monedas
         for (Moneda& m : monedas_) {
             // Mueve cada moneda (animacion)
-            m.update();
+            m.update(window);
         }
         
         // Comprobar si las monedas chocan con Mario (se las recoge)

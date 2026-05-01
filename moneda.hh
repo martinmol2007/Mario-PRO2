@@ -3,6 +3,7 @@
 
 #include "window.hh"
 #include <vector>
+#include <cmath>
 
 using namespace std;
 using namespace pro2;
@@ -19,7 +20,13 @@ private:
      * @brief Offset (Variable que indica el desplazamiento horizontal de la moneda respecto a pos_)
      * 
      */
-    int xoffset_;
+    double xoffset_;
+
+    /**
+     * @brief Offset (Variable que indica el desplazamiento vertical de la moneda respecto a pos_)
+     * 
+     */
+    double yoffset_;
 
 public:
     /**
@@ -40,7 +47,7 @@ public:
      * @brief Actualiza la "animacion" de la moneda
      * 
      */
-    void update();
+    void update(pro2::Window& window);
 
     /**
      * @brief Genera un rectangulo de la Hitbox de la moneda
@@ -68,7 +75,14 @@ public:
      * 
      * @return Posicion xoffset
      */
-    int get_xoffset() const;
+    double get_xoffset() const;
+
+    /**
+     * @brief Devuelve la posicion yoffset de la moneda
+     * 
+     * @return Posicion xoffset
+     */
+    double get_yoffset() const;
     
 private:
     /**

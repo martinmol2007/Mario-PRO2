@@ -2,7 +2,6 @@
 #include "utils.hh"
 #include "window.hh"
 
-#include <cmath>
 
 using namespace std;
 using namespace pro2;
@@ -20,7 +19,7 @@ const int s = 0xecc49b;
 const int b = 0x5e6ddc;
 const int y = pro2::yellow;
 const int h = pro2::black;
-const int g = 0xaaaaaa;
+const int g = 0xd8d8c8;
 const int w = 0x8d573c;
 const int v = pro2::green;
 const int a = 0x0a6fb6;  // azul oscuro
@@ -33,22 +32,21 @@ const int d = 0xbfefff;  // brillo
  * @brief Moneda estilo pixel art
  */
 const vector<vector<int>> Moneda::sprite_moneda = {
-    {_, _, _, _, _, _, _, _, _, _, _, _}, 
-    {_, _, _, _, _, _, _, _, _, _, _, _},
-    {_, _, _, _, _, h, h, _, _, _, _, _}, 
-    {_, _, _, _, h, c, c, h, _, _, _, _},
-    {_, _, _, h, c, d, d, c, h, _, _, _}, 
-    {_, _, h, c, c, c, c, c, c, h, _, _},
-    {_, h, c, c, b, c, c, b, c, c, h, _}, 
-    {_, h, c, b, b, b, b, b, b, c, h, _},
-    {_, h, b, b, b, c, c, b, b, b, h, _}, 
-    {_, h, b, b, c, c, c, c, b, b, h, _},
-    {_, _, h, c, b, b, b, b, c, h, _, _}, 
-    {_, _, _, h, c, b, b, c, h, _, _, _},
-    {_, _, _, _, h, b, b, h, _, _, _, _}, 
-    {_, _, _, _, _, h, h, _, _, _, _, _},
-    {_, _, _, _, _, _, _, _, _, _, _, _}, 
-    {_, _, _, _, _, _, _, _, _, _, _, _},
+    {_, _, _, y, y, y, y, y, y, _, _, _},
+    {_, _, y, y, y, y, y, y, y, y, _, _},
+    {_, y, y, g, g, g, g, g, g, y, y, _},
+    {y, y, g, g, h, h, g, g, g, g, y, y},
+    {y, g, g, h, g, h, g, g, g, g, g, y},
+    {y, g, g, g, g, h, g, g, g, g, g, y},
+    {y, g, g, g, g, h, g, g, g, g, g, y},
+    {y, g, g, g, g, h, g, g, h, h, g, y},
+    {y, g, g, g, g, h, g, g, h, g, g, y},
+    {y, g, g, g, g, h, g, g, h, h, g, y},
+    {y, g, g, g, h, h, h, g, g, g, g, y},
+    {y, y, g, g, g, g, g, g, g, g, y, y},
+    {_, y, y, g, g, g, g, g, g, y, y, _},
+    {_, _, y, y, y, y, y, y, y, y, _, _},
+    {_, _, _, y, y, y, y, y, y, _, _, _},
 };
 
 // clang-format on
@@ -56,22 +54,28 @@ const vector<vector<int>> Moneda::sprite_moneda = {
 
 Moneda::Moneda(Pt pos) {
     pos_ = pos;
-    xoffset_ = 0;
+    xoffset_ = 0.0;
+    yoffset_ = 0.0;
 }
 
 
 // Indica la direccion en que se mueve la moneda
 // Esto hace que la moneda se mueva de izquerda a derecha en una zona de (-45, 45) pixeles
-int direccion = 1;
+// Lo pongo double para que pueda ir con mas precision / decimales
+double direccion = 0.75;
 
-void Moneda::update() {
+void Moneda::update(pro2::Window& window) {
+    // Movimiento horizontal (eje x)
     xoffset_ += direccion;;
     if (xoffset_ > 45) {
-        direccion = -1;
+        direccion = -0.75;
     }
     else if (xoffset_ < -45) {
-        direccion = 1;
+        direccion = 0.75;
     }
+
+    // Movimiento vertical (eje y)
+    yoffset_ = 3 * sin(0.125 * window.frame_count());
 }
 
 
@@ -81,7 +85,7 @@ void Moneda::update() {
  * @param window Ventana en la que pintar
  */
 void Moneda::paint(pro2::Window& window) const {
-    Pt p = { pos_.x + xoffset_, pos_.y };
+    pro2::Pt p = { int(pos_.x + xoffset_), int(pos_.y + yoffset_) };
     const Pt punto = {p.x - width, p.y - height};
     paint_sprite(window, punto, sprite_moneda, false);
 }
@@ -90,10 +94,10 @@ void Moneda::paint(pro2::Window& window) const {
 pro2::Rect Moneda::get_rect() const {
     pro2::Rect r;
     
-    r.left = pos_.x + xoffset_ - width/2;
-    r.right = pos_.x + xoffset_ + width/2;
-    r.bottom = pos_.y;
-    r.top = pos_.y - height; 
+    r.left = pos_.x + int(xoffset_) - width/2;
+    r.right = pos_.x + int(xoffset_) + width/2;
+    r.bottom = pos_.y + int(yoffset_);
+    r.top = pos_.y + int(yoffset_) - height; 
 
     return r;
 }
@@ -106,6 +110,10 @@ int Moneda::get_pos_y() const {
     return pos_.y;
 }
 
-int Moneda::get_xoffset() const {
+double Moneda::get_xoffset() const {
     return xoffset_;
+}
+
+double Moneda::get_yoffset() const {
+    return yoffset_;
 }
