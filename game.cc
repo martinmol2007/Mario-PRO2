@@ -78,8 +78,10 @@ void Game::update_objects(pro2::Window& window) {
             contador_monedas_ += 1;
             mario_.poner_animacion();
             it_m = monedas_.erase(it_m);
-            // cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
-            // cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
+
+            cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+            cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
+            
         }
         // No borras
         else {
@@ -102,11 +104,7 @@ void Game::update_objects(pro2::Window& window) {
         } else {
             it_f++;
         }
-    }
-        
-    // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
-    // cout << monedas_.size() << endl;
-    
+    }  
 }
 
 
@@ -168,7 +166,7 @@ void Game::paint(pro2::Window& window) {
     paint_square(window, r, black, 4);
 }
 
-void Game::reset(Window& window) {
+void Game::reset(pro2::Window& window) {
     mario_ = Mario({WIDTH / 2, 150}, Keys::Space, 'D', 'A', 0, 0);
 
     Pt spawn = {WIDTH / 2, 150};
