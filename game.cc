@@ -46,10 +46,12 @@ void Game::process_keys(pro2::Window& window) {
     }
     if(window.was_key_pressed('R') && muerto_) {
         reset(window);
+        update_camera(window);
         return;
     }
     if(window.was_key_pressed('K')) {
         reset(window);
+        update_camera(window);
         return;
     }
 }
@@ -81,7 +83,7 @@ void Game::update_objects(pro2::Window& window) {
 
             cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
-            
+
         }
         // No borras
         else {
@@ -168,10 +170,6 @@ void Game::paint(pro2::Window& window) {
 
 void Game::reset(pro2::Window& window) {
     mario_ = Mario({WIDTH / 2, 150}, Keys::Space, 'D', 'A', 0, 0);
-
-    Pt spawn = {WIDTH / 2, 150};
-    Pt cam = window.camera_center();
-    window.move_camera({spawn.x - cam.x, spawn.y - cam.y});
 
     platforms_.clear();
     monedas_.clear();
