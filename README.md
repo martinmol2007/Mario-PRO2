@@ -27,6 +27,7 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 | Derecha  | `D` |
 | Pausar   | `P` |
 | Reiniciar   | `R` |
+| Matar   | `K` |
 
 ---
 

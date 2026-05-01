@@ -48,10 +48,14 @@ void Game::process_keys(pro2::Window& window) {
         reset();
         return;
     }
+    if(window.was_key_pressed('K')) {
+        reset();
+        return;
+    }
 }
 
 void Game::update_objects(pro2::Window& window) {
-    if (muerto_ or paused_) {
+    if (muerto_ or not paused_) {
         mario_.update(window, platforms_);
         auto rect_mario = mario_.get_rect();
         
@@ -119,7 +123,7 @@ void Game::update_camera(pro2::Window& window) {
 
 void Game::update(pro2::Window& window) {
     process_keys(window);
-    if(not paused_ or not muerto_) {
+    if(not paused_ and not muerto_) {
         update_objects(window);
         update_camera(window);
     }
@@ -191,5 +195,5 @@ void Game::reset() {
     contador_monedas_ = 0;
     vidas_ = 5;
     muerto_ = false;
-    paused_ = false;
+    paused_ = true;
 }
