@@ -32,7 +32,7 @@ class Game {
     void update_objects(pro2::Window& window);
     void update_camera(pro2::Window& window);
 
-    void reset();
+    void reset(pro2::Window& window);
 
  public:
     Game(int width, int height);

@@ -45,69 +45,68 @@ void Game::process_keys(pro2::Window& window) {
         return;
     }
     if(window.was_key_pressed('R') && muerto_) {
-        reset();
+        reset(window);
         return;
     }
     if(window.was_key_pressed('K')) {
-        reset();
+        reset(window);
         return;
     }
 }
 
 void Game::update_objects(pro2::Window& window) {
-    if (muerto_ or not paused_) {
-        mario_.update(window, platforms_);
-        auto rect_mario = mario_.get_rect();
+    mario_.update(window, platforms_);
+    auto rect_mario = mario_.get_rect();
         
-        // Provoca que se muevan las monedas
-        for (Moneda& m : monedas_) {
-            // Mueve cada moneda (animacion)
-            m.update(window);
-        }
-        
-        // Provoca que se muevan los fantasmas
-        for (Fantasma& f : fantasmas_) {
-            f.update(window);
-        }
-        
-        // Comprobar si las monedas chocan con Mario (se las recoge)
-        auto it_m = monedas_.begin();
-
-        while (it_m != monedas_.end()) {
-            // Lo borras, se avanza solo el iterador
-            if (is_collision(rect_mario, (*it_m).get_rect())) {
-                contador_monedas_ += 1;
-                mario_.poner_animacion();
-                it_m = monedas_.erase(it_m);
-                // cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
-                // cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
-            }
-            // No borras
-            else {
-                it_m++;
-            }
-        }
-
-        // Comprueba si se choca con un fantasma
-        auto it_f = fantasmas_.begin();
-
-        while (it_f != fantasmas_.end()) {
-            if (is_collision(rect_mario, (*it_f).get_rect())) {
-                vidas_ -= 1;
-                it_f = fantasmas_.erase(it_f);
-
-                cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
-                cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
-
-                if (vidas_ == 0) muerto_ = true;
-            } else {
-                it_f++;
-            }
-        }
-        
-        // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
-        // cout << monedas_.size() << endl;
+    // Provoca que se muevan las monedas
+    for (Moneda& m : monedas_) {
+        // Mueve cada moneda (animacion)
+        m.update(window);
     }
+        
+    // Provoca que se muevan los fantasmas
+    for (Fantasma& f : fantasmas_) {
+        f.update(window);
+    }
+        
+    // Comprobar si las monedas chocan con Mario (se las recoge)
+    auto it_m = monedas_.begin();
+
+    while (it_m != monedas_.end()) {
+        // Lo borras, se avanza solo el iterador
+        if (is_collision(rect_mario, (*it_m).get_rect())) {
+            contador_monedas_ += 1;
+            mario_.poner_animacion();
+            it_m = monedas_.erase(it_m);
+            // cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+            // cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
+        }
+        // No borras
+        else {
+            it_m++;
+        }
+    }
+
+    // Comprueba si se choca con un fantasma
+    auto it_f = fantasmas_.begin();
+
+    while (it_f != fantasmas_.end()) {
+        if (is_collision(rect_mario, (*it_f).get_rect())) {
+            vidas_ -= 1;
+            it_f = fantasmas_.erase(it_f);
+
+            cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+            cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
+
+            if (vidas_ == 0) muerto_ = true;
+        } else {
+            it_f++;
+        }
+    }
+        
+    // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
+    // cout << monedas_.size() << endl;
+    
 }
 
 
@@ -169,8 +168,12 @@ void Game::paint(pro2::Window& window) {
     paint_square(window, r, black, 4);
 }
 
-void Game::reset() {
+void Game::reset(Window& window) {
     mario_ = Mario({WIDTH / 2, 150}, Keys::Space, 'D', 'A', 0, 0);
+
+    Pt spawn = {WIDTH / 2, 150};
+    Pt cam = window.camera_center();
+    window.move_camera({spawn.x - cam.x, spawn.y - cam.y});
 
     platforms_.clear();
     monedas_.clear();
