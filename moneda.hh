@@ -2,11 +2,10 @@
 #define MONEDA__HH
 
 #include "window.hh"
+#include "utils.hh"
 #include <vector>
 #include <cmath>
 
-using namespace std;
-using namespace pro2;
 
 class Moneda {
 private:
@@ -14,7 +13,7 @@ private:
      * @brief Posicion de la moneda
      * 
      */
-    Pt pos_;
+    pro2::Pt pos_;
 
     /**
      * @brief Offset (Variable que indica el desplazamiento horizontal de la moneda respecto a pos_)
@@ -22,19 +21,13 @@ private:
      */
     double xoffset_;
 
-    /**
-     * @brief Offset (Variable que indica el desplazamiento vertical de la moneda respecto a pos_)
-     * 
-     */
-    double yoffset_;
-
 public:
     /**
      * @brief Construye un objeto Moneda con pos
      * 
      * @param pos Posicion de la moneda
      */
-    Moneda(Pt pos);
+    Moneda(pro2::Pt pos);
 
     /**
      * @brief Pinta la moneda
@@ -76,20 +69,13 @@ public:
      * @return Posicion xoffset
      */
     double get_xoffset() const;
-
-    /**
-     * @brief Devuelve la posicion yoffset de la moneda
-     * 
-     * @return Posicion xoffset
-     */
-    double get_yoffset() const;
     
 private:
     /**
      * @brief Sprite de la moneda
      * 
      */
-    static const vector<vector<int>> sprite_moneda;
+    static const std::vector<std::vector<int>> sprite_moneda;
 };
 
 

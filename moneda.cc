@@ -2,7 +2,6 @@
 #include "utils.hh"
 #include "window.hh"
 
-
 using namespace std;
 using namespace pro2;
 
@@ -55,7 +54,6 @@ const vector<vector<int>> Moneda::sprite_moneda = {
 Moneda::Moneda(Pt pos) {
     pos_ = pos;
     xoffset_ = 0.0;
-    yoffset_ = 0.0;
 }
 
 
@@ -73,9 +71,6 @@ void Moneda::update(pro2::Window& window) {
     else if (xoffset_ < -45) {
         direccion = 0.75;
     }
-
-    // Movimiento vertical (eje y)
-    yoffset_ = 3 * sin(0.125 * window.frame_count());
 }
 
 
@@ -85,7 +80,7 @@ void Moneda::update(pro2::Window& window) {
  * @param window Ventana en la que pintar
  */
 void Moneda::paint(pro2::Window& window) const {
-    pro2::Pt p = { int(pos_.x + xoffset_), int(pos_.y + yoffset_) };
+    pro2::Pt p = { int(pos_.x + xoffset_), pos_.y };
     const Pt punto = {p.x - width, p.y - height};
     paint_sprite(window, punto, sprite_moneda, false);
 }
@@ -96,8 +91,8 @@ pro2::Rect Moneda::get_rect() const {
     
     r.left = pos_.x + int(xoffset_) - width/2;
     r.right = pos_.x + int(xoffset_) + width/2;
-    r.bottom = pos_.y + int(yoffset_);
-    r.top = pos_.y + int(yoffset_) - height; 
+    r.bottom = pos_.y;
+    r.top = pos_.y - height; 
 
     return r;
 }
@@ -114,6 +109,3 @@ double Moneda::get_xoffset() const {
     return xoffset_;
 }
 
-double Moneda::get_yoffset() const {
-    return yoffset_;
-}
