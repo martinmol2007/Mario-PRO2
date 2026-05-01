@@ -72,7 +72,7 @@ void paint_sprite(pro2::Window& window, pro2::Pt orig, const std::vector<std::ve
  * @return true Si hay colision
  * @return false Si no hay colision
  */
-bool hay_colision (const Mario& mario, const Moneda& moneda);
+// bool hay_colision (const Mario& mario, const Moneda& moneda);
 
 /**
  * @brief Mira si hay colision en la hitbox del Mario y la Moneda

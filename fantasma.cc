@@ -5,7 +5,7 @@ using namespace pro2;
 
 // Direccion para el movimiento horizontal
 
-double direccion = 0.5;
+static double direccion = 0.5;
 
 // Variables globales para los sprites
 
@@ -54,7 +54,7 @@ Fantasma::Fantasma(Pt pos) {
 }
 
 
-void Fantasma::update(Window& window) {
+void Fantasma::update(pro2::Window& window) {
     // Movimiento horizontal (eje x)
     xoffset_ += direccion;;
     if (xoffset_ > 30) {
@@ -65,14 +65,16 @@ void Fantasma::update(Window& window) {
     }
 
     // Movimiento vertical (eje y)
-    yoffset_ = 3 * sin(0.125 * window.frame_count());
+    yoffset_ = 30 * sin(0.125 * window.frame_count());
 }
 
-void Fantasma::paint(Window& window) const {
-    Pt p = { int(pos_.x + xoffset_), pos_.y };
+void Fantasma::paint(pro2::Window& window) const {
+    Pt p = { int(pos_.x + xoffset_), int(pos_.y + yoffset_) };
     const Pt punto = {p.x - width, p.y - height};
 
-    if (window.frame_count() % 15 == 0) {
+    int ciclo = (window.frame_count() / 15) % 9;
+
+    if (ciclo < 8) {
         bool mirror = direccion > 0 ? true : false;
         paint_sprite(window, punto, sprite_fantasma, mirror);
     }

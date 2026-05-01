@@ -3,6 +3,7 @@
 
 #include "mario.hh"
 #include "moneda.hh"
+#include "fantasma.hh"
 #include "nube.hh"
 #include "platform.hh"
 
@@ -18,11 +19,14 @@ class Game {
 
     std::vector<Platform> platforms_;
     std::list<Moneda> monedas_;
+    std::list<Fantasma> fantasmas_;
 
     int contador_monedas_;
+    int vidas_;
 
     bool finished_;
     bool paused_;
+    bool muerto_;
 
     void process_keys(pro2::Window& window);
     void update_objects(pro2::Window& window);

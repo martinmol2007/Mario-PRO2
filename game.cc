@@ -20,12 +20,17 @@ Game::Game(int width, int height) :
     for (int i = 1; i < 20; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
-
     for (int i = 0; i < 20; i++) {
         monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
+    for (int i = 0; i < 20; i++) {
+        fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
+    }
     // Las monedas las lleva el Juego
     contador_monedas_ = 0;
+    // Atributos del Mario que los lleva el juego
+    vidas_ = 3;
+    muerto_ = false;
 }
 
 void Game::process_keys(pro2::Window& window) {
@@ -37,11 +42,15 @@ void Game::process_keys(pro2::Window& window) {
         paused_ = not paused_;
         return;
     }
+    if(window.was_key_pressed('R')) {
+        muerto_ = false;
+    }
 }
 
 void Game::update_objects(pro2::Window& window) {
     if (not paused_) {
         mario_.update(window, platforms_);
+        auto rect_mario = mario_.get_rect();
         
         // Provoca que se muevan las monedas
         for (Moneda& m : monedas_) {
@@ -49,23 +58,46 @@ void Game::update_objects(pro2::Window& window) {
             m.update(window);
         }
         
+        // Provoca que se muevan los fantasmas
+        for (Fantasma& f : fantasmas_) {
+            f.update(window);
+        }
+        
         // Comprobar si las monedas chocan con Mario (se las recoge)
-        auto it = monedas_.begin();
-    
-        while (it != monedas_.end()) {
+        auto it_m = monedas_.begin();
+
+        while (it_m != monedas_.end()) {
             // Lo borras, se avanza solo el iterador
-            if (hay_colision(mario_, (*it))) {
+            if (is_collision(rect_mario, (*it_m).get_rect())) {
                 contador_monedas_ += 1;
                 mario_.poner_animacion();
-                it = monedas_.erase(it);
+                it_m = monedas_.erase(it_m);
                 // cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
                 // cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
             }
             // No borras
             else {
-                it++;
+                it_m++;
             }
         }
+
+        // Comprueba si se choca con un fantasma
+        auto it_f = fantasmas_.begin();
+
+        while (it_f != fantasmas_.end()) {
+            if (is_collision(rect_mario, (*it_f).get_rect())) {
+                vidas_ -= 1;
+                it_f = fantasmas_.erase(it_f);
+
+                cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+                cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
+
+                if (vidas_ == 0) muerto_ = true;
+            } else {
+                it_f++;
+            }
+        }
+        
         // Sacar el tamaño del vector de monedas (para comprobar si se estan eleminado las monedas sobrantes)
         // cout << monedas_.size() << endl;
     }
@@ -88,7 +120,6 @@ void Game::update(pro2::Window& window) {
         update_objects(window);
         update_camera(window);
     }
-    // cout << contador_monedas_ << endl;
 }
 
 
@@ -101,6 +132,11 @@ void Game::paint(pro2::Window& window) {
         paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
         paint_sprite(window, { 50*i + 45, 50 }, sprite_nube, false);
         paint_sprite(window, { 50*i + 48, 47 }, sprite_nube, false);
+    }
+
+    // Pinta los fantasmas
+    for (const Fantasma& f : fantasmas_) {
+        f.paint(window);
     }
 
     // Pinta las plataformas
