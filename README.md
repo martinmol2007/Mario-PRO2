@@ -8,7 +8,7 @@
 
 ## Info
 
-Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
+Juego estilo Mario de la asignatura de PRO2 de la FIB 2026 
 
 ![Imagen](.github/images/Estrella.png)
 
@@ -33,7 +33,8 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 
 ## Objetos del juego
 
-- **Diamantes** → Como las monedas (se pueden recojer y suman puntos (en un futuro))
+- **Monedas** → Euros, se pueden recoger y tienen su animacion
+- **Fantasmas** → Son enemigos, si te chocas con ellos, te restan una vida
 
 ---
 
