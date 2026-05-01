@@ -78,6 +78,4 @@ private:
     static const std::vector<std::vector<int>> sprite_moneda;
 };
 
-
-
 #endif
