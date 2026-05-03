@@ -86,7 +86,7 @@ Rect Fantasma::get_rect() const {
     r.left = pos_.x + int(xoffset_) - width/2;
     r.right = pos_.x + int(xoffset_) + width/2;
     r.bottom = pos_.y + int(yoffset_);
-    r.top = pos_.y - height; 
+    r.top = pos_.y + int(yoffset_) - height; 
 
     return r;
 }
