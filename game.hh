@@ -9,6 +9,7 @@
 
 #include "window.hh"
 #include "utils.hh"
+#include "finder.hh"
 
 #include <vector>
 #include <list>
@@ -16,6 +17,10 @@
 
 class Game {
     Mario mario_;
+
+    Finder<Platform> fplatforms_;
+    Finder<Moneda> fmonedas_;
+    Finder<Fantasma> ffantasmas_;
 
     std::vector<Platform> platforms_;
     std::list<Moneda> monedas_;

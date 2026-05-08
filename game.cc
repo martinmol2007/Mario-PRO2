@@ -49,6 +49,7 @@ void Game::process_keys(pro2::Window& window) {
         update_camera(window);
         return;
     }
+    // Funciona a veces
     if(window.was_key_pressed('K')) {
         reset(window);
         update_camera(window);
@@ -58,8 +59,9 @@ void Game::process_keys(pro2::Window& window) {
 
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
-    auto rect_mario = mario_.get_rect();
-        
+    
+    // std::set<Moneda*> visible_monedas = fmonedas_.query(window.camera_rect())
+
     // Provoca que se muevan las monedas
     for (Moneda& m : monedas_) {
         // Mueve cada moneda (animacion)
@@ -70,7 +72,10 @@ void Game::update_objects(pro2::Window& window) {
     for (Fantasma& f : fantasmas_) {
         f.update(window);
     }
-        
+    
+    // Rectangulo del Mario para colisiones
+    auto rect_mario = mario_.get_rect();
+
     // Comprobar si las monedas chocan con Mario (se las recoge)
     auto it_m = monedas_.begin();
 
