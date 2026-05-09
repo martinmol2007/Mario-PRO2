@@ -3,6 +3,15 @@
 
 const int WIDTH = 480, HEIGHT = 320;
 
+// Cantidad de objetos
+
+const int NUMERO_MONEDAS = 20;
+const int NUMERO_FANTASMAS = 20;
+const int NUMERO_PLATAFORMAS = 20;
+const int CANTIDAD_NUBES = 100;
+const int CANTIDAD_VIDAS_INICIAL = 5;
+const int CANTIDAD_MONEDAS_INICIAL = 0;
+
 using namespace pro2;
 
 Game::Game(int width, int height) : 
@@ -19,19 +28,19 @@ Game::Game(int width, int height) :
     },
     finished_(false), paused_(false) {
     assert(width > 0 && height > 0, "L'amplada i l'alcada del joc han de ser positives.");
-    for (int i = 1; i < 20; i++) {
+    for (int i = 1; i < NUMERO_PLATAFORMAS; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < NUMERO_MONEDAS; i++) {
         monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < NUMERO_FANTASMAS; i++) {
         fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
     }
-    // Las monedas las lleva el Juego
-    contador_monedas_ = 0;
-    // Atributos del Mario que los lleva el juego
-    vidas_ = 5;
+
+    // Atributos "del" Mario que los lleva el juego
+    contador_monedas_ = CANTIDAD_MONEDAS_INICIAL;
+    vidas_ = CANTIDAD_VIDAS_INICIAL;
     muerto_ = false;
 }
 
@@ -144,7 +153,7 @@ void Game::paint(pro2::Window& window) {
     window.clear(sky_blue);
 
     // Pinta las nubes
-    for (int i = 0; i < 100; i += 2) {
+    for (int i = 0; i < CANTIDAD_NUBES; i += 2) {
         paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
         paint_sprite(window, { 50*i + 45, 50 }, sprite_nube, false);
         paint_sprite(window, { 50*i + 48, 47 }, sprite_nube, false);
@@ -183,21 +192,21 @@ void Game::reset(pro2::Window& window) {
     platforms_ = {Platform(100, 300, 200, 211), Platform(0, 200, 250, 261), Platform(250, 400, 150, 161)};
     monedas_ = {Moneda ({325, 150}), Moneda ({200, 200}), Moneda ({100, 250})};
 
-    for (int i = 1; i < 20; i++) {
+    for (int i = 1; i < NUMERO_PLATAFORMAS; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < NUMERO_MONEDAS; i++) {
         monedas_.push_back(Moneda({530 + 200*i, 150}));
     }
 
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < NUMERO_FANTASMAS; i++) {
         fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
     }
 
    
-    contador_monedas_ = 0;
-    vidas_ = 5;
+    contador_monedas_ = CANTIDAD_MONEDAS_INICIAL;
+    vidas_ = CANTIDAD_VIDAS_INICIAL;
     muerto_ = false;
     paused_ = true;
 }

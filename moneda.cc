@@ -1,4 +1,5 @@
 #include "moneda.hh"
+
 #include "utils.hh"
 #include "window.hh"
 
@@ -9,6 +10,9 @@ using namespace pro2;
 
 const int width = 6;
 const int height = 15;
+
+const int MAX_OFFSET = 45;
+const double DIRECCION = 0.75;
 
 // Paleta de Colores para moneda
 
@@ -65,11 +69,11 @@ static double direccion = 0.75;
 void Moneda::update(pro2::Window& window) {
     // Movimiento horizontal (eje x)
     xoffset_ += direccion;;
-    if (xoffset_ > 45) {
-        direccion = -0.75;
+    if (xoffset_ > MAX_OFFSET) {
+        direccion = -DIRECCION;
     }
-    else if (xoffset_ < -45) {
-        direccion = 0.75;
+    else if (xoffset_ < -MAX_OFFSET) {
+        direccion = DIRECCION;
     }
 }
 

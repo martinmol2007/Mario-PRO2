@@ -4,6 +4,7 @@
 // INFO DE MARIO
 
 #include <vector>
+
 #include "platform.hh"
 #include "window.hh"
 

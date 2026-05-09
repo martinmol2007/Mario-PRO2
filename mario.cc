@@ -1,9 +1,11 @@
 #include "mario.hh"
 #include "utils.hh"
+
 using namespace std;
 using namespace pro2;
 
 // Tamaño de los sprites
+
 const int width = 12;
 const int height = 16;
 
