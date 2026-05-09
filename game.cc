@@ -58,11 +58,14 @@ void Game::process_keys(pro2::Window& window) {
         update_camera(window);
         return;
     }
-    // Funciona a veces
     if(window.was_key_pressed('K')) {
         reset(window);
         update_camera(window);
         return;
+    }
+    if(window.was_key_pressed('H')) {
+        vidas_ += 1;
+        cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
     }
 }
 

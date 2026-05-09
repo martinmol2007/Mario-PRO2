@@ -77,11 +77,13 @@ public:
                 // Conseguir un Chunk
                 pro2::Pt c = (*it_set_chunks);
 
-                
+                // Iterador al objeto dentro del set del map f_bloques
                 auto it_f_bloques = f_bloques_[c].find(t);
+
+                // Borra el objeto que esta en el chunk c del set de objetos
                 f_bloques_[c].erase(it_f_bloques);
-                
             }
+            // Cuando has borrado el objeto t de todos los chunks en los que estaba, borrar t del mapa de objetos / puntos
             f_objs_.erase(it);
         }
         
