@@ -2,6 +2,7 @@
 #define NUBE_HH
 
 #include <vector>
+
 #include "window.hh"
 
 using namespace std;

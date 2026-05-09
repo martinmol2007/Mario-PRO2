@@ -44,9 +44,12 @@ public:
             }
         }
 
+        // Guarda en f_bloques_ el objeto que hay en cada chunk al que pertenece
+        // Crea un set auxiliar con todos los chunks a los que pertenece t
         std::set<pro2::Pt> chunks_objeto = f_objs_[t];
 
         for (auto it = chunks_objeto.begin(); it != chunks_objeto.end(); it++) {
+            // Uno de los chunks a los que pertenece el objeto t
             pro2::Pt p = (*it);
             f_bloques_[p].insert(t);
         }
@@ -57,13 +60,37 @@ public:
         // Añadir a f_objs_ con set<Pt>
         // Añadir en cada punto del set el objeto t
 
+        return;
+    }    
 
-    }     
     void remove(const T* t) {
+        // Busca el objeto t para ver si esta
+        auto it = f_objs_.find(t);
+        
+        // Si esta, lo borras de todo
+        if(it != f_objs_.end()) {
+            // Set auxiliar con todos los chunks a los que un objeto tiene
+            const std::set<pro2::Pt> chunks_objeto = it->second;
+            
+            // Para cada chunk en el que esta, borras el objeto que esta en el map f_bloques en ese chunk
+            for(auto it_set_chunks = chunks_objeto.begin(); it_set_chunks != chunks_objeto.end(); it_set_chunks++) {
+                // Conseguir un Chunk
+                pro2::Pt c = (*it_set_chunks);
+
+                
+                auto it_f_bloques = f_bloques_[c].find(t);
+                f_bloques_[c].erase(it_f_bloques);
+                
+            }
+            f_objs_.erase(it);
+        }
+        
         // Buscar T en el f_objs_
         // Si esta, recorrer el set<Pt> eliminando el objeto (en el otro map (f_bloques))
         // Borrar t de f_objs_
+        return;
     }
+
     void update(const T* t) {
         remove(t);
         add(t);
@@ -87,13 +114,5 @@ public:
     }
 };
 
-/*
-NOTAS:
-Casillas que separan la camara
-- Dos maps
-map<obj., pts>
-mpa<pt, objs>
-
-*/
 
 #endif
