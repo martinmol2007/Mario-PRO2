@@ -2,7 +2,8 @@
 #define FINDER_HH
 
 // Tamaño de los chuncks del Finder
-const static int ancho = 100;
+
+static const int CHUNK_MIDA = 100;
 
 #include <map>
 #include <set>
@@ -11,15 +12,45 @@ const static int ancho = 100;
 
 template <typename T>
 class Finder {
-    // el T es un objecte (template)
-    std::map<const T*, std::set<pro2::Pt>> f_objs_; // para los objetos
-    std::map<pro2::Pt, std::set<const T*>> f_bloques_; //  para saber que objetos hay en un cudrado (querry) (rectangulos)
+    /**
+     * @brief Map; que segun un objeto, te dice en que chunks esta
+     * 
+     */
+    std::map<const T*, std::set<pro2::Pt>> f_objs_; 
+
+    /**
+     * @brief Map; que segun un chunk te dice que objetos hay dentro de ese chunk
+     * 
+     */
+    std::map<pro2::Pt, std::set<const T*>> f_bloques_; 
 public:
     Finder() {}
 
     void add(const T* t) { 
         // Conseguir el rectangulo
-        pro2::Rect r = t->get_rect();
+        pro2::Rect r_pos = t->get_rect();
+
+        // Calcula a que chunk pertenece el objeto segun su rectangulo
+        int chunk_left = r_pos.left / CHUNK_MIDA;
+        int chunk_right = r_pos.right / CHUNK_MIDA;
+        int chunk_top = r_pos.top / CHUNK_MIDA;
+        int chunk_bottom = r_pos.bottom / CHUNK_MIDA;
+
+        // Guarda en f_objs_ los chunks en los que esta t (lo del set)
+        for (int i = chunk_left; i <= chunk_right; i++) {
+            for (int j = chunk_top; j <= chunk_top; j++) {
+                pro2::Pt chunk = {i, j};
+                f_objs_[t].insert(chunk);
+            }
+        }
+
+        std::set<pro2::Pt> chunks_objeto = f_objs_[t];
+
+        for (auto it = chunks_objeto.begin(); it != chunks_objeto.end(); it++) {
+            pro2::Pt p = (*it);
+            f_bloques_[p].insert(t);
+        }
+
 
         // Calcular en que bloques (chuncks) esta Rect r
         // Devuelve set<Pt (chuncks)>
