@@ -54,12 +54,6 @@ public:
             f_bloques_[p].insert(t);
         }
 
-
-        // Calcular en que bloques (chuncks) esta Rect r
-        // Devuelve set<Pt (chuncks)>
-        // Añadir a f_objs_ con set<Pt>
-        // Añadir en cada punto del set el objeto t
-
         return;
     }    
 
@@ -76,20 +70,14 @@ public:
             for(auto it_set_chunks = chunks_objeto.begin(); it_set_chunks != chunks_objeto.end(); it_set_chunks++) {
                 // Conseguir un Chunk
                 pro2::Pt c = (*it_set_chunks);
-
-                // Iterador al objeto dentro del set del map f_bloques
-                auto it_f_bloques = f_bloques_[c].find(t);
-
+              
                 // Borra el objeto que esta en el chunk c del set de objetos
-                f_bloques_[c].erase(it_f_bloques);
+                f_bloques_[c].erase(t);
             }
             // Cuando has borrado el objeto t de todos los chunks en los que estaba, borrar t del mapa de objetos / puntos
             f_objs_.erase(it);
         }
         
-        // Buscar T en el f_objs_
-        // Si esta, recorrer el set<Pt> eliminando el objeto (en el otro map (f_bloques))
-        // Borrar t de f_objs_
         return;
     }
 

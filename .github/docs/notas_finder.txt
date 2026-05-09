@@ -1,0 +1,10 @@
+Add
+        // Calcular en que bloques (chuncks) esta Rect r
+        // Devuelve set<Pt (chuncks)>
+        // Añadir a f_objs_ con set<Pt>
+        // Añadir en cada punto del set el objeto t
+
+Remove 
+        // Buscar T en el f_objs_
+        // Si esta, recorrer el set<Pt> eliminando el objeto (en el otro map (f_bloques))
+        // Borrar t de f_objs_
