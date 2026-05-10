@@ -1,0 +1,11 @@
+//for (const Moneda& m : monedas_) {
+    //    m.paint(window);
+    //}
+
+for (const Fantasma& f : fantasmas_) {
+        f.paint(window);
+    }
+
+ for (const Platform& p : platforms_) {
+        p.paint(window);
+    }

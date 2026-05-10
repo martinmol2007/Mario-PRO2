@@ -110,9 +110,12 @@ void Game::update_objects(pro2::Window& window) {
         if (is_collision(rect_mario, (*it_m).get_rect())) {
             contador_monedas_ += 1;
             mario_.poner_animacion();
+
+            // Borra del finder la moneda tras ser recogida
+            fmonedas_.remove(&(*it_m));
+
             it_m = monedas_.erase(it_m);
 
-            fmonedas_.remove(&(*it_m));
             
             cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
@@ -130,9 +133,12 @@ void Game::update_objects(pro2::Window& window) {
     while (it_f != fantasmas_.end()) {
         if (is_collision(rect_mario, (*it_f).get_rect())) {
             vidas_ -= 1;
+
+            // Borra del finder el fantasma tras ser recogida
+            ffantasmas_.remove(&(*it_f));
+            
             it_f = fantasmas_.erase(it_f);
 
-            ffantasmas_.remove(&(*it_f));
 
             cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
@@ -181,19 +187,25 @@ void Game::paint(pro2::Window& window) {
     }
 
     // Pinta los fantasmas
-    for (const Fantasma& f : fantasmas_) {
-        f.paint(window);
+    set<const Fantasma*> f_query = ffantasmas_.query(window.camera_rect());
+    for(const Fantasma* f : f_query) {
+        f->paint(window);
     }
+    
 
     // Pinta las plataformas
-    for (const Platform& p : platforms_) {
-        p.paint(window);
+    set<const Platform*> p_query = fplatforms_.query(window.camera_rect());
+    for(const Platform* p : p_query) {
+        p->paint(window);
     }
+   
 
     // Pinta las monedas
-    for (const Moneda& m : monedas_) {
-        m.paint(window);
+    set<const Moneda*> m_query = fmonedas_.query(window.camera_rect());
+    for(const Moneda* m : m_query) {
+        m->paint(window);
     }
+    
 
     // Pinta el Mario
     mario_.paint(window, mario_.get_sprite());

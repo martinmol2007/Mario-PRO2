@@ -67,7 +67,7 @@ public:
      * 
      * @param t Objeto generico
      */
-    void remove(const T* t) {
+    void remove(T* t) {
         // Busca el objeto t para ver si esta
         auto it = f_objs_.find(t);
         
@@ -96,7 +96,7 @@ public:
      * 
      * @param t Objeto generico
      */
-    void update(const T* t) {
+    void update(T* t) {
         remove(t);
         add(t);
     }
