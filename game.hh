@@ -22,7 +22,7 @@ class Game {
     Finder<Moneda> fmonedas_;
     Finder<Fantasma> ffantasmas_;
 
-    std::vector<Platform> platforms_;
+    std::list<Platform> platforms_;
     std::list<Moneda> monedas_;
     std::list<Fantasma> fantasmas_;
 
@@ -38,13 +38,6 @@ class Game {
     void update_camera(pro2::Window& window);
 
     void reset(pro2::Window& window);
-
-    template<typename T>
-    void finder_inicializar(Finder<T>& f, const std::vector<T>& v) {
-        for(const T& obj : v) {
-            f.add(&obj);
-        }
-    }
 
     template<typename T>
     void finder_inicializar(Finder<T>& f, const std::list<T>& l) {
