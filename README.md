@@ -16,7 +16,7 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 
 ## To Do:
 
--
+- Finder y todo lo relacionado con ello
 
 ## Controles del juego
 
