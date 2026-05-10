@@ -4,16 +4,16 @@
 #include "mario.hh"
 #include "moneda.hh"
 #include "fantasma.hh"
-#include "nube.hh"
 #include "platform.hh"
+#include "nube.hh"
 
 #include "window.hh"
-#include "utils.hh"
 #include "finder.hh"
+#include "utils.hh"
 
+#include <iostream>
 #include <vector>
 #include <list>
-#include <iostream>
 
 class Game {
     Mario mario_;
@@ -38,6 +38,20 @@ class Game {
     void update_camera(pro2::Window& window);
 
     void reset(pro2::Window& window);
+
+    template<typename T>
+    void finder_inicializar(Finder<T>& f, const std::vector<T>& v) {
+        for(const T& obj : v) {
+            f.add(&obj);
+        }
+    }
+
+    template<typename T>
+    void finder_inicializar(Finder<T>& f, const std::list<T>& l) {
+        for(const T& obj : l) {
+            f.add(&obj);
+        }
+    }
 
  public:
     Game(int width, int height);

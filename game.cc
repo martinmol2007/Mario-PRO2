@@ -40,6 +40,12 @@ Game::Game(int width, int height) :
         fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
     }
 
+    // Inicializa los finders
+    finder_inicializar(fmonedas_, monedas_);
+    finder_inicializar(ffantasmas_, fantasmas_);
+    finder_inicializar(fplatforms_, platforms_);
+
+    
     // Atributos "del" Mario que los lleva el juego
     contador_monedas_ = CANTIDAD_MONEDAS_INICIAL;
     vidas_ = CANTIDAD_VIDAS_INICIAL;
@@ -84,11 +90,13 @@ void Game::update_objects(pro2::Window& window) {
     for (Moneda& m : monedas_) {
         // Mueve cada moneda (animacion)
         m.update(window);
+        fmonedas_.update(&m);
     }
         
     // Provoca que se muevan los fantasmas
     for (Fantasma& f : fantasmas_) {
         f.update(window);
+        ffantasmas_.update(&f);
     }
     
     // Rectangulo del Mario para colisiones
@@ -104,6 +112,8 @@ void Game::update_objects(pro2::Window& window) {
             mario_.poner_animacion();
             it_m = monedas_.erase(it_m);
 
+            fmonedas_.remove(&(*it_m));
+            
             cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
 
@@ -121,6 +131,8 @@ void Game::update_objects(pro2::Window& window) {
         if (is_collision(rect_mario, (*it_f).get_rect())) {
             vidas_ -= 1;
             it_f = fantasmas_.erase(it_f);
+
+            ffantasmas_.remove(&(*it_f));
 
             cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
