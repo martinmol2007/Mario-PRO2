@@ -1,6 +1,8 @@
 #include "game.hh"
 #include "assert.hh"
 
+// Parametros de la ventana 
+
 const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos

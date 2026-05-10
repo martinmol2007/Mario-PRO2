@@ -43,7 +43,7 @@ public:
 
         // Guarda en f_objs_ los chunks en los que esta t (lo del set)
         for (int i = chunk_left; i <= chunk_right; i++) {
-            for (int j = chunk_top; j <= chunk_top; j++) {
+            for (int j = chunk_top; j <= chunk_bottom; j++) {
                 pro2::Pt chunk = {i, j};
                 f_objs_[t].insert(chunk);
             }
