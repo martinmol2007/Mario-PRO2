@@ -123,7 +123,12 @@ public:
 
         // Para cada chunk de f_bloques_ en rect, poner en el set resultado todos los objetos que haya ahi
         for(auto it = chunks_rectangulo.begin(); it != chunks_rectangulo.end(); it++) {
-            poner_set(objetos_visibles, f_bloques_[(*it)]);
+            // Buscar si hay algun objeto en ese chunk
+            auto it_bloques = f_bloques_.find(*it);
+
+            if(it_bloques != f_bloques_.end()) {
+                poner_set(objetos_visibles, it_bloques->second);
+            }
         }
         
 
@@ -137,7 +142,7 @@ private:
      */
     void poner_set(std::set<const T*>& objetos_visibles, const std::set<const T*>& objetos) const {
         for(auto it = objetos.begin(); it != objetos.end(); it++) {
-            objetos_visibles.insert(it);
+            objetos_visibles.insert(*it);
         }
         return;
     }
