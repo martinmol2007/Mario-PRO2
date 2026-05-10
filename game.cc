@@ -183,14 +183,6 @@ void Game::paint(pro2::Window& window) {
     
     window.clear(sky_blue);
 
-    Pt mario_pos = mario_.pos();
-    Rect mini_cam = {
-        mario_pos.x - 120,  // left
-        mario_pos.y - 100,  // top
-        mario_pos.x + 120,  // right
-        mario_pos.y + 100   // bottom
-    };
-
     // Pinta las nubes
     for (int i = 0; i < CANTIDAD_NUBES; i += 2) {
         paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
@@ -199,21 +191,21 @@ void Game::paint(pro2::Window& window) {
     }
 
     // Pinta los fantasmas
-    set<const Fantasma*> f_query = ffantasmas_.query(mini_cam);
+    set<const Fantasma*> f_query = ffantasmas_.query(window.camera_rect());
     for(const Fantasma* f : f_query) {
         f->paint(window);
     }
     
 
     // Pinta las plataformas
-    set<const Platform*> p_query = fplatforms_.query(mini_cam);
+    set<const Platform*> p_query = fplatforms_.query(window.camera_rect());
     for(const Platform* p : p_query) {
         p->paint(window);
     }
    
 
     // Pinta las monedas
-    set<const Moneda*> m_query = fmonedas_.query(mini_cam);
+    set<const Moneda*> m_query = fmonedas_.query(window.camera_rect());
     for(const Moneda* m : m_query) {
         m->paint(window);
     }
@@ -222,8 +214,7 @@ void Game::paint(pro2::Window& window) {
     // Pinta el Mario
     mario_.paint(window, mario_.get_sprite());
     
-    // Pintar borde de la mini camara para verla
-paint_square(window, mini_cam, pro2::red, 2);
+
     // Pintar el marco negro
     Rect r = window.camera_rect();
     paint_square(window, r, black, 4);
