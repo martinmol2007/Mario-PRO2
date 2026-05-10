@@ -64,7 +64,7 @@ Moneda::Moneda(Pt pos) {
 // Indica la direccion en que se mueve la moneda
 // Esto hace que la moneda se mueva de izquerda a derecha en una zona de (-45, 45) pixeles
 // Lo pongo double para que pueda ir con mas precision / decimales
-static double direccion = 0.75;
+// double direccion = 0.75;
 
 void Moneda::update(pro2::Window& window) {
     // Movimiento horizontal (eje x)

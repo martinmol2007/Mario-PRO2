@@ -81,22 +81,26 @@ void Game::process_keys(pro2::Window& window) {
     }
 }
 
+// Con el finder, solo se actulzian los objetos visibles, NO todos
+// Va a haber desfase, pero da igual
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
     
-    // std::set<Moneda*> visible_monedas = fmonedas_.query(window.camera_rect())
 
     // Provoca que se muevan las monedas
-    for (Moneda& m : monedas_) {
-        // Mueve cada moneda (animacion)
-        m.update(window);
-        fmonedas_.update(&m);
+    set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
+    for(const Moneda* m : monedas_visibles) {
+        const_cast<Moneda*>(m)->update(window);
+        // m->update(window);
+        fmonedas_.update(m);
     }
-        
+    
     // Provoca que se muevan los fantasmas
-    for (Fantasma& f : fantasmas_) {
-        f.update(window);
-        ffantasmas_.update(&f);
+    set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
+    for (const Fantasma* f : fantasmas_visibles) {
+        const_cast<Fantasma*>(f)->update(window);
+        // f->update(window);
+        ffantasmas_.update(f);
     }
     
     // Rectangulo del Mario para colisiones
@@ -176,7 +180,7 @@ void Game::paint(pro2::Window& window) {
         window.clear(red);
         return;
     } 
-
+    
     window.clear(sky_blue);
 
     // Pinta las nubes

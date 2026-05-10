@@ -111,7 +111,7 @@ pro2::Rect Mario::get_rect() const {
     return r;
 }
 
-void Mario::update(pro2::Window& window, const vector<Platform>& platforms) {
+void Mario::update(pro2::Window& window, const list<Platform>& platforms) {
     last_pos_ = pos_;
     if (window.is_key_down(jump_key)) {
         jump();

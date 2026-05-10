@@ -4,6 +4,7 @@
 // INFO DE MARIO
 
 #include <vector>
+#include <list>
 
 #include "platform.hh"
 #include "window.hh"
@@ -67,7 +68,7 @@ class Mario {
 
     void jump();
 
-    void update(pro2::Window& window, const std::vector<Platform>& platforms);
+    void update(pro2::Window& window, const std::list<Platform>& platforms);
 
     /**
      * @brief Pone la animacion

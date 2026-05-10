@@ -21,6 +21,12 @@ private:
      */
     double xoffset_;
 
+    /**
+     * @brief Direccion de moviemiento de la moneda
+     * 
+     */
+    double direccion = 0.75;
+
 public:
     /**
      * @brief Construye un objeto Moneda con pos

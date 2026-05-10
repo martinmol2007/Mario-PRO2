@@ -26,6 +26,12 @@ private:
      * 
      */
     double yoffset_;
+
+    /**
+     * @brief Direccion de movimiento del fantasma
+     * 
+     */
+    double direccion = 0.5;
 public:
     /**
      * @brief Constructor del Fantasma

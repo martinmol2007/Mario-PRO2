@@ -1,0 +1,8 @@
+for (Moneda& m : monedas_) {
+        // Mueve cada moneda (animacion)
+        m.update(window);
+        fmonedas_.update(&m);
+    }
+for(Fantasma* f : fantasmas_visibles) {
+        f->update(window);
+    }

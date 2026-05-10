@@ -5,7 +5,7 @@ using namespace pro2;
 
 // Direccion para el movimiento horizontal
 
-static double direccion = 0.5;
+// double direccion = 0.5;
 
 // Variables globales para los sprites
 
