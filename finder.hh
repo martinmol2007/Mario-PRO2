@@ -150,6 +150,17 @@ public:
         // Devuelve un set con todos los objetos que estan visibles dado un rectangulo
         return objetos_visibles;
     }
+
+    /**
+     * @brief Borrar todos los elementos de ambos maps
+     * 
+     */
+    void clear() {
+        f_bloques_.clear();
+        f_objs_.clear();
+
+        return;
+    }
 private:
     /**
      * @brief Funcion auxiliar que pone en el set de objetos_visibles todo lo que haya en el set objetos

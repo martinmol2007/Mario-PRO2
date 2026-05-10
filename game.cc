@@ -237,6 +237,15 @@ void Game::reset(pro2::Window& window) {
         fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
     }
 
+    // Vacia todos los finders
+    fmonedas_.clear();
+    ffantasmas_.clear();
+    fplatforms_.clear();
+
+    // Inicializa los finders
+    finder_inicializar(fmonedas_, monedas_);
+    finder_inicializar(ffantasmas_, fantasmas_);
+    finder_inicializar(fplatforms_, platforms_);
    
     contador_monedas_ = CANTIDAD_MONEDAS_INICIAL;
     vidas_ = CANTIDAD_VIDAS_INICIAL;
