@@ -15,6 +15,7 @@ const int CANTIDAD_VIDAS_INICIAL = 5;
 const int CANTIDAD_MONEDAS_INICIAL = 0;
 
 using namespace pro2;
+using namespace std;
 
 Game::Game(int width, int height) : 
     mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0, 0), // Controles Mas Comodos
