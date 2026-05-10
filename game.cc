@@ -71,11 +71,11 @@ void Game::process_keys(pro2::Window& window) {
         update_camera(window);
         return;
     }
-    if(window.was_key_pressed('H')) {
+    if(window.was_key_pressed('H') && not paused_) {
         vidas_ += 1;
         cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
     }
-    if(window.was_key_pressed('M')) {
+    if(window.was_key_pressed('M') && not paused_) {
         contador_monedas_ += 1;
         cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
     }
