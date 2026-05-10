@@ -99,8 +99,47 @@ public:
      *          parcial o totalment dins de `rect`
      */
     std::set<const T*> query(pro2::Rect rect) const {
-        // Calcular en que bloques esta Rect (nos devuelve un set de puntos)
+        // Calcular en que bloques (chunks) esta Rect (nos devuelve un set de puntos)
         // Para cada punto,  buscar en f_bloques_ y ver que objetos hay e irlos añadiendo al set
+
+        // Crea el set con todos los objetos que estan dentro del rectangulo (camara)
+        std::set<const T*> objetos_visibles;
+
+        // Crea un set para los chunks que hay dado un rectangulo
+        std::set<pro2::Pt> chunks_rectangulo;
+
+        int chunk_left = rect.left / CHUNK_MIDA;
+        int chunk_right = rect.right / CHUNK_MIDA;
+        int chunk_top = rect.top / CHUNK_MIDA;
+        int chunk_bottom = rect.bottom / CHUNK_MIDA;
+
+        for(int i  = chunk_left; i <= chunk_right; i++) {
+            for(int j = chunk_top; j <= chunk_bottom; j++) {
+                // Poner en el set todos los chunks que hay dado un rectangulo (rect)
+                chunks_rectangulo.insert({i, j});
+            }
+        }
+
+
+        // Para cada chunk de f_bloques_ en rect, poner en el set resultado todos los objetos que haya ahi
+        for(auto it = chunks_rectangulo.begin(); it != chunks_rectangulo.end(); it++) {
+            poner_set(objetos_visibles, f_bloques_[(*it)]);
+        }
+        
+
+        // Devuelve un set con todos los objetos que estan visibles dado un rectangulo
+        return objetos_visibles;
+    }
+private:
+    /**
+     * @brief Funcion auxiliar que pone en el set de objetos_visibles todo lo que haya en el set objetos
+     * 
+     */
+    void poner_set(std::set<const T*>& objetos_visibles, const std::set<const T*>& objetos) const {
+        for(auto it = objetos.begin(); it != objetos.end(); it++) {
+            objetos_visibles.insert(it);
+        }
+        return;
     }
 };
 

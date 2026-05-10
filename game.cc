@@ -67,6 +67,10 @@ void Game::process_keys(pro2::Window& window) {
         vidas_ += 1;
         cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
     }
+    if(window.was_key_pressed('M')) {
+        contador_monedas_ += 1;
+        cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+    }
 }
 
 void Game::update_objects(pro2::Window& window) {
