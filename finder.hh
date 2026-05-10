@@ -26,6 +26,11 @@ class Finder {
 public:
     Finder() {}
 
+    /**
+     * @brief Añade al Finder todos los chunks a los que el objeto t pertenece, tambien los chunks en los que el objeto t esta
+     * 
+     * @param t Objeto generico
+     */
     void add(const T* t) { 
         // Conseguir el rectangulo
         pro2::Rect r_pos = t->get_rect();
@@ -57,6 +62,11 @@ public:
         return;
     }    
 
+    /**
+     * @brief Quita del finder los chunks a los que pertenece t y el objeto t
+     * 
+     * @param t Objeto generico
+     */
     void remove(const T* t) {
         // Busca el objeto t para ver si esta
         auto it = f_objs_.find(t);
@@ -81,6 +91,11 @@ public:
         return;
     }
 
+    /**
+     * @brief Actualiza el finder, por ejemplo para el moviemiento de las monedas
+     * 
+     * @param t Objeto generico
+     */
     void update(const T* t) {
         remove(t);
         add(t);
@@ -100,7 +115,7 @@ public:
      */
     std::set<const T*> query(pro2::Rect rect) const {
         // Calcular en que bloques (chunks) esta Rect (nos devuelve un set de puntos)
-        // Para cada punto,  buscar en f_bloques_ y ver que objetos hay e irlos añadiendo al set
+        // Para cada chunk,  buscar en f_bloques_ y ver que objetos hay e irlos añadiendo al set
 
         // Crea el set con todos los objetos que estan dentro del rectangulo (camara)
         std::set<const T*> objetos_visibles;
