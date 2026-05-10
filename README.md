@@ -29,6 +29,7 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 | Reiniciar   | `R` |
 | Suicidarse   | `K` |
 | Curarse   | `H` |
+| Monedas   | `M` |
 
 ---
 
