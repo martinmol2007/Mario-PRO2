@@ -46,6 +46,13 @@ class Game {
         }
     }
 
+    template<typename T>
+    void finder_inicializar(Finder<T>& f, const std::vector<T>& l) {
+        for(const T& obj : l) {
+            f.add(&obj);
+        }
+    }
+
  public:
     Game(int width, int height);
 
