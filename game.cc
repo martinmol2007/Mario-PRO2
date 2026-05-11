@@ -11,8 +11,10 @@ const int NUMERO_MONEDAS =           2000;
 const int NUMERO_FANTASMAS =         2000;
 const int NUMERO_PLATAFORMAS =       2000;
 const int CANTIDAD_NUBES =            100;
-const int CANTIDAD_VIDAS_INICIAL =      5;
+const int CANTIDAD_VIDAS_INICIAL =     15;
 const int CANTIDAD_MONEDAS_INICIAL =    0;
+
+const int VALOR_MONEDA = 1;
 
 using namespace pro2;
 using namespace std;
@@ -112,6 +114,23 @@ void Game::update_objects(pro2::Window& window) {
     // Comprobar si las monedas chocan con Mario (se las recoge)
     auto it_m = monedas_.begin();
 
+    // Consigue los sets actualizados despues de mover los objetos (monedas y fantasmas)
+    set<const Moneda*> monedas_colisiones = fmonedas_.query(window.camera_rect());
+    set<const Fantasma*> fantasmas_colisiones = ffantasmas_.query(window.camera_rect());
+
+    for(const Moneda* m : monedas_colisiones) {
+        if(is_collision(rect_mario, m->get_rect())) {
+            contador_monedas_ += VALOR_MONEDA;
+            mario_.poner_animacion();
+            
+            fmonedas_.remove(m);
+            
+            auto it = std::find(monedas_.begin(), monedas_.end(), m);
+            
+            monedas_.erase(it);
+        }
+    }
+
     while (it_m != monedas_.end()) {
         // Lo borras, se avanza solo el iterador
         if (is_collision(rect_mario, (*it_m).get_rect())) {
@@ -120,7 +139,7 @@ void Game::update_objects(pro2::Window& window) {
             
             // Borra del finder la moneda tras ser recogida
             fmonedas_.remove(&(*it_m));
-
+           
             it_m = monedas_.erase(it_m);
 
             
