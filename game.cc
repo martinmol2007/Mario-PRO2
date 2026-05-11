@@ -7,12 +7,12 @@ const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS = 20;
-const int NUMERO_FANTASMAS = 20;
-const int NUMERO_PLATAFORMAS = 20;
-const int CANTIDAD_NUBES = 100;
-const int CANTIDAD_VIDAS_INICIAL = 5;
-const int CANTIDAD_MONEDAS_INICIAL = 0;
+const int NUMERO_MONEDAS =           2000;
+const int NUMERO_FANTASMAS =         2000;
+const int NUMERO_PLATAFORMAS =       2000;
+const int CANTIDAD_NUBES =            100;
+const int CANTIDAD_VIDAS_INICIAL =      5;
+const int CANTIDAD_MONEDAS_INICIAL =    0;
 
 using namespace pro2;
 using namespace std;
@@ -84,24 +84,26 @@ void Game::process_keys(pro2::Window& window) {
 
 // Con el finder, solo se actulzian los objetos visibles, NO todos
 // Actualizar todos, para que no haya desfase
+
+// Preguntar si se tienen que mover todas o las que estan visbles
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
     
 
     // Provoca que se muevan las monedas
-    // set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
-    for(Moneda& m : monedas_) {
-        //const_cast<Moneda*>(m)->update(window);
-        m.update(window);
-        fmonedas_.update(&m);
+    set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
+    for(const Moneda* m : monedas_visibles) {
+        //m.update(window);
+        const_cast<Moneda*>(m)->update(window);
+        fmonedas_.update(m);
     }
     
     // Provoca que se muevan los fantasmas
-    // set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
-    for (Fantasma& f : fantasmas_) {
-        // const_cast<Fantasma*>(f)->update(window);
-        f.update(window);
-        ffantasmas_.update(&f);
+    set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
+    for (const Fantasma* f : fantasmas_visibles) {
+        const_cast<Fantasma*>(f)->update(window);
+        // f.update(window);
+        ffantasmas_.update(f);
     }
     
     // Rectangulo del Mario para colisiones
@@ -115,7 +117,7 @@ void Game::update_objects(pro2::Window& window) {
         if (is_collision(rect_mario, (*it_m).get_rect())) {
             contador_monedas_ += 1;
             mario_.poner_animacion();
-
+            
             // Borra del finder la moneda tras ser recogida
             fmonedas_.remove(&(*it_m));
 
