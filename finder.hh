@@ -50,18 +50,6 @@ public:
             }
         }
 
-        // Guarda en f_bloques_ el objeto que hay en cada chunk al que pertenece
-        // Crea un set auxiliar con todos los chunks a los que pertenece t
-        // std::set<pro2::Pt> chunks_objeto = f_objs_[t];
-
-        /*
-        for (auto it = chunks_objeto.begin(); it != chunks_objeto.end(); it++) {
-            // Uno de los chunks a los que pertenece el objeto t
-            pro2::Pt p = (*it);
-            f_bloques_[p].insert(t);
-        }
-        */
-
         return;
     }    
 
@@ -117,14 +105,8 @@ public:
      *          parcial o totalment dins de `rect`
      */
     std::set<const T*> query(pro2::Rect rect) const {
-        // Calcular en que bloques (chunks) esta Rect (nos devuelve un set de puntos)
-        // Para cada chunk,  buscar en f_bloques_ y ver que objetos hay e irlos añadiendo al set
-
         // Crea el set con todos los objetos que estan dentro del rectangulo (camara)
         std::set<const T*> objetos_visibles;
-        
-        // Crea un set para los chunks que hay dado un rectangulo
-        // std::set<pro2::Pt> chunks_rectangulo;
 
         int chunk_left = rect.left / CHUNK_MIDA;
         int chunk_right = rect.right / CHUNK_MIDA;
@@ -144,25 +126,8 @@ public:
                 if(objetos_in_chunk != f_bloques_.end()) {
                     poner_set(objetos_visibles, objetos_in_chunk->second);
                 }
-
-
-                //chunks_rectangulo.insert({i, j});
             }
         }
-
-
-        // Para cada chunk de f_bloques_ en rect, 
-        // poner en el set resultado todos los objetos que haya ahi
-        /* 
-        for(auto it = chunks_rectangulo.begin(); it != chunks_rectangulo.end(); it++) {
-            // Buscar si hay algun objeto en ese chunk
-            auto it_bloques = f_bloques_.find(*it);
-
-            if(it_bloques != f_bloques_.end()) {
-                poner_set(objetos_visibles, it_bloques->second);
-            }
-        }
-        */
 
         // Devuelve un set con todos los objetos que estan visibles dado un rectangulo
         return objetos_visibles;
