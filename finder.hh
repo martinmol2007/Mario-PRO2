@@ -136,7 +136,8 @@ public:
         }
 
 
-        // Para cada chunk de f_bloques_ en rect, poner en el set resultado todos los objetos que haya ahi
+        // Para cada chunk de f_bloques_ en rect, 
+        // poner en el set resultado todos los objetos que haya ahi
         for(auto it = chunks_rectangulo.begin(); it != chunks_rectangulo.end(); it++) {
             // Buscar si hay algun objeto en ese chunk
             auto it_bloques = f_bloques_.find(*it);
