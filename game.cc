@@ -7,12 +7,13 @@ const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS =           2000;
-const int NUMERO_FANTASMAS =         2000;
-const int NUMERO_PLATAFORMAS =       2000;
+const int NUMERO_MONEDAS =           1000000;
+const int NUMERO_FANTASMAS =         1000000;
+const int NUMERO_PLATAFORMAS =       1000000;
 const int CANTIDAD_NUBES =            100;
 const int CANTIDAD_VIDAS_INICIAL =     15;
 const int CANTIDAD_MONEDAS_INICIAL =    0;
+const int CANTIDAD_VIDAS_QUITAR =       1;
 
 const int VALOR_MONEDA = 1;
 
@@ -108,29 +109,59 @@ void Game::update_objects(pro2::Window& window) {
         ffantasmas_.update(f);
     }
     
-    // Rectangulo del Mario para colisiones
-    auto rect_mario = mario_.get_rect();
-
     // Comprobar si las monedas chocan con Mario (se las recoge)
-    auto it_m = monedas_.begin();
+    // auto it_m = monedas_.begin();
 
-    // Consigue los sets actualizados despues de mover los objetos (monedas y fantasmas)
+    // Rectangulo del Mario para colisiones
+    Rect rect_mario = mario_.get_rect();
+
+    // Consigue los sets actualizados despues de mover los objetos (monedas)
     set<const Moneda*> monedas_colisiones = fmonedas_.query(window.camera_rect());
-    set<const Fantasma*> fantasmas_colisiones = ffantasmas_.query(window.camera_rect());
-
+    
     for(const Moneda* m : monedas_colisiones) {
         if(is_collision(rect_mario, m->get_rect())) {
             contador_monedas_ += VALOR_MONEDA;
+
             mario_.poner_animacion();
             
             fmonedas_.remove(m);
             
-            auto it = std::find(monedas_.begin(), monedas_.end(), m);
-            
-            monedas_.erase(it);
+            bool trobat = false;
+            for(auto it = monedas_.begin(); it != monedas_.end() && not trobat; it++) {
+                if((&*it) == m) {
+                    trobat = true;
+                    monedas_.erase(it);
+                }
+            }
+
+            cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+            cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
         }
     }
 
+    // Consigue los sets actualizados despues de mover los objetos (fantasmas)
+    set<const Fantasma*> fantasmas_colisiones = ffantasmas_.query(window.camera_rect());
+
+    for(const Fantasma* f : fantasmas_colisiones) {
+        if(is_collision(rect_mario, f->get_rect())) {
+            vidas_ -= CANTIDAD_VIDAS_QUITAR;
+
+            ffantasmas_.remove(f);
+
+            bool trobat = false;
+            for(auto it = fantasmas_.begin(); it != fantasmas_.end() && not trobat; it++) {
+                if(&(*it) == f) {
+                    trobat = true;
+                    fantasmas_.erase(it);
+                }
+            }
+
+            cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+            cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
+        }
+    }
+    
+    /*
     while (it_m != monedas_.end()) {
         // Lo borras, se avanza solo el iterador
         if (is_collision(rect_mario, (*it_m).get_rect())) {
@@ -152,13 +183,15 @@ void Game::update_objects(pro2::Window& window) {
             it_m++;
         }
     }
+    */
 
+    /*
     // Comprueba si se choca con un fantasma
     auto it_f = fantasmas_.begin();
 
     while (it_f != fantasmas_.end()) {
         if (is_collision(rect_mario, (*it_f).get_rect())) {
-            vidas_ -= 1;
+            vidas_ -= CANTIDAD_VIDAS_QUITAR;
 
             // Borra del finder el fantasma tras ser recogida
             ffantasmas_.remove(&(*it_f));
@@ -174,6 +207,8 @@ void Game::update_objects(pro2::Window& window) {
             it_f++;
         }
     }  
+    */
+        
 }
 
 
