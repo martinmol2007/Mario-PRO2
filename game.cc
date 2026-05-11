@@ -1,24 +1,24 @@
 #include "game.hh"
 #include "assert.hh"
 
+using namespace pro2;
+using namespace std;
+
 // Parametros de la ventana 
 
 const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS =           1000000;
-const int NUMERO_FANTASMAS =         1000000;
-const int NUMERO_PLATAFORMAS =       1000000;
+const int NUMERO_MONEDAS =           2000;
+const int NUMERO_FANTASMAS =         2000;
+const int NUMERO_PLATAFORMAS =       2000;
 const int CANTIDAD_NUBES =            100;
 const int CANTIDAD_VIDAS_INICIAL =     15;
 const int CANTIDAD_MONEDAS_INICIAL =    0;
 const int CANTIDAD_VIDAS_QUITAR =       1;
+const int VALOR_MONEDA =                1;
 
-const int VALOR_MONEDA = 1;
-
-using namespace pro2;
-using namespace std;
 
 Game::Game(int width, int height) : 
     mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0, 0), // Controles Mas Comodos
@@ -56,6 +56,7 @@ Game::Game(int width, int height) :
     muerto_ = false;
 }
 
+// Para probar cosas
 void Game::process_keys(pro2::Window& window) {
     if (window.is_key_down(Keys::Escape)) {
         finished_ = true;
@@ -104,8 +105,8 @@ void Game::update_objects(pro2::Window& window) {
     // Provoca que se muevan los fantasmas
     set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
     for (const Fantasma* f : fantasmas_visibles) {
-        const_cast<Fantasma*>(f)->update(window);
         // f.update(window);
+        const_cast<Fantasma*>(f)->update(window);
         ffantasmas_.update(f);
     }
     
@@ -128,7 +129,7 @@ void Game::update_objects(pro2::Window& window) {
             
             bool trobat = false;
             for(auto it = monedas_.begin(); it != monedas_.end() && not trobat; it++) {
-                if((&*it) == m) {
+                if(&(*it) == m) {
                     trobat = true;
                     monedas_.erase(it);
                 }
@@ -146,8 +147,8 @@ void Game::update_objects(pro2::Window& window) {
         if(is_collision(rect_mario, f->get_rect())) {
             vidas_ -= CANTIDAD_VIDAS_QUITAR;
 
-            matar();
-            
+            if(vidas_ == 0) matar();
+
             ffantasmas_.remove(f);
 
             bool trobat = false;
