@@ -146,6 +146,8 @@ void Game::update_objects(pro2::Window& window) {
         if(is_collision(rect_mario, f->get_rect())) {
             vidas_ -= CANTIDAD_VIDAS_QUITAR;
 
+            matar();
+            
             ffantasmas_.remove(f);
 
             bool trobat = false;

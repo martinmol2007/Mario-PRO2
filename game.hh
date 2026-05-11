@@ -65,6 +65,10 @@ class Game {
         return finished_;
     }
 
+    void matar() {
+        muerto_ = true;
+    }
+
  private:
     static constexpr int sky_blue = 0x5c94fc;
 };
