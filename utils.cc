@@ -1,4 +1,5 @@
 // TODO LO QUE TIENE QUE VER CON PAINT (PINTAR)
+// Y FUNCIONES AUXILIARES
 
 #include "utils.hh"
 #include "assert.hh"
