@@ -83,25 +83,25 @@ void Game::process_keys(pro2::Window& window) {
 }
 
 // Con el finder, solo se actulzian los objetos visibles, NO todos
-// Va a haber desfase, pero da igual
+// Actualizar todos, para que no haya desfase
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
     
 
     // Provoca que se muevan las monedas
-    set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
-    for(const Moneda* m : monedas_visibles) {
-        const_cast<Moneda*>(m)->update(window);
-        // m->update(window);
-        fmonedas_.update(m);
+    // set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
+    for(Moneda& m : monedas_) {
+        //const_cast<Moneda*>(m)->update(window);
+        m.update(window);
+        fmonedas_.update(&m);
     }
     
     // Provoca que se muevan los fantasmas
-    set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
-    for (const Fantasma* f : fantasmas_visibles) {
-        const_cast<Fantasma*>(f)->update(window);
-        // f->update(window);
-        ffantasmas_.update(f);
+    // set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
+    for (Fantasma& f : fantasmas_) {
+        // const_cast<Fantasma*>(f)->update(window);
+        f.update(window);
+        ffantasmas_.update(&f);
     }
     
     // Rectangulo del Mario para colisiones
@@ -176,13 +176,15 @@ void Game::update(pro2::Window& window) {
 
 
 void Game::paint(pro2::Window& window) {
-    // Pinta el cielo color rojo si no esta muerto
+    // Pinta el cielo color rojo si estas muerto
     if (muerto_) {
         window.clear(red);
         return;
     } 
     
     window.clear(sky_blue);
+
+    // Pintar solo los objetos cercanos, ya que es lo que mas tarda
 
     // Pinta las nubes
     for (int i = 0; i < CANTIDAD_NUBES; i += 2) {
