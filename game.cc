@@ -246,7 +246,7 @@ void Game::paint(pro2::Window& window) {
     // Pinta los fantasmas
     set<const Fantasma*> f_query = ffantasmas_.query(window.camera_rect());
     for(const Fantasma* f : f_query) {
-        f->paint(window);
+        f->paint(window, paused_);
     }
     
 

@@ -44,8 +44,10 @@ public:
      * @brief Pinta el Fantsma por pantalla
      * 
      * @param window Ventana en la que pintar
+     * 
+     * @param paused_ Indica si el juego esta pausado
      */
-    void paint(pro2::Window& window) const;
+    void paint(pro2::Window& window, bool paused_) const;
 
     /**
      * @brief Actualiza el fantsma
