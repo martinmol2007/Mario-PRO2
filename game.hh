@@ -15,6 +15,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <set>
 #include <algorithm>
 
 class Game {
@@ -25,8 +26,9 @@ class Game {
     Finder<Fantasma> ffantasmas_;
 
     std::list<Platform> platforms_;
-    std::list<Moneda> monedas_;
+    std::set<const Moneda *> monedas_;
     std::list<Fantasma> fantasmas_;
+
 
     int contador_monedas_;
     int vidas_;
@@ -49,8 +51,15 @@ class Game {
     }
 
     template<typename T>
-    void finder_inicializar(Finder<T>& f, const std::vector<T>& l) {
-        for(const T& obj : l) {
+    void finder_inicializar(Finder<T>& f, const std::vector<T>& v) {
+        for(const T& obj : v) {
+            f.add(&obj);
+        }
+    }
+
+    template<typename T>
+    void finder_inicializar(Finder<T>& f, const std::set<T>& s) {
+        for(const T& obj : s) {
             f.add(&obj);
         }
     }

@@ -10,11 +10,11 @@ const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS =           2000;
-const int NUMERO_FANTASMAS =         2000;
-const int NUMERO_PLATAFORMAS =       2000;
+const int NUMERO_MONEDAS =             20;
+const int NUMERO_FANTASMAS =           20;
+const int NUMERO_PLATAFORMAS =         20;
 const int CANTIDAD_NUBES =            100;
-const int CANTIDAD_VIDAS_INICIAL =     15;
+const int CANTIDAD_VIDAS_INICIAL =      5;
 const int CANTIDAD_MONEDAS_INICIAL =    0;
 const int CANTIDAD_VIDAS_QUITAR =       1;
 const int VALOR_MONEDA =                1;
@@ -28,9 +28,9 @@ Game::Game(int width, int height) :
         Platform(250, 400, 150, 161),
     },
     monedas_ {
-        Moneda ({325, 150}), // Moneda de la derecha del todo
-        Moneda ({200, 200}),
-        Moneda ({100, 250}),
+        new Moneda ({325, 150}), // Moneda de la derecha del todo
+        new Moneda ({200, 200}),
+        new Moneda ({100, 250}),
     },
     finished_(false), paused_(false) {
     assert(width > 0 && height > 0, "L'amplada i l'alcada del joc han de ser positives.");
@@ -38,14 +38,16 @@ Game::Game(int width, int height) :
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
     for (int i = 0; i < NUMERO_MONEDAS; i++) {
-        monedas_.push_back(Moneda({530 + 200*i, 150}));
+        monedas_.insert(new Moneda({530 + 200*i, 150}));
     }
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
         fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
     }
 
     // Inicializa los finders
-    finder_inicializar(fmonedas_, monedas_);
+    for(const Moneda* moneda : monedas_) {
+        fmonedas_.add(moneda);
+    }
     finder_inicializar(ffantasmas_, fantasmas_);
     finder_inicializar(fplatforms_, platforms_);
 
@@ -109,16 +111,12 @@ void Game::update_objects(pro2::Window& window) {
         const_cast<Fantasma*>(f)->update(window);
         ffantasmas_.update(f);
     }
-    
-    // Comprobar si las monedas chocan con Mario (se las recoge)
-    // auto it_m = monedas_.begin();
 
     // Rectangulo del Mario para colisiones
     Rect rect_mario = mario_.get_rect();
 
     // Consigue los sets actualizados despues de mover los objetos (monedas)
     set<const Moneda*> monedas_colisiones = fmonedas_.query(window.camera_rect());
-    
     for(const Moneda* m : monedas_colisiones) {
         if(is_collision(rect_mario, m->get_rect())) {
             contador_monedas_ += VALOR_MONEDA;
@@ -126,15 +124,9 @@ void Game::update_objects(pro2::Window& window) {
             mario_.poner_animacion();
             
             fmonedas_.remove(m);
+            monedas_.erase(m);
+            delete m;
             
-            bool trobat = false;
-            for(auto it = monedas_.begin(); it != monedas_.end() && not trobat; it++) {
-                if(&(*it) == m) {
-                    trobat = true;
-                    monedas_.erase(it);
-                }
-            }
-
             cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
         }
@@ -142,7 +134,6 @@ void Game::update_objects(pro2::Window& window) {
 
     // Consigue los sets actualizados despues de mover los objetos (fantasmas)
     set<const Fantasma*> fantasmas_colisiones = ffantasmas_.query(window.camera_rect());
-
     for(const Fantasma* f : fantasmas_colisiones) {
         if(is_collision(rect_mario, f->get_rect())) {
             vidas_ -= CANTIDAD_VIDAS_QUITAR;
@@ -280,6 +271,7 @@ void Game::paint(pro2::Window& window) {
     // Pintar el marco negro
     Rect r = window.camera_rect();
     paint_square(window, r, black, 4);
+    
 }
 
 void Game::reset(pro2::Window& window) {
@@ -290,14 +282,14 @@ void Game::reset(pro2::Window& window) {
     fantasmas_.clear();
 
     platforms_ = {Platform(100, 300, 200, 211), Platform(0, 200, 250, 261), Platform(250, 400, 150, 161)};
-    monedas_ = {Moneda ({325, 150}), Moneda ({200, 200}), Moneda ({100, 250})};
+    monedas_ = {new Moneda ({325, 150}), new Moneda ({200, 200}), new Moneda ({100, 250})};
 
     for (int i = 1; i < NUMERO_PLATAFORMAS; i++) {
         platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
     }
 
     for (int i = 0; i < NUMERO_MONEDAS; i++) {
-        monedas_.push_back(Moneda({530 + 200*i, 150}));
+        monedas_.insert(new Moneda({530 + 200*i, 150}));
     }
 
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
@@ -310,7 +302,9 @@ void Game::reset(pro2::Window& window) {
     fplatforms_.clear();
 
     // Inicializa los finders
-    finder_inicializar(fmonedas_, monedas_);
+    for(const Moneda* moneda : monedas_) {
+        fmonedas_.add(moneda);
+    }
     finder_inicializar(ffantasmas_, fantasmas_);
     finder_inicializar(fplatforms_, platforms_);
    
