@@ -41,13 +41,11 @@ Game::Game(int width, int height) :
         monedas_.insert(new Moneda({530 + 200*i, 150}));
     }
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
-        fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
+        fantasmas_.insert(new Fantasma({530 + 200*i, 161}));
     }
 
     // Inicializa los finders
-    for(const Moneda* moneda : monedas_) {
-        fmonedas_.add(moneda);
-    }
+    finder_inicializar(fmonedas_, monedas_);
     finder_inicializar(ffantasmas_, fantasmas_);
     finder_inicializar(fplatforms_, platforms_);
 
@@ -90,11 +88,8 @@ void Game::process_keys(pro2::Window& window) {
 
 // Con el finder, solo se actulzian los objetos visibles, NO todos
 // Actualizar todos, para que no haya desfase
-
-// Preguntar si se tienen que mover todas o las que estan visbles
 void Game::update_objects(pro2::Window& window) {
     mario_.update(window, platforms_);
-    
 
     // Provoca que se muevan las monedas
     set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
@@ -119,12 +114,17 @@ void Game::update_objects(pro2::Window& window) {
     set<const Moneda*> monedas_colisiones = fmonedas_.query(window.camera_rect());
     for(const Moneda* m : monedas_colisiones) {
         if(is_collision(rect_mario, m->get_rect())) {
+            // Suma lo que vale una moneda
             contador_monedas_ += VALOR_MONEDA;
 
+            // Poner animacion al Mario
             mario_.poner_animacion();
             
+            // Borra el objeto del Finder y el Set
             fmonedas_.remove(m);
             monedas_.erase(m);
+
+            // Libera memoria
             delete m;
             
             cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
@@ -136,73 +136,23 @@ void Game::update_objects(pro2::Window& window) {
     set<const Fantasma*> fantasmas_colisiones = ffantasmas_.query(window.camera_rect());
     for(const Fantasma* f : fantasmas_colisiones) {
         if(is_collision(rect_mario, f->get_rect())) {
+            // Resta las vidas al Mario
             vidas_ -= CANTIDAD_VIDAS_QUITAR;
 
-            if(vidas_ == 0) matar();
+            // Si llega a menos de 0 vidas, se acaba
+            if(vidas_ < 0) matar();
 
+            // Borra el objeto del Finder y el Set
             ffantasmas_.remove(f);
+            fantasmas_.erase(f);
 
-            bool trobat = false;
-            for(auto it = fantasmas_.begin(); it != fantasmas_.end() && not trobat; it++) {
-                if(&(*it) == f) {
-                    trobat = true;
-                    fantasmas_.erase(it);
-                }
-            }
+            // Libera memoria
+            delete f;
 
             cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
             cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
         }
-    }
-    
-    /*
-    while (it_m != monedas_.end()) {
-        // Lo borras, se avanza solo el iterador
-        if (is_collision(rect_mario, (*it_m).get_rect())) {
-            contador_monedas_ += 1;
-            mario_.poner_animacion();
-            
-            // Borra del finder la moneda tras ser recogida
-            fmonedas_.remove(&(*it_m));
-           
-            it_m = monedas_.erase(it_m);
-
-            
-            cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
-            cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
-
-        }
-        // No borras
-        else {
-            it_m++;
-        }
-    }
-    */
-
-    /*
-    // Comprueba si se choca con un fantasma
-    auto it_f = fantasmas_.begin();
-
-    while (it_f != fantasmas_.end()) {
-        if (is_collision(rect_mario, (*it_f).get_rect())) {
-            vidas_ -= CANTIDAD_VIDAS_QUITAR;
-
-            // Borra del finder el fantasma tras ser recogida
-            ffantasmas_.remove(&(*it_f));
-            
-            it_f = fantasmas_.erase(it_f);
-
-
-            cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
-            cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
-
-            if (vidas_ == 0) muerto_ = true;
-        } else {
-            it_f++;
-        }
-    }  
-    */
-        
+    }    
 }
 
 
@@ -293,7 +243,7 @@ void Game::reset(pro2::Window& window) {
     }
 
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
-        fantasmas_.push_back(Fantasma({530 + 200*i, 161}));
+        fantasmas_.insert(new Fantasma({530 + 200*i, 161}));
     }
 
     // Vacia todos los finders
@@ -302,9 +252,7 @@ void Game::reset(pro2::Window& window) {
     fplatforms_.clear();
 
     // Inicializa los finders
-    for(const Moneda* moneda : monedas_) {
-        fmonedas_.add(moneda);
-    }
+    finder_inicializar(fmonedas_, monedas_);
     finder_inicializar(ffantasmas_, fantasmas_);
     finder_inicializar(fplatforms_, platforms_);
    

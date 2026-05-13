@@ -13,9 +13,9 @@
 #include "utils.hh"
 
 #include <iostream>
+#include <set>
 #include <vector>
 #include <list>
-#include <set>
 #include <algorithm>
 
 class Game {
@@ -26,8 +26,12 @@ class Game {
     Finder<Fantasma> ffantasmas_;
 
     std::list<Platform> platforms_;
-    std::set<const Moneda *> monedas_;
-    std::list<Fantasma> fantasmas_;
+    std::set<const Moneda*> monedas_;
+    std::set<const Fantasma*> fantasmas_;
+
+    // Borrar
+    // std::list<Fantasma> fantasmas_;
+    // std::set<const Platform*> platforms_;
 
 
     int contador_monedas_;
@@ -44,9 +48,9 @@ class Game {
     void reset(pro2::Window& window);
 
     template<typename T>
-    void finder_inicializar(Finder<T>& f, const std::list<T>& l) {
-        for(const T& obj : l) {
-            f.add(&obj);
+    void finder_inicializar(Finder<T>& f, const std::set<const T*>& s) {
+        for(const T* obj : s) {
+            f.add(obj);
         }
     }
 
@@ -58,8 +62,8 @@ class Game {
     }
 
     template<typename T>
-    void finder_inicializar(Finder<T>& f, const std::set<T>& s) {
-        for(const T& obj : s) {
+    void finder_inicializar(Finder<T>& f, const std::list<T>& l) {
+        for(const T& obj : l) {
             f.add(&obj);
         }
     }

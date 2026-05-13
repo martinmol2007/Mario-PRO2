@@ -1,0 +1,47 @@
+/*
+    while (it_m != monedas_.end()) {
+        // Lo borras, se avanza solo el iterador
+        if (is_collision(rect_mario, (*it_m).get_rect())) {
+            contador_monedas_ += 1;
+            mario_.poner_animacion();
+            
+            // Borra del finder la moneda tras ser recogida
+            fmonedas_.remove(&(*it_m));
+           
+            it_m = monedas_.erase(it_m);
+
+            
+            cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+            cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
+
+        }
+        // No borras
+        else {
+            it_m++;
+        }
+    }
+    */
+
+    /*
+    // Comprueba si se choca con un fantasma
+    auto it_f = fantasmas_.begin();
+
+    while (it_f != fantasmas_.end()) {
+        if (is_collision(rect_mario, (*it_f).get_rect())) {
+            vidas_ -= CANTIDAD_VIDAS_QUITAR;
+
+            // Borra del finder el fantasma tras ser recogida
+            ffantasmas_.remove(&(*it_f));
+            
+            it_f = fantasmas_.erase(it_f);
+
+
+            cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+            cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
+
+            if (vidas_ == 0) muerto_ = true;
+        } else {
+            it_f++;
+        }
+    }  
+    */
