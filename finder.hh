@@ -3,7 +3,7 @@
 
 // Tamaño de los chuncks del Finder
 
-static const int CHUNK_MIDA = 100;
+static const int CHUNK_MIDA = 100; 
 
 #include <map>
 #include <set>
