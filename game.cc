@@ -200,7 +200,7 @@ void Game::paint(pro2::Window& window) {
     Pt pos_ini = {p.x + 25, p.y + 25};
     
     for(int i = 1; i < vidas_+1; i++) {
-        int bloque = i % 5;
+        int bloque = (i-1)/5;
         paint_sprite(window, {pos_ini.x + 15*i, pos_ini.y + bloque*15}, sprite_corazon, false);
     }
 
