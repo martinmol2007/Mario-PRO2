@@ -10,7 +10,7 @@ static const int CHUNK_MIDA = 100;
 
 #include "geometry.hh"
 
-template <typename T>
+template<typename T>
 class Finder {
     /**
      * @brief Map; que segun un objeto, te dice en que chunks esta
@@ -122,7 +122,7 @@ public:
                 // Busca si dado un chunk, hay algun objeto en ese chunk
                 auto objetos_in_chunk = f_bloques_.find(chunk);
 
-                // Hay algun objeto
+                // Hay algun objeto, añadirlo
                 if(objetos_in_chunk != f_bloques_.end()) {
                     poner_set(objetos_visibles, objetos_in_chunk->second);
                 }

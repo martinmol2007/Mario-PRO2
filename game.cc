@@ -127,8 +127,9 @@ void Game::update_objects(pro2::Window& window) {
             // Libera memoria
             delete m;
             
+            // Para ver si se borran correctamente
             cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
-            cout << "TAMAÑO DE LA LISTA DE MONEDAS: " << monedas_.size() << endl;
+            cout << "TAMAÑO DEL SET DE MONEDAS: " << monedas_.size() << endl;
         }
     }
 
@@ -149,8 +150,9 @@ void Game::update_objects(pro2::Window& window) {
             // Libera memoria
             delete f;
 
+            // Para ver si se borran correctamente
             cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
-            cout << "TAMAÑO DE LA LISTA DE FANTASMAS: " << fantasmas_.size() << endl;
+            cout << "TAMAÑO DEL SET DE LOS FANTASMAS: " << fantasmas_.size() << endl;
         }
     }    
 }
