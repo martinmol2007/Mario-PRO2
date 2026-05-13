@@ -7,6 +7,7 @@
 
 #include "platform.hh"
 #include "nube.hh"
+#include "corazon.hh"
 
 #include "window.hh"
 #include "finder.hh"

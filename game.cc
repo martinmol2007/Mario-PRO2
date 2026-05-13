@@ -17,6 +17,7 @@ const int CANTIDAD_NUBES =            100;
 const int CANTIDAD_VIDAS_INICIAL =      5;
 const int CANTIDAD_MONEDAS_INICIAL =    0;
 const int CANTIDAD_VIDAS_QUITAR =       1;
+const int CANTIDAD_VIDAS_PONER =        1;
 const int VALOR_MONEDA =                1;
 
 
@@ -77,11 +78,16 @@ void Game::process_keys(pro2::Window& window) {
         return;
     }
     if(window.was_key_pressed('H') && not paused_) {
-        vidas_ += 1;
+        vidas_ += CANTIDAD_VIDAS_PONER;
+        cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+    }
+    if(window.was_key_pressed('-') && not paused_) {
+        vidas_ -= CANTIDAD_VIDAS_QUITAR;
+        if(vidas_ <= 0) matar();
         cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
     }
     if(window.was_key_pressed('M') && not paused_) {
-        contador_monedas_ += 1;
+        contador_monedas_ += VALOR_MONEDA;
         cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
     }
 }
@@ -94,7 +100,6 @@ void Game::update_objects(pro2::Window& window) {
     // Provoca que se muevan las monedas
     set<const Moneda*> monedas_visibles = fmonedas_.query(window.camera_rect());
     for(const Moneda* m : monedas_visibles) {
-        //m.update(window);
         const_cast<Moneda*>(m)->update(window);
         fmonedas_.update(m);
     }
@@ -102,7 +107,6 @@ void Game::update_objects(pro2::Window& window) {
     // Provoca que se muevan los fantasmas
     set<const Fantasma*> fantasmas_visibles = ffantasmas_.query(window.camera_rect());
     for (const Fantasma* f : fantasmas_visibles) {
-        // f.update(window);
         const_cast<Fantasma*>(f)->update(window);
         ffantasmas_.update(f);
     }
@@ -189,13 +193,26 @@ void Game::paint(pro2::Window& window) {
     // Pintar solo los objetos cercanos, ya que es lo que mas tarda
     // Pintar solo lo que esta mas cerca
 
+    // Pintar el contador de vidas visual
+    Rect r2 = window.camera_rect();
+
+    Pt p = {r2.left, r2.top};
+    Pt pos_ini = {p.x + 25, p.y + 25};
+    
+    for(int i = 1; i < vidas_+1; i++) {
+        int bloque = i % 5;
+        paint_sprite(window, {pos_ini.x + 15*i, pos_ini.y + bloque*15}, sprite_corazon, false);
+    }
+
+
     // Pinta las nubes
-    for (int i = 0; i < CANTIDAD_NUBES; i += 2) {
+    for(int i = 0; i < CANTIDAD_NUBES; i += 2) {
         paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
         paint_sprite(window, { 50*i + 45, 50 }, sprite_nube, false);
         paint_sprite(window, { 50*i + 48, 47 }, sprite_nube, false);
     }
-
+    
+    
     // Pinta los fantasmas
     set<const Fantasma*> f_query = ffantasmas_.query(window.camera_rect());
     for(const Fantasma* f : f_query) {
