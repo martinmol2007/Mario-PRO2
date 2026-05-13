@@ -185,6 +185,7 @@ void Game::paint(pro2::Window& window) {
     window.clear(sky_blue);
 
     // Pintar solo los objetos cercanos, ya que es lo que mas tarda
+    // Pintar solo lo que esta mas cerca
 
     // Pinta las nubes
     for (int i = 0; i < CANTIDAD_NUBES; i += 2) {
@@ -221,7 +222,6 @@ void Game::paint(pro2::Window& window) {
     // Pintar el marco negro
     Rect r = window.camera_rect();
     paint_square(window, r, black, 4);
-    
 }
 
 void Game::reset(pro2::Window& window) {
