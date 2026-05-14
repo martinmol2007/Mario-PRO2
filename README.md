@@ -16,8 +16,7 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 
 ## To Do:
 
-- Finder y todo lo relacionado con ello
-- Mirar que pasa con lo de las colisiones y el Finder
+- Pulir Cosas
 
 ## Controles del juego
 
@@ -30,7 +29,9 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 | Reiniciar   | `R` |
 | Suicidarse   | `K` |
 | Curarse   | `H` |
+| Restar Vida   | `-` |
 | Monedas   | `M` |
+| Quitar Moneda   | `N` |
 
 ---
 

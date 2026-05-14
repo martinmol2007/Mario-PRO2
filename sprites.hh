@@ -49,14 +49,14 @@ const vector<vector<int>> sprite_nube = {
  * 
  */
 const vector<vector<int>> sprite_mini_moneda = {
-    {_, _, y, y, y, y, _, _},
-    {_, y, y, o, o, y, y, _},
-    {y, y, y, y, y, y, y, y},
-    {y, o, y, y, y, o, y, y},
-    {y, o, y, y, y, o, y, y},
-    {y, y, y, y, y, y, y, y},
-    {_, y, y, o, o, y, y, _},
-    {_, _, y, y, y, y, _, _},
+    {_, _, _, y, y, _, _, _},
+    {_, _, y, o, o, y, _, _},
+    {_, y, o, y, y, o, y, _},
+    {y, o, y, y, y, y, o, y},
+    {y, o, y, y, y, y, o, y},
+    {_, y, o, y, y, o, y, _},
+    {_, _, y, o, o, y, _, _},
+    {_, _, _, y, y, _, _, _},
 };
 
 

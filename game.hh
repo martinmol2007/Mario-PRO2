@@ -30,11 +30,6 @@ class Game {
     std::set<const Moneda*> monedas_;
     std::set<const Fantasma*> fantasmas_;
 
-    // Borrar
-    // std::list<Fantasma> fantasmas_;
-    // std::set<const Platform*> platforms_;
-
-
     int contador_monedas_;
     int vidas_;
 

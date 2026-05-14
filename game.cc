@@ -10,12 +10,12 @@ const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS =             20;
-const int NUMERO_FANTASMAS =           20;
-const int NUMERO_PLATAFORMAS =         20;
+const int NUMERO_MONEDAS =             5000;
+const int NUMERO_FANTASMAS =           5000;
+const int NUMERO_PLATAFORMAS =         5000;
 const int CANTIDAD_NUBES =            100;
 const int CANTIDAD_VIDAS_INICIAL =      5;
-const int CANTIDAD_MONEDAS_INICIAL =    0;
+const int CANTIDAD_MONEDAS_INICIAL =    10000;
 const int CANTIDAD_VIDAS_QUITAR =       1;
 const int CANTIDAD_VIDAS_PONER =        1;
 const int VALOR_MONEDA =                5;
@@ -98,6 +98,12 @@ void Game::process_keys(pro2::Window& window) {
         contador_monedas_ += VALOR_MONEDA;
         cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
     }
+    if(window.was_key_pressed('N') && not paused_) {
+        contador_monedas_ -= VALOR_MONEDA;
+        cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+    }
+
+    return;
 }
 
 // Con el finder, solo se actulzian los objetos visibles, NO todos
@@ -234,7 +240,7 @@ void Game::paint(pro2::Window& window) {
     mario_.paint(window, mario_.get_sprite());
 
 
-    // Pinta los contadores visuales de los Corazones(Vidas) y Monedas
+    // Pinta los contadores visuales de los Corazones (Vidas) y Monedas
     contador_vidas_visual(window);
     contador_monedas_visual(window);
 
@@ -287,7 +293,7 @@ void Game::contador_monedas_visual(pro2::Window& window) const {
     Rect r = window.camera_rect();
 
     // Inicializa la posicion de los corazones
-    Pt pos_ini_moneda = {r.left - OFFSET_MONEDAS, r.top + OFFSET_MONEDAS};
+    Pt pos_ini_moneda = {r.right - OFFSET_MONEDAS, r.top + OFFSET_MONEDAS};
 
     // Convierte el valor de monedas en un string para poder recorrelo
     string numero = to_string(contador_monedas_);
