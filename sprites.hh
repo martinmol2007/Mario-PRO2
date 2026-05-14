@@ -162,7 +162,7 @@ const vector<vector<int>> num_9 = {
 };
 
 
-vector<vector<int>> selector_sprite_numero(int i) {
+inline vector<vector<int>> selector_sprite_numero(int i) {
     if(i == 0) { return num_0; }
     if(i == 1) { return num_1; }
     if(i == 2) { return num_2; }
@@ -173,7 +173,7 @@ vector<vector<int>> selector_sprite_numero(int i) {
     if(i == 7) { return num_7; }
     if(i == 8) { return num_8; }
     if(i == 9) { return num_9; }
-    return;
+    else { return vector<vector<int>>(0); }
 }
 
 

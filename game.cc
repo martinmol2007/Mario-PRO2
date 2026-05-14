@@ -18,10 +18,12 @@ const int CANTIDAD_VIDAS_INICIAL =      5;
 const int CANTIDAD_MONEDAS_INICIAL =    0;
 const int CANTIDAD_VIDAS_QUITAR =       1;
 const int CANTIDAD_VIDAS_PONER =        1;
-const int VALOR_MONEDA =                1;
+const int VALOR_MONEDA =                5;
 const int CORAZONES_POR_FILA =          5;
-const int SEPARACON_X =                15;
-const int SEPARACION_Y =               20;
+const int SEPARACON_X_COR =                15;
+const int SEPARACION_Y_COR =               20;
+const int SEPRACION_X_MONEDA = 10;
+const int SEPARACION_Y_MONEDA = 0;
 
 
 Game::Game(int width, int height) : 
@@ -240,7 +242,7 @@ void Game::paint(pro2::Window& window) {
        int fila = i / CORAZONES_POR_FILA;
        int columna = i % CORAZONES_POR_FILA;
 
-        paint_sprite(window, {pos_ini_cor.x + columna * SEPARACON_X, pos_ini_cor.y + fila * SEPARACION_Y}, sprite_corazon, false);
+        paint_sprite(window, {pos_ini_cor.x + columna * SEPARACON_X_COR, pos_ini_cor.y + fila * SEPARACION_Y_COR}, sprite_corazon, false);
     }
 
     // Pintar el contador de monedas visual
@@ -251,11 +253,10 @@ void Game::paint(pro2::Window& window) {
     int veces = 0; // Para la separacion
     string numero = to_string(contador_monedas_);
     for(int i = numero.size()-1; i >= 0; i--) {
-        paint_sprite(window, {pos_ini_moneda.x - veces*15, pos_ini_moneda.y}, selector_sprite_numero(numero[i]), false);
+        paint_sprite(window, {pos_ini_moneda.x - veces * SEPARACON_X_COR, pos_ini_moneda.y}, selector_sprite_numero((numero[i]) - '0'), false);
         veces++;
     }
    
-    
 
     // Pintar el marco negro
     Rect r = window.camera_rect();
