@@ -37,24 +37,49 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 
 ## Objetos del juego
 
-- **Monedas** → Euros, se pueden recoger y tienen su animacion
-![Imagen](.github/images/Moneda.png)
+### Monedas
+Euros, se pueden recoger y tienen su animación.
+
+<p align="center">
+  <img src=".github/images/Moneda.png" width="120">
+</p>
+
 ---
 
-- **Fantasmas** → Son enemigos, si te chocas con ellos, te restan una vida
-![Imagen](.github/images/Fantasma.png)
+### Fantasmas
+Son enemigos, si te chocas con ellos, te restan una vida.
+
+<p align="center">
+  <img src=".github/images/Fantasma.png" width="120">
+</p>
+
 ---
 
-- **Nube** → Una nube, simplemente
-![Imagen](.github/images/Nube.png)
+### Nube
+Una nube, simplemente.
+
+<p align="center">
+  <img src=".github/images/Nube.png" width="120">
+</p>
+
 ---
 
-- **Contador Vidas** → Contador de Vidas
-![Imagen](.github/images/Contador_Vidas.png)
+### Contador Vidas
+Contador visual de vidas.
+
+<p align="center">
+  <img src=".github/images/Contador_Vidas.png" width="220">
+</p>
+
 ---
 
-- **Contador Monedas** → Contador de Monedas
-![Imagen](.github/images/Contador_Monedas.png)
+### Contador Monedas
+Contador visual de monedas.
+
+<p align="center">
+  <img src=".github/images/Contador_Monedas.png" width="220">
+</p>
+
 ---
 
 ## Comandos de terminal
