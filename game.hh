@@ -6,8 +6,7 @@
 #include "fantasma.hh"
 
 #include "platform.hh"
-#include "nube.hh"
-#include "corazon.hh"
+#include "sprites.hh"
 
 #include "window.hh"
 #include "finder.hh"
