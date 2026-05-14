@@ -16,6 +16,7 @@
 #include <set>
 #include <vector>
 #include <list>
+#include <string>
 #include <algorithm>
 
 class Game {

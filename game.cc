@@ -233,15 +233,28 @@ void Game::paint(pro2::Window& window) {
     Rect r2 = window.camera_rect();
 
     Pt p = {r2.left, r2.top};
-    Pt pos_ini = {p.x + 25, p.y + 25};
+    Pt pos_ini_cor = {p.x + 25, p.y + 25};
     
     for(int i = 0; i < vidas_; i++) {
 
        int fila = i / CORAZONES_POR_FILA;
        int columna = i % CORAZONES_POR_FILA;
 
-        paint_sprite(window, {pos_ini.x + columna * SEPARACON_X, pos_ini.y + fila * SEPARACION_Y}, sprite_corazon, false);
+        paint_sprite(window, {pos_ini_cor.x + columna * SEPARACON_X, pos_ini_cor.y + fila * SEPARACION_Y}, sprite_corazon, false);
     }
+
+    // Pintar el contador de monedas visual
+    Pt p2 = {r2.right, r2.top};
+    Pt pos_ini_moneda = {p2.x - 25, p2.y + 25};
+
+    // Convierte el valor de monedas en un string para poder recorrelo
+    int veces = 0; // Para la separacion
+    string numero = to_string(contador_monedas_);
+    for(int i = numero.size()-1; i >= 0; i--) {
+        paint_sprite(window, {pos_ini_moneda.x - veces*15, pos_ini_moneda.y}, selector_sprite_numero(numero[i]), false);
+        veces++;
+    }
+   
     
 
     // Pintar el marco negro

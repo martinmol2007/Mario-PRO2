@@ -19,6 +19,7 @@ const int g = 0xaaaaaa;
 const int w = 0x8d573c;
 const int o = pro2::white; 
 
+
 /**
  * @brief Nube estilo pixel art
  * 
@@ -159,6 +160,22 @@ const vector<vector<int>> num_9 = {
     {_, _, y},
     {y, y, y},
 };
+
+
+vector<vector<int>> selector_sprite_numero(int i) {
+    if(i == 0) { return num_0; }
+    if(i == 1) { return num_1; }
+    if(i == 2) { return num_2; }
+    if(i == 3) { return num_3; }
+    if(i == 4) { return num_4; }
+    if(i == 5) { return num_5; }
+    if(i == 6) { return num_6; }
+    if(i == 7) { return num_7; }
+    if(i == 8) { return num_8; }
+    if(i == 9) { return num_9; }
+    return;
+}
+
 
 
 #endif
