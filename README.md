@@ -10,7 +10,9 @@
 
 Juego estilo Mario de la asignatura de PRO2 de la FIB 2026 
 
-![Imagen](.github/images/Estrella.png)
+<p align="center">
+  <img src=".github/images/Estrella.png" width="250">
+</p>
 
 ---
 
