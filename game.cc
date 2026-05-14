@@ -19,6 +19,9 @@ const int CANTIDAD_MONEDAS_INICIAL =    0;
 const int CANTIDAD_VIDAS_QUITAR =       1;
 const int CANTIDAD_VIDAS_PONER =        1;
 const int VALOR_MONEDA =                1;
+const int CORAZONES_POR_FILA =          5;
+const int SEPARACON_X =                15;
+const int SEPARACION_Y =               20;
 
 
 Game::Game(int width, int height) : 
@@ -193,18 +196,6 @@ void Game::paint(pro2::Window& window) {
     // Pintar solo los objetos cercanos, ya que es lo que mas tarda
     // Pintar solo lo que esta mas cerca
 
-    // Pintar el contador de vidas visual
-    Rect r2 = window.camera_rect();
-
-    Pt p = {r2.left, r2.top};
-    Pt pos_ini = {p.x + 25, p.y + 25};
-    
-    for(int i = 1; i < vidas_+1; i++) {
-        int bloque = (i-1)/5;
-        paint_sprite(window, {pos_ini.x + 15*(i%5), pos_ini.y + bloque*15}, sprite_corazon, false);
-    }
-
-
     // Pinta las nubes
     for(int i = 0; i < CANTIDAD_NUBES; i += 2) {
         paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
@@ -236,6 +227,21 @@ void Game::paint(pro2::Window& window) {
     
     // Pinta el Mario
     mario_.paint(window, mario_.get_sprite());
+
+
+    // Pintar el contador de vidas visual (Corazones)
+    Rect r2 = window.camera_rect();
+
+    Pt p = {r2.left, r2.top};
+    Pt pos_ini = {p.x + 25, p.y + 25};
+    
+    for(int i = 0; i < vidas_; i++) {
+
+       int fila = i / CORAZONES_POR_FILA;
+       int columna = i % CORAZONES_POR_FILA;
+
+        paint_sprite(window, {pos_ini.x + columna * SEPARACON_X, pos_ini.y + fila * SEPARACION_Y}, sprite_corazon, false);
+    }
     
 
     // Pintar el marco negro
