@@ -20,10 +20,13 @@ const int CANTIDAD_VIDAS_QUITAR =       1;
 const int CANTIDAD_VIDAS_PONER =        1;
 const int VALOR_MONEDA =                5;
 const int CORAZONES_POR_FILA =          5;
-const int SEPARACON_X_COR =                15;
-const int SEPARACION_Y_COR =               20;
-const int SEPRACION_X_MONEDA = 10;
-const int SEPARACION_Y_MONEDA = 0;
+const int SEPARACION_X_COR =           15;
+const int SEPARACION_Y_COR =           20;
+const int SEPARACION_X_MONEDA =         7;
+const int SEPARACION_Y_MONEDA =         0;
+const int ELEVEACION_MINI_MONEDA =      5;
+const int OFFSET_CORAZONES =           25;
+const int OFFSET_MONEDAS =             25;
 
 
 Game::Game(int width, int height) : 
@@ -231,32 +234,10 @@ void Game::paint(pro2::Window& window) {
     mario_.paint(window, mario_.get_sprite());
 
 
-    // Pintar el contador de vidas visual (Corazones)
-    Rect r2 = window.camera_rect();
+    // Pinta los contadores visuales de los Corazones(Vidas) y Monedas
+    contador_vidas_visual(window);
+    contador_monedas_visual(window);
 
-    Pt p = {r2.left, r2.top};
-    Pt pos_ini_cor = {p.x + 25, p.y + 25};
-    
-    for(int i = 0; i < vidas_; i++) {
-
-       int fila = i / CORAZONES_POR_FILA;
-       int columna = i % CORAZONES_POR_FILA;
-
-        paint_sprite(window, {pos_ini_cor.x + columna * SEPARACON_X_COR, pos_ini_cor.y + fila * SEPARACION_Y_COR}, sprite_corazon, false);
-    }
-
-    // Pintar el contador de monedas visual
-    Pt p2 = {r2.right, r2.top};
-    Pt pos_ini_moneda = {p2.x - 25, p2.y + 25};
-
-    // Convierte el valor de monedas en un string para poder recorrelo
-    int veces = 0; // Para la separacion
-    string numero = to_string(contador_monedas_);
-    for(int i = numero.size()-1; i >= 0; i--) {
-        paint_sprite(window, {pos_ini_moneda.x - veces * SEPARACON_X_COR, pos_ini_moneda.y}, selector_sprite_numero((numero[i]) - '0'), false);
-        veces++;
-    }
-   
 
     // Pintar el marco negro
     Rect r = window.camera_rect();
@@ -299,4 +280,48 @@ void Game::reset(pro2::Window& window) {
     vidas_ = CANTIDAD_VIDAS_INICIAL;
     muerto_ = false;
     paused_ = true;
+}
+
+void Game::contador_monedas_visual(pro2::Window& window) const {
+    // Consigue el reactangulo de la camara
+    Rect r = window.camera_rect();
+
+    // Inicializa la posicion de los corazones
+    Pt pos_ini_moneda = {r.left - OFFSET_MONEDAS, r.top + OFFSET_MONEDAS};
+
+    // Convierte el valor de monedas en un string para poder recorrelo
+    string numero = to_string(contador_monedas_);
+
+    // Para la separacion
+    int veces = 0; 
+
+    // Bucle para imprimir el numero de monedas
+    for(int i = numero.size()-1; i >= 0; i--) {
+        paint_sprite(window, {pos_ini_moneda.x - veces * SEPARACION_X_MONEDA, pos_ini_moneda.y}, selector_sprite_numero((numero[i]) - '0'), false);
+        veces += 1;
+    }
+    // Pinta el simbolo de la moneda
+    paint_sprite(window, {pos_ini_moneda.x - veces * (SEPARACION_X_MONEDA + 1) - 5, pos_ini_moneda.y - 1}, sprite_mini_moneda, false);
+
+    return;
+}
+
+void Game::contador_vidas_visual(pro2::Window& window) const {
+    // Consigue el reactangulo de la camara
+    Rect r = window.camera_rect();
+
+    // Inicializa la posicion de los corazones
+    Pt pos_ini_cor = {r.left + OFFSET_CORAZONES, r.top + OFFSET_CORAZONES};
+
+    // Bucle para imprimir los corazones
+    for(int i = 0; i < vidas_; i++) {
+        // Mira la fila y columna en la que va (5 por fila)
+        int fila = i / CORAZONES_POR_FILA;
+        int columna = i % CORAZONES_POR_FILA;
+
+        // Pinta los corzones
+        paint_sprite(window, {pos_ini_cor.x + columna * SEPARACION_X_COR, pos_ini_cor.y + fila * SEPARACION_Y_COR}, sprite_corazon, false);
+    }
+    
+    return;
 }

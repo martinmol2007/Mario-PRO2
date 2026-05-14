@@ -83,6 +83,9 @@ class Game {
         muerto_ = true;
     }
 
+    void contador_monedas_visual(pro2::Window& window) const;
+    void contador_vidas_visual(pro2::Window& window) const;
+
  private:
     static constexpr int sky_blue = 0x5c94fc;
 };
