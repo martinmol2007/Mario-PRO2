@@ -4,8 +4,6 @@
 #include <vector>
 #include "window.hh"
 
-using namespace std;
-using namespace pro2;
 
 // Paleta de Colores
 
@@ -24,7 +22,7 @@ const int o = pro2::white;
  * @brief Nube estilo pixel art
  * 
  */
-const vector<vector<int>> sprite_nube = {
+const std::vector<std::vector<int>> sprite_nube = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
@@ -48,7 +46,7 @@ const vector<vector<int>> sprite_nube = {
  * @brief Sprite de mini moneda estilo Pixel art
  * 
  */
-const vector<vector<int>> sprite_mini_moneda = {
+const std::vector<std::vector<int>> sprite_mini_moneda = {
     {_, _, _, y, y, _, _, _},
     {_, _, y, o, o, y, _, _},
     {_, y, o, y, y, o, y, _},
@@ -72,7 +70,7 @@ const std::vector<std::vector<int>> sprite_corazon = {
 };
 
 
-const vector<vector<int>> num_0 = {
+const std::vector<std::vector<int>> num_0 = {
     {y, y, y},
     {y, _, y},
     {y, _, y},
@@ -81,7 +79,7 @@ const vector<vector<int>> num_0 = {
 };
 
 
-const vector<vector<int>> num_1 = {
+const std::vector<std::vector<int>> num_1 = {
     {_, y, _},
     {y, y, _},
     {_, y, _},
@@ -90,7 +88,7 @@ const vector<vector<int>> num_1 = {
 };
 
 
-const vector<vector<int>> num_2 = {
+const std::vector<std::vector<int>> num_2 = {
     {y, y, y},
     {_, _, y},
     {y, y, y},
@@ -99,7 +97,7 @@ const vector<vector<int>> num_2 = {
 };
 
 
-const vector<vector<int>> num_3 = {
+const std::vector<std::vector<int>> num_3 = {
     {y, y, y},
     {_, _, y},
     {y, y, y},
@@ -108,7 +106,7 @@ const vector<vector<int>> num_3 = {
 };
 
 
-const vector<vector<int>> num_4 = {
+const std::vector<std::vector<int>> num_4 = {
     {y, _, y},
     {y, _, y},
     {y, y, y},
@@ -117,7 +115,7 @@ const vector<vector<int>> num_4 = {
 };
 
 
-const vector<vector<int>> num_5 = {
+const std::vector<std::vector<int>> num_5 = {
     {y, y, y},
     {y, _, _},
     {y, y, y},
@@ -126,7 +124,7 @@ const vector<vector<int>> num_5 = {
 };
 
 
-const vector<vector<int>> num_6 = {
+const std::vector<std::vector<int>> num_6 = {
     {y, y, y},
     {y, _, _},
     {y, y, y},
@@ -135,7 +133,7 @@ const vector<vector<int>> num_6 = {
 };
 
 
-const vector<vector<int>> num_7 = {
+const std::vector<std::vector<int>> num_7 = {
     {y, y, y},
     {_, _, y},
     {_, y, _},
@@ -144,7 +142,7 @@ const vector<vector<int>> num_7 = {
 };
 
 
-const vector<vector<int>> num_8 = {
+const std::vector<std::vector<int>> num_8 = {
     {y, y, y},
     {y, _, y},
     {y, y, y},
@@ -153,7 +151,7 @@ const vector<vector<int>> num_8 = {
 };
 
 
-const vector<vector<int>> num_9 = {
+const std::vector<std::vector<int>> num_9 = {
     {y, y, y},
     {y, _, y},
     {y, y, y},
@@ -162,7 +160,7 @@ const vector<vector<int>> num_9 = {
 };
 
 
-inline vector<vector<int>> selector_sprite_numero(int i) {
+inline std::vector<std::vector<int>> selector_sprite_numero(int i) {
     if(i == 0) { return num_0; }
     if(i == 1) { return num_1; }
     if(i == 2) { return num_2; }
@@ -173,7 +171,7 @@ inline vector<vector<int>> selector_sprite_numero(int i) {
     if(i == 7) { return num_7; }
     if(i == 8) { return num_8; }
     if(i == 9) { return num_9; }
-    else { return vector<vector<int>>(0); }
+    else { return std::vector<std::vector<int>>(0); }
 }
 
 

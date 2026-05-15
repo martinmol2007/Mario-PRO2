@@ -9,13 +9,12 @@
 #include "platform.hh"
 #include "window.hh"
 
-using namespace pro2;
 
 class Mario {
  private:
-    Pt pos_, last_pos_;
-    Pt speed_ = {0, 0};
-    Pt accel_ = {0, 0};
+    pro2::Pt pos_, last_pos_;
+    pro2::Pt speed_ = {0, 0};
+    pro2::Pt accel_ = {0, 0};
     
     int accel_time_ = 0;
 
@@ -28,11 +27,9 @@ class Mario {
 
     // Frames de la animacion
     int frames_animacion_ = 0;
-
-    std::vector<std::vector<int>> sprite;
 	
  public:
-    Mario(pro2::Pt pos, int j, int r, int l, int contador, int frames) : 
+    Mario(pro2::Pt pos, int j, int r, int l, int frames) : 
         pos_(pos), 
         last_pos_(pos), 
         jump_key(j), 
@@ -105,7 +102,7 @@ class Mario {
      * 
      * @return Consigue el sprite dependiendo de si esta en animacion
      */
-    const std::vector<std::vector<int>> get_sprite () const {
+    const std::vector<std::vector<int>>& get_sprite () const {
         if (frames_animacion_ > 0) {
             return mario_sprite_moneda_;
         } else {

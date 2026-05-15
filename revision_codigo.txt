@@ -1,0 +1,277 @@
+================================================================
+  REVISION DEL CODIGO - Mario Pro 2
+================================================================
+
+
+----------------------------------------------------------------
+  LO QUE ESTA BIEN
+----------------------------------------------------------------
+
+- Arquitectura general correcta: Game, Mario, Moneda, Fantasma,
+  Platform separados en clases propias.
+
+- Finder<T> es la parte mas interesante: estructura espacial por
+  chunks que evita procesar todos los objetos del mundo, solo los
+  visibles. Buena idea y razonablemente bien ejecutada.
+
+- Uso de assert.hh con mensajes descriptivos para validar
+  precondiciones.
+
+- Sprites pixel-art definidos de forma legible con paleta de
+  colores por variables de un caracter.
+
+- Makefile funcional y multiplataforma (Linux/macOS/Windows).
+
+
+================================================================
+  BUGS REALES (cosas que fallan o pueden fallar)
+================================================================
+
+[BUG 1] MEMORY LEAK CRITICO en Game::reset()
+  Archivo: game.cc, lineas 256-258
+  -------------------------------------------------------
+  monedas_.clear();    <- los punteros se borran pero los objetos NO
+  fantasmas_.clear();  <- misma situacion
+
+  monedas_ y fantasmas_ son std::set<const T*>. Llamar a .clear()
+  elimina los punteros del set pero NO llama delete sobre los
+  objetos apuntados. Cada vez que el jugador pulsa R o K, se filtran
+  5000 Moneda y 5000 Fantasma en memoria.
+
+  Ademas, Game no tiene destructor, asi que al cerrar el programa
+  tambien se filtran todos los objetos de la partida.
+
+  Solucion: iterar el set antes de clear() y llamar delete en cada
+  puntero, o usar smart pointers (std::unique_ptr).
+
+
+[BUG 2] CONDICION DE MUERTE INCONSISTENTE
+  Archivos: game.cc, linea 162 (colision con fantasma)
+            game.cc, linea 93  (tecla '-')
+  -------------------------------------------------------
+  Al colisionar con un fantasma:
+      vidas_ -= 1;
+      if(vidas_ < 0) matar();   <- muere cuando llega a -1
+
+  Al pulsar '-':
+      vidas_ -= 1;
+      if(vidas_ <= 0) matar();  <- muere cuando llega a 0
+
+  Con CANTIDAD_VIDAS_INICIAL = 5, si Mario choca con fantasmas
+  necesita 6 golpes para morir (llega a 0 pero no muere, necesita
+  llegar a -1). Con la tecla '-' son solo 5 pulsaciones.
+
+  Solucion: usar <= 0 en ambos sitios.
+
+
+[BUG 3] const_cast PARA MUTAR OBJETOS CONSTANTES
+  Archivo: game.cc, lineas 117 y 124
+  -------------------------------------------------------
+  const_cast<Moneda*>(m)->update(window);
+  const_cast<Fantasma*>(f)->update(window);
+
+  El set guarda const T* pero los objetos necesitan mutarse. Esto
+  es un fallo de diseno: el set deberia ser set<T*> (sin const).
+  Usar const_cast para quitar la constness es una senal de alerta
+  en C++.
+
+
+[BUG 4] is_collision INCOMPLETA
+  Archivo: utils.cc, lineas 65-75
+  -------------------------------------------------------
+  La funcion solo detecta colision si alguna esquina de B esta
+  dentro de A. No detecta el caso en que B envuelve completamente
+  a A en el eje horizontal (B.left < A.left && B.right > A.right).
+
+  Si Mario es mas estrecho que una moneda o fantasma, la colision
+  puede no detectarse en determinadas posiciones.
+
+
+[BUG 5] DOBLE PUNTO Y COMA ;;
+  Archivos: moneda.cc, linea 71
+            fantasma.cc, linea 59
+  -------------------------------------------------------
+  xoffset_ += direccion;;
+
+  No es un bug grave (es una sentencia vacia extra), pero indica
+  descuido en la escritura del codigo.
+
+
+================================================================
+  PROBLEMAS DE DISENO
+================================================================
+
+[DISENO 1] using namespace EN UN HEADER
+  Archivos: mario.hh, linea 12
+            sprites.hh, lineas 8-9
+  -------------------------------------------------------
+  // mario.hh
+  using namespace pro2;    <- contamina TODOS los archivos que
+                              incluyan mario.hh
+
+  // sprites.hh
+  using namespace std;
+  using namespace pro2;    <- igual
+
+  Poner using namespace en un .hh es una mala practica muy
+  conocida: fuerza ese namespace a todos los archivos que incluyan
+  el header, lo que puede provocar conflictos de nombres
+  inesperados.
+
+
+[DISENO 2] get_sprite() COPIA UN VECTOR GRANDE CADA FRAME
+  Archivo: mario.hh, linea 108
+  -------------------------------------------------------
+  const std::vector<std::vector<int>> get_sprite() const { ... }
+
+  Devuelve POR VALOR una copia de la matriz sprite (16x12 = 192
+  enteros) en cada frame a 48 FPS. Deberia devolver
+  const std::vector<std::vector<int>>& (referencia constante),
+  lo que es gratuito en memoria y tiempo.
+
+
+[DISENO 3] CONSTANTES WIDTH/HEIGHT DUPLICADAS
+  Archivos: main.cc, linea 7
+            game.cc, linea 9
+  -------------------------------------------------------
+  // main.cc
+  const int WIDTH = 480, HEIGHT = 320;
+
+  // game.cc
+  const int WIDTH = 480, HEIGHT = 320;
+
+  La misma constante definida dos veces en archivos distintos.
+  Si alguien cambia una y olvida la otra, el juego se rompe.
+
+
+[DISENO 4] CONSTRUCTOR Y reset() TIENEN CODIGO DUPLICADO
+  Archivo: game.cc, lineas 32-66 y 253-288
+  -------------------------------------------------------
+  La creacion de plataformas, monedas y fantasmas, y la
+  inicializacion de los finders, es exactamente la misma logica
+  en el constructor y en reset(). Deberia extraerse a un metodo
+  privado init_level() para no repetir codigo (principio DRY:
+  Don't Repeat Yourself).
+
+
+[DISENO 5] MIEMBRO sprite DE Mario NO SE USA NUNCA
+  Archivo: mario.hh, linea 32
+  -------------------------------------------------------
+  std::vector<std::vector<int>> sprite;  <- nunca asignado ni usado
+
+  Es un atributo de instancia que no hace nada. Los sprites reales
+  son los static mario_sprite_normal_ y mario_sprite_moneda_.
+  Este miembro es codigo muerto.
+
+
+[DISENO 6] PARAMETRO contador EN CONSTRUCTOR DE Mario IGNORADO
+  Archivo: mario.hh, linea 35
+  -------------------------------------------------------
+  Mario(pro2::Pt pos, int j, int r, int l, int contador, int frames)
+
+  El parametro contador se acepta pero nunca se usa en el cuerpo
+  del constructor. Es codigo muerto que confunde a quien lee la
+  firma del metodo.
+
+
+[DISENO 7] CONSTANTES DE COLOR REDEFINIDAS EN CADA .cc
+  Archivos: mario.cc, moneda.cc, fantasma.cc
+  -------------------------------------------------------
+  Cada archivo define su propia paleta local:
+      const int _ = -1;
+      const int r = pro2::red;
+      const int s = 0xecc49b;
+      ...
+
+  Los valores son casi iguales pero no identicos entre archivos
+  (p.ej. 'g' es 0xaaaaaa en mario.cc y 0xd8d8c8 en moneda.cc).
+  Tener la paleta centralizada en un header evitaria confusiones.
+
+
+[DISENO 8] paint_rect ESTA ROTA Y NO SE USA
+  Archivo: utils.cc, lineas 26-31
+  -------------------------------------------------------
+  void paint_rect(Window& window, Rect& r, Color color, int mida) {
+      for (int i = 0; i < mida; i++) {
+          paint_hline(window, r.left, r.left+50, r.top-i, color); // 50 hardcodeado
+          paint_hline(window, r.left-50, r.left, r.top-i, color); // no usa r.right ni r.bottom
+      }
+  }
+
+  La funcion ignora r.right y r.bottom, tiene un 50 hardcodeado
+  y dibuja hacia arriba en lugar de dibujar un rectangulo.
+  Parece inacabada. Como no se llama desde ningun sitio, no
+  afecta al juego, pero deberia eliminarse.
+
+
+================================================================
+  PROBLEMAS DE ESTILO
+================================================================
+
+[ESTILO 1] MEZCLA DE IDIOMAS EN EL CODIGO
+  Los nombres de metodos estan en ingles (update, paint, get_rect),
+  las variables en espanol (contador_monedas_, muerto_, paused_),
+  y los comentarios mezclan espanol, catalan e ingles. Es
+  inconsistente y dificulta la lectura.
+
+
+[ESTILO 2] en_animacion() CON TERNARIO INNECESARIO
+  Archivo: mario.hh, linea 99
+  -------------------------------------------------------
+  return (frames_animacion_ > 0 ? true : false);
+  // deberia ser simplemente:
+  return frames_animacion_ > 0;
+
+
+[ESTILO 3] xsz/ysz CON NOMBRES INVERTIDOS
+  Archivo: platform.cc, lineas 26-27
+  -------------------------------------------------------
+  const int xsz = platform_texture_.size();      // rows -> es dimension Y, no X
+  const int ysz = platform_texture_[0].size();   // cols -> es dimension X, no Y
+
+  Los nombres estan al reves. No rompe nada porque son usados
+  consistentemente, pero es confuso para quien lea el codigo.
+
+
+[ESTILO 4] CHUNK_MIDA CON static REDUNDANTE EN HEADER
+  Archivo: finder.hh, linea 6
+  -------------------------------------------------------
+  static const int CHUNK_MIDA = 100;
+
+  En C++17, const int a nivel de namespace ya tiene enlazado
+  interno. El static es redundante. Mejor usar constexpr.
+
+
+================================================================
+  RESUMEN DE GRAVEDAD
+================================================================
+
+  ALTA    | Memory leak en reset() y sin destructor
+  ALTA    | Condicion de muerte inconsistente
+  MEDIA   | const_cast sobre punteros constantes
+  MEDIA   | is_collision incompleta
+  MEDIA   | get_sprite() copia vector cada frame
+  MEDIA   | using namespace en headers
+  BAJA    | Codigo duplicado constructor / reset
+  BAJA    | Miembros y parametros muertos (sprite, contador)
+  BAJA    | paint_rect rota y sin usar
+  ESTILO  | Mezcla de idiomas, doble ;;, ternarios innecesarios
+
+
+================================================================
+  CONCLUSION
+================================================================
+
+El proyecto tiene una base solida y el Finder<T> demuestra que
+el estudiante ha entendido la idea de optimizacion espacial.
+
+Los problemas mas serios son el memory leak (cada reset filtra
+~10000 objetos) y la condicion de muerte inconsistente, que son
+bugs reales que afectan al juego.
+
+El resto son deudas de diseno y limpieza de codigo que no rompen
+el juego pero indican habitos a mejorar, especialmente el uso de
+using namespace en headers y la duplicacion de codigo entre el
+constructor y reset().
+
+================================================================

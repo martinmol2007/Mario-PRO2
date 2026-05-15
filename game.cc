@@ -30,7 +30,7 @@ const int OFFSET_MONEDAS =             25;
 
 
 Game::Game(int width, int height) : 
-    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0, 0), // Controles Mas Comodos
+    mario_({width / 2, 150}, Keys::Space, 'D', 'A', 0), // Controles Mas Comodos
     platforms_ {
         Platform(100, 300, 200, 211),
         Platform(0, 200, 250, 261),
@@ -159,7 +159,7 @@ void Game::update_objects(pro2::Window& window) {
             vidas_ -= CANTIDAD_VIDAS_QUITAR;
 
             // Si llega a menos de 0 vidas, se acaba
-            if(vidas_ < 0) matar();
+            if(vidas_ <= 0) matar();
 
             // Borra el objeto del Finder y el Set
             ffantasmas_.remove(f);
@@ -250,13 +250,24 @@ void Game::paint(pro2::Window& window) {
     paint_square(window, r, black, 4);
 }
 
+// Soluciona el memory leak
+template<typename T>
+void borrar(set<const T*>& s) {
+    for(auto it = s.begin(); it != s.end(); it++) {
+        delete *it;
+    }
+    s.clear();
+
+    return;
+}
+
 void Game::reset(pro2::Window& window) {
-    mario_ = Mario({WIDTH / 2, 150}, Keys::Space, 'D', 'A', 0, 0);
+    mario_ = Mario({WIDTH / 2, 150}, Keys::Space, 'D', 'A', 0);
 
     platforms_.clear();
-    monedas_.clear();
-    fantasmas_.clear();
-
+    borrar(fantasmas_);
+    borrar(monedas_);
+    
     platforms_ = {Platform(100, 300, 200, 211), Platform(0, 200, 250, 261), Platform(250, 400, 150, 161)};
     monedas_ = {new Moneda ({325, 150}), new Moneda ({200, 200}), new Moneda ({100, 250})};
 
@@ -331,3 +342,4 @@ void Game::contador_vidas_visual(pro2::Window& window) const {
     
     return;
 }
+

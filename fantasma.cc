@@ -56,7 +56,7 @@ Fantasma::Fantasma(Pt pos) {
 
 void Fantasma::update(pro2::Window& window) {
     // Movimiento horizontal (eje x)
-    xoffset_ += direccion;;
+    xoffset_ += direccion;
     if (xoffset_ > 30) {
         direccion = -0.5;
     }

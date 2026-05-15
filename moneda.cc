@@ -68,7 +68,7 @@ Moneda::Moneda(Pt pos) {
 
 void Moneda::update(pro2::Window& window) {
     // Movimiento horizontal (eje x)
-    xoffset_ += direccion;;
+    xoffset_ += direccion;
     if (xoffset_ > MAX_OFFSET) {
         direccion = -DIRECCION;
     }
