@@ -343,3 +343,7 @@ void Game::contador_vidas_visual(pro2::Window& window) const {
     return;
 }
 
+Game::~Game() {
+    borrar(monedas_);
+    borrar(fantasmas_);
+}

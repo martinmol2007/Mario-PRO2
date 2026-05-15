@@ -66,6 +66,7 @@ class Game {
 
  public:
     Game(int width, int height);
+    ~Game();
 
     void update(pro2::Window& window);
     void paint(pro2::Window& window);
