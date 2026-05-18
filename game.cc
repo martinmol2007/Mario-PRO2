@@ -114,7 +114,7 @@ void Game::process_keys(pro2::Window& window) {
     if(window.was_key_pressed('I') && not paused_) {
         cout << "TAMAÑO DEL SET DE MONEDAS: " << monedas_.size() << endl;
         cout << "TAMAÑO DEL SET DE LOS FANTASMAS: " << fantasmas_.size() << endl;
-        cout << "TAMAÑO DEL VECTOR DE PLATAFORMAS: " << platforms_.size() << endl;
+        cout << "TAMAÑO DE LA LISTA DE PLATAFORMAS: " << platforms_.size() << endl;
     }
 
     return;
