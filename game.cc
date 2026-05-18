@@ -44,10 +44,14 @@ Game::Game(int width, int height) :
     finished_(false), paused_(false) {
     assert(width > 0 && height > 0, "L'amplada i l'alcada del joc han de ser positives.");
     for (int i = 1; i < NUMERO_PLATAFORMAS; i++) {
-        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
+        // Left ,right, top, bottom
+        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161)); // Abajo
+        platforms_.push_back(Platform(375 + i * 200, 475 + i * 200, 100, 111)); // Medio
+        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 50, 61)); // Arriba
     }
     for (int i = 0; i < NUMERO_MONEDAS; i++) {
         monedas_.insert(new Moneda({530 + 200*i, 150}));
+        monedas_.insert(new Moneda({500 + 200*i, 100}));
     }
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
         fantasmas_.insert(new Fantasma({530 + 200*i, 161}));
@@ -210,9 +214,9 @@ void Game::paint(pro2::Window& window) {
 
     // Pinta las nubes
     for(int i = 0; i < CANTIDAD_NUBES; i += 2) {
-        paint_sprite(window, {50*i + 50, 50 }, sprite_nube, false);
-        paint_sprite(window, { 50*i + 45, 50 }, sprite_nube, false);
-        paint_sprite(window, { 50*i + 48, 47 }, sprite_nube, false);
+        paint_sprite(window, {50*i + 100, 100 }, sprite_nube, false);
+        paint_sprite(window, { 50*i + 95, 100 }, sprite_nube, false);
+        paint_sprite(window, { 50*i + 98, 97 }, sprite_nube, false);
     }
     
     
