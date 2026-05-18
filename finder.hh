@@ -124,7 +124,7 @@ public:
 
                 // Hay algun objeto, añadirlo
                 if(objetos_in_chunk != f_bloques_.end()) {
-                    poner_set(objetos_visibles, objetos_in_chunk->second);
+                    objetos_visibles.insert(objetos_in_chunk->second.begin(), objetos_in_chunk->second.end());
                 }
             }
         }
@@ -143,17 +143,7 @@ public:
 
         return;
     }
-private:
-    /**
-     * @brief Funcion auxiliar que pone en el set de objetos_visibles todo lo que haya en el set objetos
-     * 
-     */
-    void poner_set(std::set<const T*>& objetos_visibles, const std::set<const T*>& objetos) const {
-        for(auto it = objetos.begin(); it != objetos.end(); it++) {
-            objetos_visibles.insert(*it);
-        }
-        return;
-    }
+
 };
 
 

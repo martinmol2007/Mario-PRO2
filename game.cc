@@ -14,7 +14,7 @@ const int NUMERO_MONEDAS =             5000;
 const int NUMERO_FANTASMAS =           5000;
 const int NUMERO_PLATAFORMAS =         5000;
 const int CANTIDAD_NUBES =            100;
-const int CANTIDAD_VIDAS_INICIAL =      5;
+const int CANTIDAD_VIDAS_INICIAL =      1;
 const int CANTIDAD_MONEDAS_INICIAL =    10000;
 const int CANTIDAD_VIDAS_QUITAR =       1;
 const int CANTIDAD_VIDAS_PONER =        1;
@@ -73,6 +73,7 @@ void Game::process_keys(pro2::Window& window) {
     }
     if(window.was_key_pressed('P')) {
         paused_ = not paused_;
+        if(paused_) cout << "JUEGO PAUSADO" << endl;
         return;
     }
     if(window.was_key_pressed('R') && muerto_) {
