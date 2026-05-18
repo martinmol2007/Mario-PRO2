@@ -14,8 +14,8 @@ const int NUMERO_MONEDAS =             5000;
 const int NUMERO_FANTASMAS =           5000;
 const int NUMERO_PLATAFORMAS =         5000;
 const int CANTIDAD_NUBES =            100;
-const int CANTIDAD_VIDAS_INICIAL =      1;
-const int CANTIDAD_MONEDAS_INICIAL =    10000;
+const int CANTIDAD_VIDAS_INICIAL =      5;
+const int CANTIDAD_MONEDAS_INICIAL =    500;
 const int CANTIDAD_VIDAS_QUITAR =       1;
 const int CANTIDAD_VIDAS_PONER =        1;
 const int VALOR_MONEDA =                5;
@@ -51,10 +51,10 @@ Game::Game(int width, int height) :
     }
     for (int i = 0; i < NUMERO_MONEDAS; i++) {
         monedas_.insert(new Moneda({530 + 200*i, 150}));
-        monedas_.insert(new Moneda({500 + 200*i, 100}));
+        monedas_.insert(new Moneda({530 + 200*i, 50}));
     }
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
-        fantasmas_.insert(new Fantasma({530 + 200*i, 161}));
+        fantasmas_.insert(new Fantasma({625 + 200*i, 110}));
     }
 
     // Inicializa los finders
@@ -104,8 +104,17 @@ void Game::process_keys(pro2::Window& window) {
         cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
     }
     if(window.was_key_pressed('N') && not paused_) {
+        if(contador_monedas_ - VALOR_MONEDA <= 0) {
+            contador_monedas_ = 0;
+            return;
+        }
         contador_monedas_ -= VALOR_MONEDA;
         cout << "CONTADOR MONEDAS: " << contador_monedas_ << endl;
+    }
+    if(window.was_key_pressed('I') && not paused_) {
+        cout << "TAMAÑO DEL SET DE MONEDAS: " << monedas_.size() << endl;
+        cout << "TAMAÑO DEL SET DE LOS FANTASMAS: " << fantasmas_.size() << endl;
+        cout << "TAMAÑO DEL VECTOR DE PLATAFORMAS: " << platforms_.size() << endl;
     }
 
     return;
@@ -277,15 +286,18 @@ void Game::reset(pro2::Window& window) {
     monedas_ = {new Moneda ({325, 150}), new Moneda ({200, 200}), new Moneda ({100, 250})};
 
     for (int i = 1; i < NUMERO_PLATAFORMAS; i++) {
-        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161));
+        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 150, 161)); // Abajo
+        platforms_.push_back(Platform(375 + i * 200, 475 + i * 200, 100, 111)); // Medio
+        platforms_.push_back(Platform(250 + i * 200, 400 + i * 200, 50, 61)); // Arriba
     }
 
     for (int i = 0; i < NUMERO_MONEDAS; i++) {
         monedas_.insert(new Moneda({530 + 200*i, 150}));
+        monedas_.insert(new Moneda({530 + 200*i, 50}));
     }
 
     for (int i = 0; i < NUMERO_FANTASMAS; i++) {
-        fantasmas_.insert(new Fantasma({530 + 200*i, 161}));
+        fantasmas_.insert(new Fantasma({625 + 200*i, 110}));
     }
 
     // Vacia todos los finders
