@@ -10,9 +10,9 @@ const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS =             5000;
-const int NUMERO_FANTASMAS =           5000;
-const int NUMERO_PLATAFORMAS =         5000;
+const int NUMERO_MONEDAS =             500000;
+const int NUMERO_FANTASMAS =           500000;
+const int NUMERO_PLATAFORMAS =         500000;
 const int CANTIDAD_NUBES =            100;
 const int CANTIDAD_VIDAS_INICIAL =      5;
 const int CANTIDAD_MONEDAS_INICIAL =    500;
