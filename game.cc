@@ -8,18 +8,21 @@ using namespace std;
 
 const int WIDTH = 480, HEIGHT = 320;
 
-// Cantidad de objetos
+// Cantidad de objetos y sus valors
 
-const int NUMERO_MONEDAS =             2000;
-const int NUMERO_FANTASMAS =           2000;
-const int NUMERO_PLATAFORMAS =         2000;
-const int CANTIDAD_NUBES =              100;
-const int CANTIDAD_VIDAS_INICIAL =        5;
-const int CANTIDAD_MONEDAS_INICIAL =      5;
-const int CANTIDAD_VIDAS_QUITAR =         1;
-const int CANTIDAD_VIDAS_PONER =          1;
-const int VALOR_MONEDA =                  1;
-const int VALOR_VIDA_MONEDA =             5;
+const long long NUMERO_MONEDAS =             2000;
+const long long NUMERO_FANTASMAS =           2000;
+const long long NUMERO_PLATAFORMAS =         2000;
+const long long CANTIDAD_NUBES =              100;
+const long long CANTIDAD_VIDAS_INICIAL =        5;
+const long long CANTIDAD_MONEDAS_INICIAL =     10;
+const long long CANTIDAD_VIDAS_QUITAR =         1;
+const long long CANTIDAD_VIDAS_PONER =          1;
+const long long VALOR_MONEDA =                  1;
+const long long VALOR_VIDA_MONEDA =             5;
+
+// Offsets y demas
+
 const int CORAZONES_POR_FILA =            5;
 const int SEPARACION_X_COR =             15;
 const int SEPARACION_Y_COR =             20;
