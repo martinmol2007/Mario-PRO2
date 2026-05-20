@@ -75,7 +75,8 @@ public:
                 // Borra el objeto que esta en el chunk c del set de objetos
                 f_bloques_[c].erase(t);
                 
-                // Borrar f_bloquees_[c] si queda vacio ?? PREGUTNAR MIERCOLES
+                // Borrar f_bloquees_[c] si queda vacio ?? 
+                if(f_bloques_[c].empty()) f_bloques_.erase(c);
             }
             // Cuando has borrado el objeto t de todos los chunks en los que estaba, borrar t del mapa de objetos / puntos
             f_objs_.erase(it);

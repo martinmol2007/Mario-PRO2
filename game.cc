@@ -10,23 +10,24 @@ const int WIDTH = 480, HEIGHT = 320;
 
 // Cantidad de objetos
 
-const int NUMERO_MONEDAS =             500000;
-const int NUMERO_FANTASMAS =           500000;
-const int NUMERO_PLATAFORMAS =         500000;
-const int CANTIDAD_NUBES =            100;
-const int CANTIDAD_VIDAS_INICIAL =      5;
-const int CANTIDAD_MONEDAS_INICIAL =    500;
-const int CANTIDAD_VIDAS_QUITAR =       1;
-const int CANTIDAD_VIDAS_PONER =        1;
-const int VALOR_MONEDA =                5;
-const int CORAZONES_POR_FILA =          5;
-const int SEPARACION_X_COR =           15;
-const int SEPARACION_Y_COR =           20;
-const int SEPARACION_X_MONEDA =         7;
-const int SEPARACION_Y_MONEDA =         0;
-const int ELEVEACION_MINI_MONEDA =      5;
-const int OFFSET_CORAZONES =           25;
-const int OFFSET_MONEDAS =             25;
+const int NUMERO_MONEDAS =             2000;
+const int NUMERO_FANTASMAS =           2000;
+const int NUMERO_PLATAFORMAS =         2000;
+const int CANTIDAD_NUBES =              100;
+const int CANTIDAD_VIDAS_INICIAL =        5;
+const int CANTIDAD_MONEDAS_INICIAL =      5;
+const int CANTIDAD_VIDAS_QUITAR =         1;
+const int CANTIDAD_VIDAS_PONER =          1;
+const int VALOR_MONEDA =                  1;
+const int VALOR_VIDA_MONEDA =             5;
+const int CORAZONES_POR_FILA =            5;
+const int SEPARACION_X_COR =             15;
+const int SEPARACION_Y_COR =             20;
+const int SEPARACION_X_MONEDA =           7;
+const int SEPARACION_Y_MONEDA =           0;
+const int ELEVEACION_MINI_MONEDA =        5;
+const int OFFSET_CORAZONES =             25;
+const int OFFSET_MONEDAS =               25;
 
 
 Game::Game(int width, int height) : 
@@ -91,8 +92,14 @@ void Game::process_keys(pro2::Window& window) {
         return;
     }
     if(window.was_key_pressed('H') && not paused_) {
-        vidas_ += CANTIDAD_VIDAS_PONER;
-        cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+        if(contador_monedas_ >= VALOR_VIDA_MONEDA) {
+            vidas_ += CANTIDAD_VIDAS_PONER;
+            contador_monedas_ -= VALOR_VIDA_MONEDA;
+            cout << "CONTADOR DE VIDAS: " << vidas_ << endl;
+        }
+        else {
+            cout << "TIENES " << contador_monedas_ << " MONEDAS, Y UNA VIDA CUESTA " << VALOR_VIDA_MONEDA << " MONEDAS!" << endl;
+        }
     }
     if(window.was_key_pressed('-') && not paused_) {
         vidas_ -= CANTIDAD_VIDAS_QUITAR;
@@ -115,6 +122,14 @@ void Game::process_keys(pro2::Window& window) {
         cout << "TAMAÑO DEL SET DE MONEDAS: " << monedas_.size() << endl;
         cout << "TAMAÑO DEL SET DE LOS FANTASMAS: " << fantasmas_.size() << endl;
         cout << "TAMAÑO DE LA LISTA DE PLATAFORMAS: " << platforms_.size() << endl;
+    }
+    if(window.was_key_pressed('C') && not paused_) {
+        mario_.set_checkpoint(mario_.pos());
+        cout << "CHECKPOINT HECHO! " << endl;
+    }
+    if(window.was_key_pressed('T') && not paused_) {
+        mario_.teleport();
+        cout << "TELEPORT HECHO! " << endl;
     }
 
     return;

@@ -143,3 +143,13 @@ void Mario::update(pro2::Window& window, const list<Platform>& platforms) {
 
     actualizar_animacion();
 }
+
+void Mario::set_checkpoint(pro2::Pt p) {
+    checkpoint_ = p;
+    return;
+}
+
+void Mario::teleport() {
+    pos_ = checkpoint_;
+    return;
+}

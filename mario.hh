@@ -13,8 +13,10 @@
 class Mario {
  private:
     pro2::Pt pos_, last_pos_;
+    pro2::Pt checkpoint_;
     pro2::Pt speed_ = {0, 0};
     pro2::Pt accel_ = {0, 0};
+
     
     int accel_time_ = 0;
 
@@ -32,6 +34,7 @@ class Mario {
     Mario(pro2::Pt pos, int j, int r, int l, int frames) : 
         pos_(pos), 
         last_pos_(pos), 
+        checkpoint_(pos),
         jump_key(j), 
         right_key(r), 
         left_key(l),   
@@ -109,6 +112,11 @@ class Mario {
             return mario_sprite_normal_;
         }
     }
+
+    // Establece un checkpoint
+    void set_checkpoint(pro2::Pt point);
+    // Teletrasportarse al checkpoint
+    void teleport();
 
     /**
      * @brief Devuelve el Rectangulo de Mario (hitbox)
