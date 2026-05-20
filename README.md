@@ -35,6 +35,8 @@ Juego estilo Mario de la asignatura de PRO2 de la FIB 2026
 | Monedas   | `M` |
 | Quitar Moneda   | `N` |
 | Info  | `I` |
+| Checkpoint  | `C` |
+| Teleport  | `T` |
 
 ---
 
