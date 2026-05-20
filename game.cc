@@ -238,9 +238,9 @@ void Game::paint(pro2::Window& window) {
 
     // Pinta las nubes
     for(int i = 0; i < CANTIDAD_NUBES; i += 2) {
-        paint_sprite(window, {50*i + 100, 100 }, sprite_nube, false);
-        paint_sprite(window, { 50*i + 95, 100 }, sprite_nube, false);
-        paint_sprite(window, { 50*i + 98, 97 }, sprite_nube, false);
+        paint_sprite(window, {50*i + 100, 80 }, sprite_nube, false);
+        paint_sprite(window, { 50*i + 95, 80 }, sprite_nube, false);
+        paint_sprite(window, { 50*i + 98, 77 }, sprite_nube, false);
     }
     
     
