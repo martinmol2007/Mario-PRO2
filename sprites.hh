@@ -19,21 +19,21 @@ const int o = pro2::white;
 
 
 /**
- * @brief Nube estilo pixel art
+ * @brief Nube estilo pixel art (Super Mario Bros)
  * 
  */
 const std::vector<std::vector<int>> sprite_nube = {
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
-    {_, _, _, _, _, _, _, _, _, _, _, _},
-    {_, _, _, _, o, o, o, o, _, _, _, _},
-    {_, _, _, o, o, o, g, g, o, o, _, _},
-    {_, _, o, o, o, o, o, o, g, o, _, _},
-    {_, _, o, o, o, o, o, o, o, o, o, _},
-    {_, _, o, g, o, o, o, o, o, o, o, _},
-    {_, _, o, g, o, o, o, o, o, o, o, _},
-    {_, _, _, o, g, o, o, o, o, o, _, _},
-    {_, _, _, _, o, o, o, o, o, _, _, _},
+    {_, _, _, _, o, o, o, _, _, _, _, _},
+    {_, _, _, o, o, o, o, o, _, _, _, _},
+    {_, _, _, o, o, o, o, o, o, o, _, _},
+    {_, o, o, o, o, o, o, o, o, o, o, _},
+    {o, o, o, o, o, o, o, o, o, o, o, o},
+    {o, o, o, o, o, o, o, o, o, o, o, o},
+    {o, o, o, o, o, o, o, o, o, g, g, o},
+    {_, o, o, o, o, o, o, o, g, g, g, _},
+    {_, _, o, o, o, o, o, g, g, g, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
     {_, _, _, _, _, _, _, _, _, _, _, _},
