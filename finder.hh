@@ -77,7 +77,7 @@ public:
                 
             }
             // Cuando has borrado el objeto t de todos los chunks en los que estaba, borrar t del mapa de objetos / puntos
-            f_objs_.erase(it);
+            f_objs_.erase(t);
         }
         
         return;
