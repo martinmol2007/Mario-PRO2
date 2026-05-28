@@ -70,10 +70,10 @@ public:
             // Para cada chunk en el que esta, borras el objeto que esta en el map f_bloques en ese chunk
             for(auto it_set_chunks = chunks_objeto.begin(); it_set_chunks != chunks_objeto.end(); it_set_chunks++) {
                 // Conseguir un Chunk
-                pro2::Pt c = (*it_set_chunks);
+                pro2::Pt chunk = (*it_set_chunks);
               
                 // Borra el objeto que esta en el chunk c del set de objetos
-                f_bloques_[c].erase(t);
+                f_bloques_[chunk].erase(t);
                 
             }
             // Cuando has borrado el objeto t de todos los chunks en los que estaba, borrar t del mapa de objetos / puntos
