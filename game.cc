@@ -73,7 +73,7 @@ Game::Game(int width, int height) :
     muerto_ = false;
 }
 
-// Para probar cosas
+// Para probar cosas / Debugar
 void Game::process_keys(pro2::Window& window) {
     if (window.is_key_down(Keys::Escape)) {
         finished_ = true;
