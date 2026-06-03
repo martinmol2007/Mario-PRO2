@@ -1,24 +1,18 @@
 # Mario PRO2 2026 — Martin Molina
 
->[!IMPORTANT]
->
->Sin Acabar!
-
 ---
 
 ## Info
 
 Juego estilo Mario de la asignatura de PRO2 de la FIB 2026 
 
+Acabado, pero se puede mejorar mucho mas!
+
 <p align="center">
   <img src=".github/images/Estrella.png" width="250">
 </p>
 
 ---
-
-## To Do:
-
-- Pulir Cosas
 
 ## Controles del juego
 
